@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:06:04 by seongwch          #+#    #+#             */
-/*   Updated: 2022/07/21 17:27:46 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/07/21 21:51:03 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static void	mv_redir_syn(t_process *prc, t_list *split)
 
 	ptr = pop_node_front(split);
 	label_token(ptr);
+	
 	push_node_back(prc->redir, ptr);
 	if (split->start != NULL && split->start->group != PIP \
 			&& split->start->group != REDIR)
