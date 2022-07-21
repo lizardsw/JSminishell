@@ -6,9 +6,9 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <unistd.h>
-#include "list.h"
+#include "parsing.h"
 
-// gcc -lreadline -L ~/goinfre/.brew/opt/readline/lib -I ~/goinfre/.brew/opt/readline/include readline.c
+// gcc -lreadline -L ~/goinfre/.brew/opt/readline/lib -I ~/goinfre/.brew/opt/readline/include *.c libft.a 
 // 위에 명령어를 통해 함수를 사용할 수 있다!!
 void	handler(int signum)
 {
@@ -45,7 +45,7 @@ int		main(void)
 			show_list(list);
 			if (list->state == GOOD)
 			{
-				storage = cmd_storage(list);
+				storage = make_ast(list);
 				show_process(storage);
 				if (syntax_error(storage) == -1)
 				{
