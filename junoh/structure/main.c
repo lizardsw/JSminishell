@@ -25,7 +25,7 @@ int main()
 	printf("%d\n", my->pipe_num);
 	// mine = cmd_storage(my);
 	// free_process(mine);
-	mine = cmd_storage(my);
+	mine = make_ast(my);
 	show_process(mine);
 
 

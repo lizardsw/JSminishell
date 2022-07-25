@@ -77,7 +77,7 @@ t_node *pop_node_front(t_list *list);
 
 
 t_list *shell_split(char *str);
-t_process **cmd_storage(t_list *list);
+t_process **make_ast(t_list *list);
 void	show_process(t_process **ptr);
 
 

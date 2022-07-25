@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 16:41:07 by seongwch          #+#    #+#             */
-/*   Updated: 2022/07/21 17:35:09 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/07/25 18:53:59 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_list	*shell_split(char *str)
 	while (str[i] != '\0')
 	{
 		j = 0;
-		while (!check_group(str[i + j]))
+		while (check_group(str[i + j]) == WORD || check_group(str[i + j]) == QUOTE)
 			j++;
 		if (j != 0)
 			push_syntax(split_list, &str[i], 0, j);

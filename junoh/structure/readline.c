@@ -45,7 +45,7 @@ int		main(void)
 			show_list(list);
 			if (list->state == GOOD)
 			{
-				storage = cmd_storage(list);
+				storage = make_ast(list);
 				show_process(storage);
 				if (syntax_error(storage) == -1)
 				{

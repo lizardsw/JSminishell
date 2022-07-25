@@ -137,7 +137,7 @@ void	mv_pip_syn(t_process *prc, t_list *split)
 	free_node(ptr);
 }
 
-t_process **cmd_storage(t_list *list)
+t_process **make_ast(t_list *list)
 {
 	t_process **storage;
 	t_node		*ptr;
