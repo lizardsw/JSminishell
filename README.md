@@ -16,5 +16,4 @@ test: 테스트 코드, 리팩토링 테스트 코드 추가
 
 chore: 빌드 업무 수정, 패키지 매니징!
 
-[SmartSelect_20220721-162522_Samsung_Notes](https://user-images.githubusercontent.com/82736337/180752475-84057567-838f-4e8f-b2de-d57f830f8b85.jpeg)
 ![This is an image](https://user-images.githubusercontent.com/82736337/180752475-84057567-838f-4e8f-b2de-d57f830f8b85.jpeg)
