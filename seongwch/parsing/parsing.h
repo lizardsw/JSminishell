@@ -74,6 +74,7 @@ t_node *new_node(char *str);
 // list_struct_ft.c
 void	push_node_back(t_list *list, t_node *node);
 void	push_node_front(t_list *list, t_node *node);
+void	insert_node(t_list *list, t_node *front_node, t_node *node);
 t_node *pop_node_back(t_list *list);
 t_node *pop_node_front(t_list *list);
 
@@ -83,6 +84,7 @@ t_list *shell_split(char *str);
 // shell_split_utils.c
 char	*get_strdup(char *src, int number);
 int	check_group(char c);
+void	label_token(t_node *ptr);
 
 // make_ast.c
 t_process **make_ast(t_list *list);

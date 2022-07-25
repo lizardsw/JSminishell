@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 16:55:16 by seongwch          #+#    #+#             */
-/*   Updated: 2022/07/21 16:55:44 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/07/25 12:31:04 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,33 @@ int	check_group(char c)
 	else if (c == '\0')
 		return (ZERO);
 	return (WORD);
+}
+
+// syntax_node에 token을 라벨링 시켜줌
+void	label_token(t_node *ptr)
+{
+	char	*temp;
+
+	temp = ptr->data;
+	if (ptr->group == REDIR)
+	{
+		if (temp[0] == '<')
+		{
+			if (temp[1] == '<')
+				ptr->token = RDRDIN;
+			else
+				ptr->token = RDIN;
+		}
+		else
+		{
+			if (temp[1] == '>')
+				ptr->token = RDRDOUT;
+			else
+				ptr->token = RDOUT;
+		}
+	}
+	else if (ptr->group == PIP)
+		ptr->token = PIPE;
+	else if (ptr->group == QUOTE || ptr->group == WORD)
+		ptr->token = CMD;
 }

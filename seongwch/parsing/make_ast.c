@@ -6,39 +6,37 @@
 /*   By: seongwch <seongwch@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:06:04 by seongwch          #+#    #+#             */
-/*   Updated: 2022/07/21 21:51:03 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/07/25 18:25:47 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-// syntax_node에 token을 라벨링 시켜줌
-static void	label_token(t_node *ptr)
+// redir group에서 heredoc 처리 해주는 함수.
+static void	mv_heredoc_syn(t_list *redir, t_list *split, t_node *node)
 {
-	char	*temp;
+	t_node	*ptr;
 
-	temp = ptr->data;
-	if (ptr->group == REDIR)
+	ptr = redir->start;
+	if (ptr == NULL || ptr->token != RDRDIN)
+		push_node_front(redir, node);
+	else
 	{
-		if (temp[0] == '<')
-		{
-			if (temp[1] == '<')
-				ptr->token = RDRDIN;
-			else
-				ptr->token = RDIN;
-		}
+		while (ptr != NULL && ptr->token != RDIN \
+			&& ptr->token != RDOUT && ptr->token != RDRDOUT)
+			ptr = ptr->next;
+		if (ptr == NULL)
+			push_node_back(redir, node);
 		else
-		{
-			if (temp[1] == '>')
-				ptr->token = RDRDOUT;
-			else
-				ptr->token = RDOUT;
-		}
+			insert_node(redir, ptr->prev, node);
 	}
-	else if (ptr->group == PIP)
-		ptr->token = PIPE;
-	else if (ptr->group == QUOTE || ptr->group == WORD)
-		ptr->token = CMD;
+	if (split->start != NULL && split->start->group != PIP \
+				&& split->start->group != REDIR)
+	{
+		ptr = pop_node_front(split);
+		label_token(ptr);
+		insert_node(redir, node, ptr);
+	}
 }
 
 // redir group node를 ast에 넣어줌.
@@ -48,14 +46,20 @@ static void	mv_redir_syn(t_process *prc, t_list *split)
 
 	ptr = pop_node_front(split);
 	label_token(ptr);
-	
-	push_node_back(prc->redir, ptr);
-	if (split->start != NULL && split->start->group != PIP \
-			&& split->start->group != REDIR)
+	if (ptr->token == RDRDIN)
+		mv_heredoc_syn(prc->redir, split, ptr);
+	else
 	{
-		ptr = pop_node_front(split);
-		label_token(ptr);
+		show_list(prc->redir);
 		push_node_back(prc->redir, ptr);
+		show_list(prc->redir);
+		if (split->start != NULL && split->start->group != PIP \
+				&& split->start->group != REDIR)
+		{
+			ptr = pop_node_front(split);
+			label_token(ptr);
+			push_node_back(prc->redir, ptr);
+		}
 	}
 }
 

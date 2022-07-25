@@ -73,3 +73,17 @@ int		main(void)
 	}
 	return (0);
 }
+
+/*
+int main()
+{
+	t_process		**storage;
+	t_list			*list;
+
+	list = shell_split("<< hi << data");
+	storage = make_ast(list);
+	show_process(storage);
+
+	return 0;
+}
+*/
