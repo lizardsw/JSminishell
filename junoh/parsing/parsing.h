@@ -23,8 +23,7 @@ enum token
 	RDOUT = 2,
 	RDRDIN = 3,
 	RDRDOUT = 4,
-	PIPE = 5,
-	SCOLON = 6
+	PIPE = 5
 };
 
 enum list_state
@@ -67,24 +66,48 @@ typedef struct s_process
 	int		index;
 } t_process;
 
+typedef struct s_state
+{
+	t_list *env_lst;
+	char	*pwd;
+	int		ret;
+} t_state;
+
+// list_struct.c
 void	show_list(t_list *list);
 t_list *new_list(void);
 t_node *new_node(char *str);
+
+// list_struct_ft.c
 void	push_node_back(t_list *list, t_node *node);
 void	push_node_front(t_list *list, t_node *node);
 t_node *pop_node_back(t_list *list);
 t_node *pop_node_front(t_list *list);
 
-
+// shell_split.c
 t_list *shell_split(char *str);
+
+// shell_split_utils.c
+int		get_strchr(char *str, int number, char c);
+char	*get_strdup(char *src, int number);
+int	check_group(char c);
+void	label_token(t_node *ptr);
+int	dq_strlen(t_list *list, char *str);
+
+// make_ast.c
 t_process **make_ast(t_list *list);
+
+// make_ast_utils.c
 void	show_process(t_process **ptr);
+t_process *new_process(void);
+t_process **new_storage(int pipe_num);
 
-
+// free.c
 void	free_node(t_node *ptr);
 void	free_list(t_list *list);
 void	free_process(t_process **prc);
 
+// error.c
 int syntax_error(t_process **parsing);
 
 #endif
