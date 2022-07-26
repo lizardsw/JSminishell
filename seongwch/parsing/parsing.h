@@ -66,6 +66,13 @@ typedef struct s_process
 	int		index;
 } t_process;
 
+typedef struct s_state
+{
+	t_list *env_lst;
+	char	*pwd;
+	int		ret;
+} t_state;
+
 // list_struct.c
 void	show_list(t_list *list);
 t_list *new_list(void);
@@ -74,7 +81,6 @@ t_node *new_node(char *str);
 // list_struct_ft.c
 void	push_node_back(t_list *list, t_node *node);
 void	push_node_front(t_list *list, t_node *node);
-void	insert_node(t_list *list, t_node *front_node, t_node *node);
 t_node *pop_node_back(t_list *list);
 t_node *pop_node_front(t_list *list);
 
