@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 16:55:16 by seongwch          #+#    #+#             */
-/*   Updated: 2022/07/26 13:13:29 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/07/26 16:03:39 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*get_strdup(char *src, int number)
 // 문자가 어떤 group인지 확인해준다.
 int	check_group(char c)
 {
-	if (c == ' ')
+	if (c == ' ' || c =='	')
 		return (SPACES);
 	else if (c == '<' || c == '>')
 		return (REDIR);

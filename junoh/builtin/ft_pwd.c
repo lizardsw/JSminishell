@@ -6,15 +6,15 @@
 /*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 14:03:02 by junoh             #+#    #+#             */
-/*   Updated: 2022/07/26 14:27:25 by junoh            ###   ########.fr       */
+/*   Updated: 2022/07/26 15:47:04 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../list.h"
+#include "../parsing/parsing.h"
 
 // 이전 함수에서 dup2(fd, STDOUT) 이 되어있음
 
-int ft_pwd(t_node *cmd_node)
+int ft_pwd(t_node *cmd_node, t_state *state)
 {
     char    *str;
 

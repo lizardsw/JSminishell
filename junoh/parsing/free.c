@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:30:23 by seongwch          #+#    #+#             */
-/*   Updated: 2022/07/21 17:30:43 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/07/26 18:50:20 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+void 	free_str(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != NULL)
+		free(str[i++]);
+	free(str);
+	return ;
+}
 
 void	free_node(t_node *ptr)
 {
