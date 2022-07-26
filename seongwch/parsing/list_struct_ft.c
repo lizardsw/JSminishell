@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 16:39:53 by seongwch          #+#    #+#             */
-/*   Updated: 2022/07/25 17:43:31 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/07/26 13:14:11 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	push_node_front(t_list *list, t_node *node)
 
 void	insert_node(t_list *list, t_node *front_node, t_node *node)
 {
-	t_node *back_node;
+	t_node	*back_node;
 
 	if (list->number == 0 || front_node->next == NULL)
 	{

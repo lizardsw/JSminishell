@@ -82,9 +82,11 @@ t_node *pop_node_front(t_list *list);
 t_list *shell_split(char *str);
 
 // shell_split_utils.c
+int		get_strchr(char *str, int number, char c);
 char	*get_strdup(char *src, int number);
 int	check_group(char c);
 void	label_token(t_node *ptr);
+int	dq_strlen(t_list *list, char *str);
 
 // make_ast.c
 t_process **make_ast(t_list *list);

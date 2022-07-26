@@ -6,11 +6,26 @@
 /*   By: seongwch <seongwch@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 16:55:16 by seongwch          #+#    #+#             */
-/*   Updated: 2022/07/25 12:31:04 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/07/26 13:13:29 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+// str에 number 만큼 c 를 찾아서 return 해준다.
+int	get_strchr(char *str, int number, char c)
+{
+	int	i;
+
+	i = 0;
+	while (i < number)
+	{
+		if (str[i] == c)
+			return (i);
+		i++;
+	}
+	return (-1);
+}
 
 // str에 number만큼 strdup
 char	*get_strdup(char *src, int number)
@@ -74,4 +89,30 @@ void	label_token(t_node *ptr)
 		ptr->token = PIPE;
 	else if (ptr->group == QUOTE || ptr->group == WORD)
 		ptr->token = CMD;
+}
+
+// QUOTE문자를 포함해서 SPACE, NULL, REDIR 을 기준으로 str길이를 세준다.
+int	dq_strlen(t_list *list, char *str)
+{
+	int	i;
+	int	index;
+
+	i = 0;
+	while (check_group(str[i]) == WORD || check_group(str[i]) == QUOTE)
+	{
+		if (check_group(str[i]) == QUOTE)
+		{
+			index = i;
+			i++;
+			while (str[i] != '\0' && str[index] != str[i])
+				i++;
+			if (str[i] == '\0')
+				list->state = ERROR;
+			else
+				i++;
+		}
+		else
+			i++;
+	}
+	return (i);
 }

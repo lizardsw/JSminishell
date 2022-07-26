@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 16:41:07 by seongwch          #+#    #+#             */
-/*   Updated: 2022/07/25 18:53:59 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/07/26 13:13:04 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ static int	push_syntax(t_list *list, char *str, int index, int len)
 	temp = get_strdup(&str[index], len);
 	new = new_node(temp);
 	new->group = check_group(str[0]);
+	if (get_strchr(&str[index], len, '\'') > -1 \
+			|| get_strchr(&str[index], len, '\"') > -1)
+		new->group = QUOTE;
 	push_node_back(list, new);
 	free(temp);
 	return (len);
@@ -33,16 +36,7 @@ static int	label_group_util(t_list *split_list, char *str)
 
 	add_index = 0;
 	i = 0;
-	if (check_group(str[0]) == QUOTE)
-	{
-		i = 1;
-		while (str[0] != str[i] && str[i] != '\0')
-			i++;
-		if (str[i] == '\0')
-			split_list->state = ERROR;
-		add_index = push_syntax(split_list, str, 1, i - 1) + 2;
-	}
-	else if (check_group(str[0]) == SPACES)
+	if (check_group(str[0]) == SPACES)
 	{
 		while (str[i] == ' ')
 			i++;
@@ -78,7 +72,7 @@ static int	label_group(t_list *split_list, char *str)
 t_list	*shell_split(char *str)
 {
 	t_list	*split_list;
-	int		check;
+	int		dq_switch;
 	int		i;
 	int		j;
 
@@ -89,12 +83,11 @@ t_list	*shell_split(char *str)
 	while (str[i] != '\0')
 	{
 		j = 0;
-		while (check_group(str[i + j]) == WORD || check_group(str[i + j]) == QUOTE)
-			j++;
+		if (check_group(str[i + j]) == WORD || check_group(str[i + j] == QUOTE))
+			j = dq_strlen(split_list, &str[i]);
 		if (j != 0)
 			push_syntax(split_list, &str[i], 0, j);
-		check = label_group(split_list, &str[i + j]);
-		j += check;
+		j += label_group(split_list, &str[i + j]);
 		i = i + j;
 		if (i > ft_strlen(str))
 			break ;

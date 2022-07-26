@@ -8,8 +8,9 @@
 #include <unistd.h>
 #include "parsing.h"
 
-// gcc -lreadline -L ~/goinfre/.brew/opt/readline/lib -I ~/goinfre/.brew/opt/readline/include *.c libft.a 
+// gcc -g -lreadline -L ~/goinfre/.brew/opt/readline/lib -I ~/goinfre/.brew/opt/readline/include *.c libft.a 
 // 위에 명령어를 통해 함수를 사용할 수 있다!!
+
 void	handler(int signum)
 {
 	if (signum != SIGINT)
@@ -80,7 +81,7 @@ int main()
 	t_process		**storage;
 	t_list			*list;
 
-	list = shell_split("<< hi << data");
+	list = shell_split("e\"hi\"o hi");
 	storage = make_ast(list);
 	show_process(storage);
 
