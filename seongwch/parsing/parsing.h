@@ -110,4 +110,7 @@ void	free_process(t_process **prc);
 // error.c
 int syntax_error(t_process **parsing);
 
+// list_env.c
+t_list	*make_list_env(char **env);
+
 #endif

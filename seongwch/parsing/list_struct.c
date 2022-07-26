@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 16:33:12 by seongwch          #+#    #+#             */
-/*   Updated: 2022/07/26 13:45:42 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/07/26 17:02:00 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	show_list(t_list *list)
 		printf("EMPTY! list");
 	while (ptr != NULL)
 	{
-		printf("[%s gt(%d,%d)] ", ptr->data, ptr->group, ptr->token);
+		// printf("%s\n", ptr->data);
+		printf("[%s gt(%d,%d)]", ptr->data, ptr->group, ptr->token);
 		ptr = ptr->next;
 	}
 	printf("\n");
