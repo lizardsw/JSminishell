@@ -6,45 +6,11 @@
 /*   By: seongwch <seongwch@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 16:55:16 by seongwch          #+#    #+#             */
-/*   Updated: 2022/07/26 16:03:39 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/07/26 21:25:00 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
-// str에 number 만큼 c 를 찾아서 return 해준다.
-int	get_strchr(char *str, int number, char c)
-{
-	int	i;
-
-	i = 0;
-	while (i < number)
-	{
-		if (str[i] == c)
-			return (i);
-		i++;
-	}
-	return (-1);
-}
-
-// str에 number만큼 strdup
-char	*get_strdup(char *src, int number)
-{
-	char	*new;
-	int		i;
-
-	i = 0;
-	new = (char *)malloc(sizeof(char) * number + 1);
-	if (new == NULL)
-		exit(1);
-	while (i < number)
-	{
-		new[i] = src[i];
-		i++;
-	}
-	new[i] = '\0';
-	return (new);
-}
 
 // 문자가 어떤 group인지 확인해준다.
 int	check_group(char c)
