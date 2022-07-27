@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 20:19:11 by seongwch          #+#    #+#             */
-/*   Updated: 2021/12/11 16:18:35 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/07/27 15:59:39 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		new[i++] = s2[j++];
 	}
 	new[i] = '\0';
+	free(s1);
 	return (new);
 }

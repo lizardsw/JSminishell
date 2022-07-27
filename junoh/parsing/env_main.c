@@ -3,19 +3,23 @@
 
 int main(int argc, char **argv, char **env)
 {
-	int	i;
+	int		i;
+	char *hi;
+	char	*storage;
 
-	i  = 0;
-	while (env[i] != NULL)
-	{
-		printf("%s\n", env[i]);
-		i++;
-	}
-	printf("\n");
-	t_list	*ptr;
+	t_state state;
 
-	ptr = make_list_env(env);
-	show_list(ptr);
-
+	state.env_lst = make_list_env(env);
+	hi = NULL;
+	storage = NULL;
+	// i = cmd_expand(&storage, "hello!");
+	// printf("return : %d storage : %s\n", i, storage);
+	// i = cmd_expand(&storage, "$s");
+	// printf("return : %d storage : %s\n", i, storage);
+	// i = position_expand(&storage, "$PAH", &state);
+	// printf("return : %d storage : %s\n", i, storage);
+	i = dquote_expand(&storage, "\"aaa$USER $USER\"", &state);
+	printf("return : %d storage : %s\n", i, storage);
+	system("leaks a.out > leaks_result_temp; cat leaks_result_temp | grep leaked && rm -rf leaks_result_temp");
 	return 0;
 }

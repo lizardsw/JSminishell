@@ -88,8 +88,6 @@ t_node *pop_node_front(t_list *list);
 t_list *shell_split(char *str);
 
 // shell_split_utils.c
-int		get_strchr(char *str, int number, char c);
-char	*get_strdup(char *src, int number);
 int	check_group(char c);
 void	label_token(t_node *ptr);
 int	dq_strlen(t_list *list, char *str);
@@ -103,6 +101,7 @@ t_process *new_process(void);
 t_process **new_storage(int pipe_num);
 
 // free.c
+void 	free_str(char **str);
 void	free_node(t_node *ptr);
 void	free_list(t_list *list);
 void	free_process(t_process **prc);
@@ -112,5 +111,19 @@ int syntax_error(t_process **parsing);
 
 // list_env.c
 t_list	*make_list_env(char **env);
+char	**split_key_value(char *str);
+char	*get_value(t_list *env, char *key);
+
+// shell_libft.c
+char	*null_strjoin(char *s1, char *s2);
+int		get_strchr(char *str, int number, char c);
+char	*get_strdup(char *src, int number);
+
+// expand_utils.c
+int	cmd_expand(char **str_storage, char *str);
+int	squote_expand(char **str_storage, char *str);
+int	position_expand(char **str_storage, char *str, t_state *state);
+int	dquote_expand(char **str_storage, char *str, t_state *state);
+
 
 #endif

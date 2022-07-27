@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   list_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: seongwch <seongwch@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 18:33:43 by junoh             #+#    #+#             */
-/*   Updated: 2022/07/26 18:50:45 by junoh            ###   ########.fr       */
+/*   Updated: 2022/07/27 14:45:28 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-char **split_key_value(char *str)
+char	**split_key_value(char *str)
 {
 	char	**new;
 	int		i;
@@ -24,7 +24,7 @@ char **split_key_value(char *str)
 	while (str[i] != '=')
 		i++;
 	new[0] = get_strdup(str, i + 1);
-	new[1] = ft_strdup(&str[i + 2]);
+	new[1] = ft_strdup(&str[i + 1]);
 	new[2] = NULL;
 	return (new);
 }
@@ -37,18 +37,19 @@ char	*get_value(t_list *env, char *key)
 
 	value = NULL;
 	ptr = env->start;
-	while (ptr->next != NULL)
+	while (ptr != NULL)
 	{
 		split = split_key_value(ptr->data);
 		if (!ft_strncmp(key, split[0], (int)ft_strlen(key)))
 		{
 			value = ft_strdup(split[1]);
-			break;
+			free_str(split);
+			return (value);
 		}
 		free_str(split);
+		split = NULL;
+		ptr = ptr->next;
 	}
-	if (value == NULL)
-		free_str(split);
 	return (value); 
 }
 
@@ -64,5 +65,6 @@ t_list	*make_list_env(char **env)
 		push_node_back(new, new_node(env[i]));
 		i++;
 	}
+	env[i] = NULL;
 	return (new);
 }
