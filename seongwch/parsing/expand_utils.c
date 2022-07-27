@@ -26,7 +26,7 @@ int	squote_expand(char **str_storage, char *str)
 	
 	front_str = *str_storage;
 	i = 1;
-	while (str[i] != '\n' && str[i] != '\'')
+	while (str[i] != '\0' && str[i] != '\'')
 		i++;
 	back_str = get_strdup(&str[1], i - 1);
 	*str_storage = null_strjoin(front_str, back_str);
@@ -35,7 +35,7 @@ int	squote_expand(char **str_storage, char *str)
 	return (i);
 }
 
-int	position_expand(char **str_storage, char *str, t_state *state)
+int	position_expand(char **str_storage, char *str, t_state *state, int is_dquote)
 {
 	int		i;
 	char	*key;
@@ -44,10 +44,31 @@ int	position_expand(char **str_storage, char *str, t_state *state)
 
 	i = 1;
 	front_str = *str_storage;
-	while (str[i] != ' ' && str[i] != '\'' && str[i] != '\"' && str[i] != '\0' && str[i] != '$')
+	while (str[i] != ' ' && str[i] != '\'' && str[i] != '\"' && str[i] != '\0' && str[i] != '$' && str[i] != '?')
 		i++;
+	if (str[i] == '?') // $? 처리해주는 부분!
+	{
+		*str_storage = null_strjoin(front_str, "$?");
+		free(front_str);
+		return (i + 1);
+	}
+	if (str[i] == '$')
+	{
+		*str_storage = null_strjoin(front_str, "");
+		free(front_str);
+		return (i + 1);
+	}
 	key = get_strdup(&str[1], i - 1);
-	back_str = get_value(state->env_lst, key);
+	if (key[0] == '\0')
+	{
+		if ((str[i] == '\'' || str[i] == '\"') && is_dquote != 1)
+			back_str = NULL;
+		else if ((str[i] == ' ' || str[i] == '\0') \
+						|| (str[i] == '\'' || str[i] == '\"') && is_dquote == 1)
+			back_str = ft_strdup("$");
+	}
+	else 
+		back_str = get_value(state->env_lst, key);
 	*str_storage = null_strjoin(front_str, back_str);
 	free(front_str);
 	free(back_str);
@@ -74,8 +95,9 @@ int	dquote_expand(char **str_storage, char *str, t_state *state)
 		free(front_str);
 		free(back_str);
 		if (str[i + j] == '$')
-			j = position_expand(str_storage, &str[i + j], state);
+			j += position_expand(str_storage, &str[i + j], state, 1);
 		i += j;
 	}
+	i++;
 	return (i);
 }

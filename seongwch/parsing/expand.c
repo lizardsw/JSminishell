@@ -1,6 +1,6 @@
 #include "parsing.h"
 
-static void	expand_syntax(t_node *node, t_state *state)
+void	expand_syntax(t_node *node, t_state *state)
 {
 	char	*storage;
 	int		i;
@@ -11,17 +11,19 @@ static void	expand_syntax(t_node *node, t_state *state)
 	while (node->data[i] != '\0')
 	{
 		j = 0;
-		j += cmd_expand(storage, &node->data[i]);
+		j += cmd_expand(&storage, &node->data[i]);
 		if (node->data[i + j] == '\'')
-			j += squote_expand(storage, &node->data[i + j]);
+			j += squote_expand(&storage, &node->data[i + j]);
 		else if (node->data[i + j] == '\"')
-
+			j += dquote_expand(&storage, &node->data[i + j], state);
 		else if (node->data[i + j] == '$')
-		{}
+			j += position_expand(&storage, &node->data[i + j], state, 0);
 		else if (node->data[i + j] == '\0')
-		{}
-		i++;
+			j++;
+		i += j;
 	}
+	free(node->data);
+	node->data = storage;
 }
 
 static void	classify_token(t_list *list, t_state *state)
@@ -31,17 +33,10 @@ static void	classify_token(t_list *list, t_state *state)
 	ptr = list->start;
 	while (ptr != NULL)
 	{
-		if (ptr->group == QUOTE)
-		{
-
-		}
-		else if (ptr->group == WORD)
-		{
-
-		}
+		if (ptr->group == QUOTE || ptr->group == WORD)
+			expand_syntax(ptr, state);
 		ptr = ptr->next;
 	}
-
 }
 
 void	expand_ast(t_process **ast, t_state *state)
@@ -51,8 +46,8 @@ void	expand_ast(t_process **ast, t_state *state)
 	i = 0;
 	while (ast[i] != NULL)
 	{
-		expand_syntax(ast[i]->redir, state);
-		expand_syntax(ast[i]->cmd, state);		
+		classify_token(ast[i]->redir, state);
+		classify_token(ast[i]->cmd, state);		
 		i++;
 	}
 }

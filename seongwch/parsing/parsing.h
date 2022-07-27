@@ -122,8 +122,11 @@ char	*get_strdup(char *src, int number);
 // expand_utils.c
 int	cmd_expand(char **str_storage, char *str);
 int	squote_expand(char **str_storage, char *str);
-int	position_expand(char **str_storage, char *str, t_state *state);
+int	position_expand(char **str_storage, char *str, t_state *state, int is_dquote);
 int	dquote_expand(char **str_storage, char *str, t_state *state);
+
+// expand.c
+void	expand_ast(t_process **ast, t_state *state);
 
 
 #endif

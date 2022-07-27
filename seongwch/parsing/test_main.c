@@ -25,14 +25,16 @@ void	handler(int signum)
 	rl_redisplay();
 }
 
-int		main(void)
+int		main(int argc, char **argv, char **env)
 {
 	int				ret;
 	char			*line;
 	t_list			*list;
 	t_process		**storage;
+	t_state			state;
 
 	signal(SIGINT, handler);
+	state.env_lst = make_list_env(env);
 	while (true)
 	{
 		line = readline("input> ");
@@ -47,6 +49,8 @@ int		main(void)
 			if (list->state == GOOD)
 			{
 				storage = make_ast(list);
+				show_process(storage);
+				expand_ast(storage, &state);
 				show_process(storage);
 				if (syntax_error(storage) == -1)
 				{
