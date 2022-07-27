@@ -69,6 +69,7 @@ typedef struct s_process
 typedef struct s_state
 {
 	t_list *env_lst;
+	char	*old_pwd;
 	char	*pwd;
 	int		ret;
 } t_state;
