@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:29:41 by seongwch          #+#    #+#             */
-/*   Updated: 2022/07/21 17:30:18 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/07/28 15:40:25 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,3 +65,4 @@ int	syntax_error(t_process **parsing)
 	}
 	return (1);
 }
+
