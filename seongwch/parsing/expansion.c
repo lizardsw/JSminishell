@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expansion.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seongwch <seongwch@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/28 12:26:12 by seongwch          #+#    #+#             */
+/*   Updated: 2022/07/28 12:26:40 by seongwch         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parsing.h"
 
 void	expand_syntax(t_node *node, t_state *state)
@@ -47,7 +59,7 @@ void	expand_ast(t_process **ast, t_state *state)
 	while (ast[i] != NULL)
 	{
 		classify_token(ast[i]->redir, state);
-		classify_token(ast[i]->cmd, state);		
+		classify_token(ast[i]->cmd, state);
 		i++;
 	}
 }

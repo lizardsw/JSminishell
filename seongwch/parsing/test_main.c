@@ -37,10 +37,10 @@ int		main(int argc, char **argv, char **env)
 	state.env_lst = make_list_env(env);
 	while (true)
 	{
-		line = readline("input> ");
+		line = readline("JSminishell> ");
 		if (line)
 		{
-			ret = strcmp(line, "bye");
+			ret = strcmp(line, "exit");
 			if (ret)
 				printf("output> %s\n", line);
 			add_history(line);
@@ -52,6 +52,7 @@ int		main(int argc, char **argv, char **env)
 				show_process(storage);
 				expand_ast(storage, &state);
 				show_process(storage);
+				system("leaks a.out > leaks_result_temp; cat leaks_result_temp | grep leaked && rm -rf leaks_result_temp");
 				if (syntax_error(storage) == -1)
 				{
 					printf("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n");

@@ -6,6 +6,10 @@
 #include <stdlib.h>
 #include "../libft/libft.h"
 
+#include <signal.h>
+#include <readline/readline.h>
+#include <readline/history.h>
+
 enum group
 {
 	WORD = 0,
@@ -69,8 +73,9 @@ typedef struct s_process
 typedef struct s_state
 {
 	t_list *env_lst;
+	char	*old_pwd;
 	char	*pwd;
-	int		ret;
+	int		status
 } t_state;
 
 // list_struct.c

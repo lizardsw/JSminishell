@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 16:55:16 by seongwch          #+#    #+#             */
-/*   Updated: 2022/07/26 21:25:00 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/07/28 12:28:26 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // 문자가 어떤 group인지 확인해준다.
 int	check_group(char c)
 {
-	if (c == ' ' || c =='	')
+	if (c == ' ' || c == '	')
 		return (SPACES);
 	else if (c == '<' || c == '>')
 		return (REDIR);

@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 18:33:43 by junoh             #+#    #+#             */
-/*   Updated: 2022/07/27 19:59:25 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/07/28 12:27:23 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*get_value(t_list *env, char *key)
 		split = NULL;
 		ptr = ptr->next;
 	}
-	return (value); 
+	return (value);
 }
 
 t_list	*make_list_env(char **env)
