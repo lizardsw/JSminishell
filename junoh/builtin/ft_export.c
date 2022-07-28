@@ -6,7 +6,7 @@
 /*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:10:39 by junoh             #+#    #+#             */
-/*   Updated: 2022/07/27 20:59:53 by junoh            ###   ########.fr       */
+/*   Updated: 2022/07/28 15:51:20 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void    change_env_lst(t_node *node, t_state *state)
         change_and_add_env_lst(state, morpheme, node);
 }
 
-void    ft_export(t_node *cmd_node, t_state *state)
+void    exec_export(t_node *cmd_node, t_state *state)
 {
     t_node *ptr;
     
@@ -95,4 +95,26 @@ void    ft_export(t_node *cmd_node, t_state *state)
             ptr = ptr->next;
         }
     }
+    return ;
+}
+
+void    ft_export(t_list *cmd_list, t_state *state)
+{
+    pid_t   pid;
+
+    pid = 0;
+    if (cmd_list->pipe_num == 0)
+        exec_export(cmd_list->start, state);
+    else
+    {
+        pid = ft_fork();
+        if (pid)
+            wait(&state->status);
+        else
+        {
+            exec_export(cmd_list->start, state);
+            exit(0);
+        }
+    }
+    return ;
 }

@@ -71,7 +71,7 @@ typedef struct s_state
 	t_list *env_lst;
 	char	*old_pwd;
 	char	*pwd;
-	int		ret;
+	int		status; // ret -> status 로 이름 변경 
 } t_state;
 
 // list_struct.c
