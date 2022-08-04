@@ -6,7 +6,7 @@
 /*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:10:39 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/04 19:48:10 by junoh            ###   ########.fr       */
+/*   Updated: 2022/07/28 15:51:20 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,19 @@
 
 t_node     *is_key_exist_without_value(t_state *state, char *key, int flag)
 {
-    t_node  *lst;
+    t_node *lst = state->env_lst->start;
     char    *cmp_buf;
     char    **split;
     
-    lst = state->env_lst->start;
     cmp_buf = get_strdup(key, (int)ft_strlen(key) - flag);
     while (lst->next != NULL)
     {
         split = split_key_value(lst->data);
-        if ((!ft_strncmp(cmp_buf, split[0], ft_strlen(key) - flag) && \
+        if ((!ft_strncmp(cmp_buf, split[0], (int)ft_strlen(key) - flag) && \
         ((int)ft_strlen(split[0]) == (int)ft_strlen(key) - flag)))
         {
             free_str(split);
-            return (new_node(ft_strdup(lst->data)));
+            return (lst);
         }
         lst = lst->next;
     }        
@@ -35,11 +34,11 @@ t_node     *is_key_exist_without_value(t_state *state, char *key, int flag)
     return (NULL);
 }
 
-static  void    change_and_add_env_lst(t_state *state, char **split, t_node *cmd_node)
+void    change_and_add_env_lst(t_state *state, char **split, t_node *cmd_node)
 {
     t_node *node;
        
-    node = is_key_exist_without_value(state, split[0], 1); // 환경변수 a=3 이나 a=가 아닌 a 일떼
+    node = is_key_exist_without_value(state, split[0], 1);
     if (node)
     {
         node->data = ft_strjoin(node->data, "=");
@@ -47,7 +46,7 @@ static  void    change_and_add_env_lst(t_state *state, char **split, t_node *cmd
     }
     else
     {
-        node = is_key_exist_without_value(state, split[0], 0); //  a 조차 없다면 a= 을 만듬
+        node = is_key_exist_without_value(state, split[0], 0);
         if (node)
             node->data = ft_strjoin(node->data, split[1]);
         else
@@ -57,7 +56,7 @@ static  void    change_and_add_env_lst(t_state *state, char **split, t_node *cmd
     return ;
 }
 
-static  void    change_env_lst(t_node *node, t_state *state)
+void    change_env_lst(t_node *node, t_state *state)
 {
     char    **morpheme; 
     t_node  *n_node;
@@ -85,16 +84,16 @@ void    exec_export(t_node *cmd_node, t_state *state)
     ptr = cmd_node;
     if (ptr->next == NULL)
         export_print(state);
-    ptr = ptr->next;
-    while (ptr->next != NULL)
+    else
     {
-        if (ft_strlen(ptr->data) == 1 && ptr->data[0] == '_')
-            ;
-        else if (!ft_strchr(ptr->data, '='))
-            change_env_lst(ptr, state);
-        else
-            push_node_back(state->env_lst, new_node(ptr->data));
-        ptr = ptr->next;
+        while (ptr->next != NULL)
+        {
+            if (!ft_strchr(cmd_node->next, '='))
+                change_env_lst(ptr, state);
+            else
+                push_node_back(state->env_lst, new_node(ptr->data));
+            ptr = ptr->next;
+        }
     }
     return ;
 }

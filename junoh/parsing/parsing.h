@@ -6,6 +6,13 @@
 #include <stdlib.h>
 #include "../libft/libft.h"
 
+#include <signal.h>
+#include <readline/readline.h>
+#include <readline/history.h>
+#include <termios.h>
+
+#include <fcntl.h>
+
 enum group
 {
 	WORD = 0,
@@ -40,6 +47,18 @@ enum prcindex
 	END = 2
 };
 
+enum e_error
+{
+	ARGS_NUM_ERR,
+	PID_ERR,
+	INFILE_OPEN_ERR,
+	OUTFILE_OPEN_ERR,
+	PATH_ERR,
+	EXE_ERR,
+	PIPE_ERR,
+	DUP_ERR
+};
+
 typedef struct s_node
 {
 	struct s_node *prev;
@@ -71,8 +90,22 @@ typedef struct s_state
 	t_list *env_lst;
 	char	*old_pwd;
 	char	*pwd;
-	int		status; // ret -> status 로 이름 변경 
+	int		status;
 } t_state;
+
+typedef struct s_info
+{
+	int fd[2];
+	int	pipe_alpha[2];
+	int pipe_beta[2];
+}	t_info;
+
+// list_struct_remove.c
+void    remove_node(t_list *list, t_node *node);
+
+// ft_export.c
+t_node     *is_key_exist_without_value(t_state *state, char *key, int flag);
+void    ft_export(t_list *cmd_list, t_state *state);
 
 // list_struct.c
 void	show_list(t_list *list);
@@ -113,6 +146,7 @@ int syntax_error(t_process **parsing);
 // list_env.c
 t_list	*make_list_env(char **env);
 char	**split_key_value(char *str);
+char	**make_char_env(t_list *list);
 char	*get_value(t_list *env, char *key);
 
 // shell_libft.c
@@ -123,8 +157,15 @@ char	*get_strdup(char *src, int number);
 // expand_utils.c
 int	cmd_expand(char **str_storage, char *str);
 int	squote_expand(char **str_storage, char *str);
-int	position_expand(char **str_storage, char *str, t_state *state);
+int	position_expand(char **str_storage, char *str, t_state *state, int is_dquote);
 int	dquote_expand(char **str_storage, char *str, t_state *state);
 
+// expand.c
+void	expand_ast(t_process **ast, t_state *state);
+
+// signal.c
+void handler(int signum);
+void signal_handler();
+void setting_terminal();
 
 #endif

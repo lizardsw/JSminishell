@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/28 12:22:40 by seongwch          #+#    #+#             */
+/*   Updated: 2022/08/03 13:44:04 by seongwch         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parsing.h"
 
 int	cmd_expand(char **str_storage, char *str)
@@ -23,10 +35,10 @@ int	squote_expand(char **str_storage, char *str)
 	char	*front_str;
 	char	*back_str;
 	int		i;
-	
+
 	front_str = *str_storage;
 	i = 1;
-	while (str[i] != '\n' && str[i] != '\'')
+	while (str[i] != '\0' && str[i] != '\'')
 		i++;
 	back_str = get_strdup(&str[1], i - 1);
 	*str_storage = null_strjoin(front_str, back_str);
@@ -35,7 +47,33 @@ int	squote_expand(char **str_storage, char *str)
 	return (i);
 }
 
-int	position_expand(char **str_storage, char *str, t_state *state)
+static int	position_except(char **storage, char *front_str, char *str, int i)
+{
+	if (str[i] == '?') // $? 처리해주는 부분!
+	{
+		*storage = null_strjoin(front_str, "$?");
+		free(front_str);
+		return (i + 1);
+	}
+	if (str[i] == '$')
+	{
+		*storage = null_strjoin(front_str, "");
+		free(front_str);
+		return (i + 1);
+	}
+	return (0);
+}
+
+static void	position_back_str(char *str, char **back_str, int i, int is_dquote)
+{
+	if ((str[i] == '\'' || str[i] == '\"') && is_dquote != 1)
+		*back_str = NULL;
+	else if ((str[i] == ' ' || str[i] == '\0') \
+					|| (str[i] == '\'' || str[i] == '\"') && is_dquote == 1)
+		*back_str = ft_strdup("$");
+}
+
+int	position_expand(char **storage, char *str, t_state *state, int is_dquote)
 {
 	int		i;
 	char	*key;
@@ -43,12 +81,18 @@ int	position_expand(char **str_storage, char *str, t_state *state)
 	char	*front_str;
 
 	i = 1;
-	front_str = *str_storage;
-	while (str[i] != ' ' && str[i] != '\'' && str[i] != '\"' && str[i] != '\0' && str[i] != '$')
+	front_str = *storage;
+	while (str[i] != ' ' && str[i] != '\'' && str[i] != '\"' \
+				&& str[i] != '\0' && str[i] != '$' && str[i] != '?')
 		i++;
+	if (str[i] == '?' || str[i] == '$')
+		return (position_except(storage, front_str, str, i));
 	key = get_strdup(&str[1], i - 1);
-	back_str = get_value(state->env_lst, key);
-	*str_storage = null_strjoin(front_str, back_str);
+	if (key[0] == '\0')
+		position_back_str(str, &back_str, i, is_dquote);
+	else
+		back_str = get_value(state->env_lst, key);
+	*storage = null_strjoin(front_str, back_str);
 	free(front_str);
 	free(back_str);
 	free(key);
@@ -61,7 +105,7 @@ int	dquote_expand(char **str_storage, char *str, t_state *state)
 	char	*back_str;
 	int		i;
 	int		j;
-	
+
 	i = 1;
 	while (str[i] != '\"')
 	{
@@ -74,8 +118,9 @@ int	dquote_expand(char **str_storage, char *str, t_state *state)
 		free(front_str);
 		free(back_str);
 		if (str[i + j] == '$')
-			j = position_expand(str_storage, &str[i + j], state);
+			j += position_expand(str_storage, &str[i + j], state, 1);
 		i += j;
 	}
+	i++;
 	return (i);
 }

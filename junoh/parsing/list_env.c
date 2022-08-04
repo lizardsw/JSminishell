@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 18:33:43 by junoh             #+#    #+#             */
-/*   Updated: 2022/07/27 14:45:28 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/04 20:00:53 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,14 @@ char	**split_key_value(char *str)
 	new = (char **)malloc(sizeof(char *) * 3);
 	if (new == NULL)
 		exit(1);
-	while (str[i] != '=')
+	while (str[i] != '\0')
+	{
+		if (str[i] != '=')
+			break ;
 		i++;
+	}
+	if ((int)ft_strlen(str) == i)
+		return (NULL);
 	new[0] = get_strdup(str, i + 1);
 	new[1] = ft_strdup(&str[i + 1]);
 	new[2] = NULL;
@@ -50,7 +56,28 @@ char	*get_value(t_list *env, char *key)
 		split = NULL;
 		ptr = ptr->next;
 	}
-	return (value); 
+	return (value);
+}
+
+char	**make_char_env(t_list *list)
+{
+	t_node		*ptr;
+	char		**new;
+	int			i;
+
+	i = 0;
+	ptr = list->start;
+	new = (char **)malloc(sizeof(char *) * (list->number + 1));
+	if (new == NULL)
+		exit(1);
+	while (ptr != NULL)
+	{
+		new[i] = ft_strdup(ptr->data);
+		i++;
+		ptr = ptr->next;
+	}
+	new[i] = NULL;
+	return (new);
 }
 
 t_list	*make_list_env(char **env)

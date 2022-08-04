@@ -6,13 +6,13 @@
 /*   By: seongwch <seongwch@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:30:23 by seongwch          #+#    #+#             */
-/*   Updated: 2022/07/27 14:14:02 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/07/28 12:27:06 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-void 	free_str(char **str)
+void	free_str(char **str)
 {
 	int	i;
 
