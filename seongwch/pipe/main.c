@@ -1,5 +1,5 @@
 #include "process.h"
-
+#include <string.h>
 
 
 void	setting_fd(int *pipe_fd)
@@ -15,74 +15,67 @@ void	setting_fd(int *pipe_fd)
 int	main(int argc, char **argv, char **envp)
 {
 	int		i;
-	pid_t pid;
+	pid_t pid[6];
 	int	pipe1_fd[2];
 	int	pipe2_fd[2];
 	char buff[100];
+	char	temp[100];
 
 	pipe(pipe1_fd);
+	pid[0] = fork();
+	if (pid[0] == 0)
+	{
+		// child
+		dup2(pipe1_fd[1], STDOUT_FILENO);
+		close(pipe1_fd[0]);
+		close(pipe1_fd[1]);
+	}
+	else
+	{
+		// parent
+		close(pipe1_fd[1]);
+	}
 	pipe(pipe2_fd);
-	i = 0;
-	pid = fork();
-	if (pid == 0)
+	pid[1] = fork();
+	if (pid[0] == 0)
 	{
-		dup2(pipe1_fd[PIPE_IN], STDOUT);
-		write(STDOUT, "hi!", 4);
-		exit(1);
+		// child
+		dup2(pipe1_fd[0], STDIN_FILENO);
+		dup2(pipe2_fd[1], STDOUT_FILENO);
+		close(pipe1_fd[0]);
+		close(pipe2_fd[1]);
+		close(pipe2_fd[0]);
 	}
 	else
 	{
-		wait(NULL);
-		// dup2(pipe1_fd[PIPE_OUT], STDIN);
-		// i = read(STDIN, buff, 100);
-		// buff[i] = '\0';
-		// // write(STDOUT, buff, i);
-		// dup2(pipe2_fd[PIPE_IN], STDOUT);
+		// parent
+
+	}
+	pipe(pipe1_fd);
+	pid[2] = fork();
+	if (pid[0] == 0)
+	{
+		// child
 	
-		// write(STDOUT, buff, i);
-	}
-	pid = fork();
-	if (pid == 0)
-	{
-		dup2(pipe1_fd[PIPE_OUT], STDIN);
-		dup2(pipe1_fd[PIPE_IN], STDOUT);
-		i = read(STDIN, buff, 100);
-		buff[i] = '\0';
-		write(STDOUT, buff, i);
-		exit(1);
 	}
 	else
 	{
-		wait(NULL);
-		dup2(pipe1_fd[PIPE_OUT], STDIN);
-		// dup2(pipe2_fd[PIPE_OUT], STDOUT);
-		i = read(STDIN, buff, 100);
-		buff[i] = '\0';
-		write(STDOUT, buff, i);
+		// parent
+
 	}
-	// pid = fork();
-	// if (pid == 0)
-	// {
-	// 	dup2(pipe2_fd[PIPE_OUT], STDIN);
-	// 	dup2(pipe1_fd[PIPE_IN], STDOUT);
-	// 	i = read(STDIN, buff, 100);
-	// 	buff[i] = '\0';
-	// 	write(STDOUT, buff, i);
-	// 	exit(1);
-	// }
-	// else
-	// {
-	// 	wait(NULL);
-	// 	dup2(pipe1_fd[PIPE_OUT], STDIN);
-	// 	i = read(STDIN, buff, 100);
-	// 	buff[i] = '\0';
-	// 	write(STDOUT, buff, i);
-	// 	printf("부모 프로세스\n");
-	// }
+	pipe(pipe2_fd);
+	pid[3] = fork();
+	if (pid[0] == 0)
+	{
+		// child
 
+	}
+	else
+	{
+		// parent
 
-
-
-
+	}
+	waitpid(pid[0], NULL, 0);
+	waitpid(pid[1], NULL, 0);
 	return 0;
 }

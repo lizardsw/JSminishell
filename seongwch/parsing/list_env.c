@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 18:33:43 by junoh             #+#    #+#             */
-/*   Updated: 2022/07/28 12:27:23 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/03 16:35:07 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,27 @@ char	*get_value(t_list *env, char *key)
 		ptr = ptr->next;
 	}
 	return (value);
+}
+
+char	**make_char_env(t_list *list)
+{
+	t_node		*ptr;
+	char		**new;
+	int			i;
+
+	i = 0;
+	ptr = list->start;
+	new = (char **)malloc(sizeof(char *) * (list->number + 1));
+	if (new == NULL)
+		exit(1);
+	while (ptr != NULL)
+	{
+		new[i] = ft_strdup(ptr->data);
+		i++;
+		ptr = ptr->next;
+	}
+	new[i] = NULL;
+	return (new);
 }
 
 t_list	*make_list_env(char **env)
