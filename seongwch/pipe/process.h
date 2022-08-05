@@ -14,8 +14,14 @@ enum std_streams
 	STDOUT = 1
 };
 
-
-
+typedef struct s_info
+{
+	int fd_in;
+	int fd_out;
+	int pipe_alpha[2];
+	int pipe_beta[2];
+	pid_t	*pid;
+}	t_info ;
 
 
 #endif 

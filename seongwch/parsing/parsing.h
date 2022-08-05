@@ -95,9 +95,12 @@ typedef struct s_state
 
 typedef struct s_info
 {
-	int fd[2];
+	int	fd_in;
+	int	fd_out;
+	int	number;
 	int	pipe_alpha[2];
-	int pipe_beta[2];
+	int	pipe_beta[2];
+	pid_t	*pid;
 }	t_info;
 
 // list_struct.c
@@ -160,5 +163,22 @@ void	expand_ast(t_process **ast, t_state *state);
 void handler(int signum);
 void signal_handler();
 void setting_terminal();
+
+// setting_fd.c
+void	redir_fd(t_info *info, t_list *redir);
+int		open_infile(char *file, int flag);
+int		open_outfile(char *file, int flag);
+
+// pipe_main.c
+int	ft_dup2(int fd1, int fd2);
+void	ft_make_pipe(t_info *info, int index);
+void child_process(t_process *process, t_state *state, t_info *info, int i);
+void parent_process(t_info *info, int i);
+void	init_info(t_process **storage, t_info *info);
+void multi_process(t_process **storage, t_state *state);
+void pipe_main(t_process **storage, t_state *state);
+
+// execute_cmd.c
+void	execute_cmd(t_list *redir, t_state *state);
 
 #endif
