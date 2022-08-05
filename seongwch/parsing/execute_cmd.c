@@ -19,22 +19,22 @@ static char	*get_path(char **envp, char *cmd)
 		path = ft_path_join(real_path[i++], cmd);
 		if (access(path, X_OK) == 0)
 		{
-			ft_frees(real_path, NULL);
+			path_frees(real_path, NULL);
 			return (path);
 		}
 	}
-	ft_frees(real_path, NULL);
+	path_frees(real_path, NULL);
 	return (cmd);
 }
 
-void	execute_cmd(t_list *redir, t_state *state)
+void	execute_cmd(t_list *cmd, t_state *state)
 {
 	char	*excute_path;
 	char	**args;
-	char	*envp;
+	char	**envp;
 	int		exceve_ret;
 
-	args = make_char_env(redir);
+	args = make_char_env(cmd);
 	envp = make_char_env(state->env_lst);
 	if (args[0][0] == '/')
 		excute_path = args[0];

@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_bonus.c                                       :+:      :+:    :+:   */
+/*   ft_path_join.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/27 14:56:28 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/05 14:38:55 by seongwch         ###   ########.fr       */
+/*   Created: 2022/08/05 14:00:55 by seongwch          #+#    #+#             */
+/*   Updated: 2022/08/05 14:01:14 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/pipex_bonus.h"
+#include "shell_libft.h"
 
-void	*ft_frees(char **strs, char *str)
+char	*ft_path_join(char *s1, char *s2)
 {
-	int	i;
+	char	*str;
+	int		i;
+	int		j;
 
-	i = 0;
-	if (strs != NULL)
-	{
-		while (strs[i] != NULL)
-			free(strs[i++]);
-		free(strs[i]);
-		free(strs);
+	if (s1 == NULL || s2 == NULL)
+		return (0);
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) \
+	+ ft_strlen(s2) + 2));
+	if (str == NULL)
 		return (NULL);
-	}
-	else
-		free(str);
-	return (NULL);
+	i = -1;
+	j = 0;
+	while (s1[++i] != '\0')
+		str[i] = s1[i];
+	str[i++] = '/';
+	while (s2[j] != '\0')
+		str[i++] = s2[j++];
+	str[ft_strlen(s1) + ft_strlen(s2) + 1] = '\0';
+	return (str);
 }

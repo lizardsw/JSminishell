@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:26:12 by seongwch          #+#    #+#             */
-/*   Updated: 2022/07/28 12:26:40 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/05 18:11:15 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	expand_syntax(t_node *node, t_state *state)
 		else if (node->data[i + j] == '\0')
 			j++;
 		i += j;
+		if (i > strlen(node->data))
+			break;
 	}
 	free(node->data);
 	node->data = storage;

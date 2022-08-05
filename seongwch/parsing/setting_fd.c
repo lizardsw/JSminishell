@@ -6,13 +6,13 @@ int	open_outfile(char *file, int flag)
 
 	if (flag == RDOUT)
 	{
-		open_ret = open(file, O_TRUNC | O_CREAT | O_RDWR, 0000644);
+		open_ret = open(file, O_WRONLY | O_TRUNC | O_CREAT, 0000644);
 		if (open_ret < 0)
 			ft_perror(OUTFILE_OPEN_ERR);
 	}
 	else if (flag == RDRDOUT)
 	{
-		open_ret = opsen(file, O_APPEND | O_CREAT | O_RDWR, 0000644);
+		open_ret = open(file, O_APPEND | O_CREAT | O_WRONLY, 0000644);
 		if (open_ret < 0)
 			ft_perror(OUTFILE_OPEN_ERR);
 	}
@@ -41,11 +41,15 @@ int	open_infile(char *file, int flag)
 void close_file(t_info *info, int token)
 {
 	if (token == RDRDIN || token == RDIN)
-		if (info->fd_in != 0)
+	{
+		if (info->fd_in != -2)
 			close(info->fd_in);
+	}
 	else if (token == RDOUT || token == RDRDOUT)
-		if (info->fd_out != 1)
+	{
+		if (info->fd_out != -2)
 			close(info->fd_out);
+	}
 }
 
 void	dup2_redir(t_info *info)

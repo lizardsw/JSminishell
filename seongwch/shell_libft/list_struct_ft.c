@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   list_struct_ft.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 16:39:53 by seongwch          #+#    #+#             */
-/*   Updated: 2022/07/26 13:45:55 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/05 14:12:33 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "shell_libft.h"
 
 void	push_node_back(t_list *list, t_node *node)
 {

@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_bonus.c                                       :+:      :+:    :+:   */
+/*   ft_strichr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/27 14:56:28 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/05 14:38:55 by seongwch         ###   ########.fr       */
+/*   Created: 2022/08/05 13:58:38 by seongwch          #+#    #+#             */
+/*   Updated: 2022/08/05 13:58:52 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/pipex_bonus.h"
+#include "shell_libft.h"
 
-void	*ft_frees(char **strs, char *str)
+int	ft_strichr(const char *s, int c)
 {
 	int	i;
 
 	i = 0;
-	if (strs != NULL)
+	if (s == NULL)
+		return (0);
+	while (s[i] != '\0')
 	{
-		while (strs[i] != NULL)
-			free(strs[i++]);
-		free(strs[i]);
-		free(strs);
-		return (NULL);
+		if (s[i] == c)
+			return (i);
+		i++;
 	}
+	if (s[i] == c)
+		return (i);
 	else
-		free(str);
-	return (NULL);
+		return (-1);
 }

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   list_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 16:33:12 by seongwch          #+#    #+#             */
-/*   Updated: 2022/07/28 12:27:29 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/05 14:14:23 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "shell_libft.h"
 
 void	show_list(t_list *list)
 {
@@ -21,7 +21,6 @@ void	show_list(t_list *list)
 		printf("EMPTY! list");
 	while (ptr != NULL)
 	{
-		// printf("%s\n", ptr->data);
 		printf("[%s gt(%d,%d)]", ptr->data, ptr->group, ptr->token);
 		ptr = ptr->next;
 	}
@@ -39,7 +38,7 @@ t_list	*new_list(void)
 	new->end = NULL;
 	new->number = 0;
 	new->pipe_num = 0;
-	new->state = GOOD;
+	new->state = 1;
 	return (new);
 }
 

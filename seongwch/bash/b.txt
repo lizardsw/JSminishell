@@ -1,15 +1,2 @@
-total 56
--rw-r--r--  1 seongwch  2021_seoul  208  7 19 21:16 a.out
--rw-r--r--  1 seongwch  2021_seoul   85  7 26 13:31 a.txt
-drwxr-xr-x  2 seongwch  2021_seoul   68  7 19 14:23 aple
--rw-r--r--  1 seongwch  2021_seoul    0  8  3 20:00 b.txt
--rw-r--r--  1 seongwch  2021_seoul    0  7 21 20:23 d.txt
--rw-r--r--  1 seongwch  2021_seoul    0  7 19 21:26 hhhh
--rw-r--r--  1 seongwch  2021_seoul    0  7 20 18:43 hi
--rw-r--r--  1 seongwch  2021_seoul   22  7 19 14:12 hi.txt
--rw-r--r--  1 seongwch  2021_seoul   22  7 19 14:10 k.txt
--rw-r--r--  1 seongwch  2021_seoul   22  7 19 14:00 kk.txt
--rw-r--r--  1 seongwch  2021_seoul   79  7 21 12:44 ll.txt
--rw-r--r--  1 seongwch  2021_seoul    0  7 19 14:14 me.txt
--rw-r--r--  1 seongwch  2021_seoul    0  7 19 14:11 pp.txt
--rw-r--r--  1 seongwch  2021_seoul   22  7 19 14:05 zz.txt
+123
+123

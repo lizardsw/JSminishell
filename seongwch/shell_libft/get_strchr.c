@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_bonus.c                                       :+:      :+:    :+:   */
+/*   get_strchr                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/27 14:56:28 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/05 14:38:55 by seongwch         ###   ########.fr       */
+/*   Created: 2022/08/05 13:50:40 by seongwch          #+#    #+#             */
+/*   Updated: 2022/08/05 13:50:58 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/pipex_bonus.h"
+#include "shell_libft.h"
 
-void	*ft_frees(char **strs, char *str)
+// str에 number 만큼 c 를 찾아서 return 해준다.
+int	get_strchr(char *str, int number, char c)
 {
 	int	i;
 
 	i = 0;
-	if (strs != NULL)
+	while (i < number)
 	{
-		while (strs[i] != NULL)
-			free(strs[i++]);
-		free(strs[i]);
-		free(strs);
-		return (NULL);
+		if (str[i] == c)
+			return (i);
+		i++;
 	}
-	else
-		free(str);
-	return (NULL);
+	return (-1);
 }

@@ -6,11 +6,14 @@ int	parsing(t_process ***storage, t_state *state, char *line)
 
 	*storage = NULL;
 	list = shell_split(line);
-	if (list->state == GOOD)
+	// show_list(list);
+	// printf("%d\n", list->state);
+	if (list->state == GOOD | list->state == BLANK)
 	{
 		*storage = make_ast(list);
+		// show_process(*storage);
 		expand_ast(*storage, state);
-		show_process(*storage);
+		// show_process(*storage);
 		if (syntax_error(*storage) == -1)
 		{
 			printf("syntax_error!\n");
@@ -46,10 +49,12 @@ int	main(int argc, char **argv, char **env)
 		add_history(line);
 		if (parsing(&storage, &state, line) == 1)
 		{
-			
+			// show_process(storage);
+			pipe_main(storage, &state);
 		}
 		free_process(storage);
 		free(line);
+		// system("leaks a.out > leaks_result_temp; cat leaks_result_temp | grep leaked && rm -rf leaks_result_temp");
 	}
-
+	return 0;
 }

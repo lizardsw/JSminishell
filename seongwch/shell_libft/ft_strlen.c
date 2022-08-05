@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_bonus.c                                       :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/27 14:56:28 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/05 14:38:55 by seongwch         ###   ########.fr       */
+/*   Created: 2021/11/10 13:29:20 by seongwch          #+#    #+#             */
+/*   Updated: 2022/08/05 14:11:24 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/pipex_bonus.h"
+#include "shell_libft.h"
 
-void	*ft_frees(char **strs, char *str)
+int	ft_strlen(char *str)
 {
-	int	i;
+	int	len;
 
-	i = 0;
-	if (strs != NULL)
-	{
-		while (strs[i] != NULL)
-			free(strs[i++]);
-		free(strs[i]);
-		free(strs);
-		return (NULL);
-	}
-	else
-		free(str);
-	return (NULL);
+	if (str == NULL)
+		return (0);
+	len = 0;
+	while (str[len])
+		len++;
+	return (len);
 }

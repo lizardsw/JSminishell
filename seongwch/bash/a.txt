@@ -1,14 +1,2 @@
-a.out
-a.txt
-aple
-b.txt
-d.txt
-hhhh
-hi
-hi.txt
-k.txt
-kk.txt
-ll.txt
-me.txt
-pp.txt
-zz.txt
+123
+123

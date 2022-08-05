@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_bonus.c                                       :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/27 14:56:28 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/05 14:38:55 by seongwch         ###   ########.fr       */
+/*   Created: 2022/08/05 14:00:11 by seongwch          #+#    #+#             */
+/*   Updated: 2022/08/05 14:00:23 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/pipex_bonus.h"
+#include "shell_libft.h"
 
-void	*ft_frees(char **strs, char *str)
+char	*ft_strndup(const char *s, int cpy_len)
 {
-	int	i;
+	char	*tmp;
+	int		len;
 
-	i = 0;
-	if (strs != NULL)
-	{
-		while (strs[i] != NULL)
-			free(strs[i++]);
-		free(strs[i]);
-		free(strs);
+	len = cpy_len;
+	tmp = malloc(sizeof(char) * (cpy_len + 1));
+	if (tmp == NULL)
 		return (NULL);
+	while (cpy_len-- > 0)
+	{
+		*tmp = *s;
+		tmp++;
+		s++;
 	}
-	else
-		free(str);
-	return (NULL);
+	*tmp = '\0';
+	return (tmp - len);
 }

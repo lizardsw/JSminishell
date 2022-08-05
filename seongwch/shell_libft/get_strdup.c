@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_bonus.c                                       :+:      :+:    :+:   */
+/*   get_strdup                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/27 14:56:28 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/05 14:38:55 by seongwch         ###   ########.fr       */
+/*   Created: 2022/08/05 13:51:10 by seongwch          #+#    #+#             */
+/*   Updated: 2022/08/05 13:51:34 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/pipex_bonus.h"
+#include "shell_libft.h"
 
-void	*ft_frees(char **strs, char *str)
+// str에 number만큼 strdup
+char	*get_strdup(char *src, int number)
 {
-	int	i;
+	char	*new;
+	int		i;
 
 	i = 0;
-	if (strs != NULL)
+	new = (char *)malloc(sizeof(char) * number + 1);
+	if (new == NULL)
+		exit(1);
+	while (i < number)
 	{
-		while (strs[i] != NULL)
-			free(strs[i++]);
-		free(strs[i]);
-		free(strs);
-		return (NULL);
+		new[i] = src[i];
+		i++;
 	}
-	else
-		free(str);
-	return (NULL);
+	new[i] = '\0';
+	return (new);
 }

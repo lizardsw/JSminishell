@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "../libft/libft.h"
+#include "../shell_libft/shell_libft.h"
 
 #include <signal.h>
 #include <readline/readline.h>
@@ -59,24 +59,6 @@ enum e_error
 	DUP_ERR
 };
 
-typedef struct s_node
-{
-	struct s_node *prev;
-	struct s_node *next;
-	char	*data;
-	int		group;
-	int		token;
-}	t_node;
-
-typedef struct s_list
-{
-	t_node *start;
-	t_node *end;
-	int	number;
-	int pipe_num;
-	int state;
-}	t_list;
-
 typedef struct s_process
 {
 	t_list	*redir;
@@ -103,17 +85,6 @@ typedef struct s_info
 	pid_t	*pid;
 }	t_info;
 
-// list_struct.c
-void	show_list(t_list *list);
-t_list *new_list(void);
-t_node *new_node(char *str);
-
-// list_struct_ft.c
-void	push_node_back(t_list *list, t_node *node);
-void	push_node_front(t_list *list, t_node *node);
-t_node *pop_node_back(t_list *list);
-t_node *pop_node_front(t_list *list);
-
 // shell_split.c
 t_list *shell_split(char *str);
 
@@ -135,6 +106,7 @@ void 	free_str(char **str);
 void	free_node(t_node *ptr);
 void	free_list(t_list *list);
 void	free_process(t_process **prc);
+void	path_frees(char **strs, char *str);
 
 // error.c
 int syntax_error(t_process **parsing);
@@ -144,11 +116,6 @@ t_list	*make_list_env(char **env);
 char	**split_key_value(char *str);
 char	**make_char_env(t_list *list);
 char	*get_value(t_list *env, char *key);
-
-// shell_libft.c
-char	*null_strjoin(char *s1, char *s2);
-int		get_strchr(char *str, int number, char c);
-char	*get_strdup(char *src, int number);
 
 // expand_utils.c
 int	cmd_expand(char **str_storage, char *str);
@@ -180,5 +147,11 @@ void pipe_main(t_process **storage, t_state *state);
 
 // execute_cmd.c
 void	execute_cmd(t_list *redir, t_state *state);
+
+// ft_perror.c
+int	ft_perror(int err);
+void	ft_error(int err);
+
+
 
 #endif

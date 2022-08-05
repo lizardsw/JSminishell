@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:30:23 by seongwch          #+#    #+#             */
-/*   Updated: 2022/07/28 12:27:06 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/05 14:36:47 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,20 @@ void	free_process(t_process **prc)
 		i++;
 	}
 	free(prc);
+}
+
+void	path_frees(char **strs, char *str)
+{
+	int	i;
+
+	i = 0;
+	if (strs != NULL)
+	{
+		while (strs[i] != NULL)
+			free(strs[i++]);
+		free(strs[i]);
+		free(strs);
+	}
+	else
+		free(str);
 }

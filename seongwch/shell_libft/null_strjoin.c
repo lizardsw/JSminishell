@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell_libft.c                                      :+:      :+:    :+:   */
+/*   null_strjoin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/28 12:27:32 by seongwch          #+#    #+#             */
-/*   Updated: 2022/07/28 12:27:51 by seongwch         ###   ########.fr       */
+/*   Created: 2022/08/05 13:48:30 by seongwch          #+#    #+#             */
+/*   Updated: 2022/08/05 13:50:20 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "shell_libft.h"
 
 char	*null_strjoin(char *s1, char *s2)
 {
@@ -32,40 +32,6 @@ char	*null_strjoin(char *s1, char *s2)
 	j = 0;
 	while (s2[j] != '\0')
 		new[i++] = s2[j++];
-	new[i] = '\0';
-	return (new);
-}
-
-// str에 number 만큼 c 를 찾아서 return 해준다.
-int	get_strchr(char *str, int number, char c)
-{
-	int	i;
-
-	i = 0;
-	while (i < number)
-	{
-		if (str[i] == c)
-			return (i);
-		i++;
-	}
-	return (-1);
-}
-
-// str에 number만큼 strdup
-char	*get_strdup(char *src, int number)
-{
-	char	*new;
-	int		i;
-
-	i = 0;
-	new = (char *)malloc(sizeof(char) * number + 1);
-	if (new == NULL)
-		exit(1);
-	while (i < number)
-	{
-		new[i] = src[i];
-		i++;
-	}
 	new[i] = '\0';
 	return (new);
 }
