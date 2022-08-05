@@ -8,7 +8,9 @@ int	parsing(t_process ***storage, t_state *state, char *line)
 	list = shell_split(line);
 	// show_list(list);
 	// printf("%d\n", list->state);
-	if (list->state == GOOD | list->state == BLANK)
+	if (list->start == NULL)
+		return (-1);
+	if (list->state == GOOD)
 	{
 		*storage = make_ast(list);
 		// show_process(*storage);
@@ -43,7 +45,7 @@ int	main(int argc, char **argv, char **env)
 		line = readline("JSminishell> ");
 		if (line == NULL)
 		{
-			write(1, "exit\n", 6);
+			write(1, "exit111111\n", 6);
 			exit(1);
 		}
 		add_history(line);
@@ -51,8 +53,8 @@ int	main(int argc, char **argv, char **env)
 		{
 			// show_process(storage);
 			pipe_main(storage, &state);
+			free_process(storage);
 		}
-		free_process(storage);
 		free(line);
 		// system("leaks a.out > leaks_result_temp; cat leaks_result_temp | grep leaked && rm -rf leaks_result_temp");
 	}

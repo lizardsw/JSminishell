@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_libft.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 13:46:51 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/05 19:59:50 by junoh            ###   ########.fr       */
+/*   Updated: 2022/08/05 20:26:21 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ char	*get_strdup(char *src, int number);
 char	*ft_strdup(char *str);
 int		ft_strlen(char *str);
 int		ft_strichr(const char *s, int c);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_strncmp(const char *s1, const char *s2, int n);
 char	*ft_path_join(char *s1, char *s2);
 char	*ft_strndup(const char *s, int cpy_len);
 char	**ft_split(char const *s, char c);
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strchr(const char *str, int c);
 int		ft_isalpha(int c);
 

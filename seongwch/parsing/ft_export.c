@@ -6,11 +6,11 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:10:39 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/05 20:12:22 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/05 20:32:17 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../parsing/parsing.h"
+#include "parsing.h"
 
 t_node     *is_key_exist_without_value(t_state *state, char *key, int flag)
 {

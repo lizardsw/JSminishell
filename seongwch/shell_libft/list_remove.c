@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_remove.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 15:06:33 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/05 20:01:53 by junoh            ###   ########.fr       */
+/*   Updated: 2022/08/05 20:20:29 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static  void    remove_last(t_list *list, t_node *node)
 	return ;
 }
 
-static  void    remove_middle(t_list *list, t_node *node)
+static  void    remove_middle(t_node *node)
 {
 	t_node *node_next;
 	t_node *node_prev;
@@ -70,7 +70,7 @@ void    remove_node(t_list *list, t_node *node)
 	{
 		if (ptr == node)
 		{
-			remove_middle(list, node);
+			remove_middle(node);
 			return ;
 		}
 		ptr = ptr->next;

@@ -80,6 +80,7 @@ typedef struct s_info
 	int	fd_in;
 	int	fd_out;
 	int	number;
+	int pre_pipe;
 	int	pipe_alpha[2];
 	int	pipe_beta[2];
 	pid_t	*pid;
@@ -152,6 +153,23 @@ void	execute_cmd(t_list *redir, t_state *state);
 int	ft_perror(int err);
 void	ft_error(int err);
 
+// builtin_package.c
+void	multi_total_cmd(t_list *cmd, t_state *state);
 
+// built-in
+void    change_env_path(t_state *state, char *key, int flag);
+void    change_dir(char *path, t_state *state);
+void    ft_cd(t_list *cmd_list, t_state *state);
+int ft_env(t_state *state, t_node *cmd_node);
+void    export_print_with_value(t_state *state, t_node *node);
+void    export_print(t_state *state);
+t_node     *is_key_exist_without_value(t_state *state, char *key, int flag);
+void    exec_export(t_node *cmd_node, t_state *state);
+void    ft_export(t_list *cmd_list, t_state *state);
+int ft_pwd(t_list *cmd_list, t_state *state);
+int     check_str(char *str);
+void    del_env_one(t_node *cmd_node, t_state *state, t_node *ptr);
+void    exec_unset(t_node *cmd_node, t_state *state);
+void    ft_unset(t_list *cmd_list, t_state *state);
 
 #endif
