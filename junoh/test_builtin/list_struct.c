@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   list_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 16:33:12 by seongwch          #+#    #+#             */
-/*   Updated: 2022/07/28 12:27:29 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/05 14:38:19 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "test.h"
 
 void	show_list(t_list *list)
 {

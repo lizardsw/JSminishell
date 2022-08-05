@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_struct_remove.c                               :+:      :+:    :+:   */
+/*   list_remove_tmp.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 15:06:33 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/04 20:16:30 by junoh            ###   ########.fr       */
+/*   Updated: 2022/08/05 18:56:22 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../parsing/parsing.h"
+#include "test.h"
 
 static  void    remove_start(t_list *list, t_node *node)
 {
@@ -54,7 +54,7 @@ void    remove_node(t_list *list, t_node *node)
 {
     t_node  *ptr;
 
-    
+
     if (list->end == node)
     {
         remove_last(list, node);
@@ -63,7 +63,7 @@ void    remove_node(t_list *list, t_node *node)
     ptr = list->start;
     if (ptr == node)
     {
-        remove_first(list, node);
+        remove_start(list, node);
         return ;
     }
     while (ptr != NULL)

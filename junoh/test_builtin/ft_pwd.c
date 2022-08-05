@@ -6,7 +6,7 @@
 /*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 14:03:02 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/05 20:00:34 by junoh            ###   ########.fr       */
+/*   Updated: 2022/08/05 19:17:19 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@
 
 int ft_pwd(t_list *cmd_list, t_state *state)
 {
-	char    *str;
+    char    *str;
 
-	(void)(cmd_list);
-	(void)(state); // should add error signal 
-	str = getcwd(NULL, 0);
-	if (str == NULL)
-		return (-1);
-	else
-	{
-		printf("%s\n", str);
-		free(str);
-	}
-	return (0);
+    (void)(cmd_list);
+    (void)(state); // should add error signal 
+    str = getcwd(NULL, 0);
+    if (str == NULL)
+        return (-1);
+    else
+    {
+        printf("%s\n", str);
+        free(str);
+    }
+    return (0);
 }

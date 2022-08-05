@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/13 20:19:11 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/05 19:27:40 by junoh            ###   ########.fr       */
+/*   Created: 2022/08/05 19:49:58 by junoh             #+#    #+#             */
+/*   Updated: 2022/08/05 19:50:13 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "shell_libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

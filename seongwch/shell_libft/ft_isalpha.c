@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/26 14:03:02 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/05 20:00:34 by junoh            ###   ########.fr       */
+/*   Created: 2022/08/05 19:56:42 by junoh             #+#    #+#             */
+/*   Updated: 2022/08/05 19:57:00 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../parsing/parsing.h"
+#include"shell_libft.h"
 
-// 이전 함수에서 dup2(fd, STDOUT) 이 되어있음
-
-int ft_pwd(t_list *cmd_list, t_state *state)
+int	ft_isalpha(int c)
 {
-	char    *str;
-
-	(void)(cmd_list);
-	(void)(state); // should add error signal 
-	str = getcwd(NULL, 0);
-	if (str == NULL)
-		return (-1);
+	if (c >= 'a' && c <= 'z')
+		return (1);
+	else if (c >= 'A' && c <= 'Z')
+		return (2);
 	else
-	{
-		printf("%s\n", str);
-		free(str);
-	}
-	return (0);
+		return (0);
 }

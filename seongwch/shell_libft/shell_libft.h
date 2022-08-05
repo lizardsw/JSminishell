@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_libft.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 13:46:51 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/05 14:17:22 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/05 19:59:50 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_path_join(char *s1, char *s2);
 char	*ft_strndup(const char *s, int cpy_len);
 char	**ft_split(char const *s, char c);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strchr(const char *str, int c);
+int		ft_isalpha(int c);
 
 // list 관련된
 void	show_list(t_list *list);
@@ -55,5 +58,6 @@ void	push_node_back(t_list *list, t_node *node);
 void	push_node_front(t_list *list, t_node *node);
 t_node	*pop_node_back(t_list *list);
 t_node	*pop_node_front(t_list *list);
+void    remove_node(t_list *list, t_node *node);
 
 #endif

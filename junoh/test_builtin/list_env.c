@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   list_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 18:33:43 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/03 16:35:07 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/05 16:33:14 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "test.h"
 
 char	**split_key_value(char *str)
 {
@@ -21,7 +21,7 @@ char	**split_key_value(char *str)
 	new = (char **)malloc(sizeof(char *) * 3);
 	if (new == NULL)
 		exit(1);
-	while (str[i] != '=')
+	while (str[i] != '=' && str[i] != '\0')
 		i++;
 	new[0] = get_strdup(str, i + 1);
 	new[1] = ft_strdup(&str[i + 1]);
@@ -74,7 +74,7 @@ char	**make_char_env(t_list *list)
 	return (new);
 }
 
-t_list	*make_list_env(char **env)
+t_list	*make_list_env(char **env) // 문제 없음
 {
 	t_list	*new;
 	int		i;
@@ -86,6 +86,6 @@ t_list	*make_list_env(char **env)
 		push_node_back(new, new_node(env[i]));
 		i++;
 	}
-	env[i] = NULL;
+	new->end->next = NULL;
 	return (new);
 }

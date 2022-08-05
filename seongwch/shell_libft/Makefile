@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+         #
+#    By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 21:31:47 by seongwch          #+#    #+#              #
-#    Updated: 2022/08/05 14:10:54 by seongwch         ###   ########.fr        #
+#    Updated: 2022/08/05 20:01:46 by junoh            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,12 @@ PART1 = ft_path_join\
 	get_strdup\
 	list_struct_ft\
 	list_struct\
+	list_remove\
 	null_strjoin\
+	ft_strjoin\
+	ft_strchr\
+	ft_isalpha\
+
 
 all : $(NAME)
 
