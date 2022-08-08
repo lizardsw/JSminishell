@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 14:32:49 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/05 14:32:59 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/08 20:55:38 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_error(int err)
 	exit(1);
 }
 
-int	ft_perror(int err)
+void	ft_perror(int err)
 {
 	if (err == INFILE_OPEN_ERR)
 		perror("Infile open error!");
@@ -54,6 +54,19 @@ int	ft_perror(int err)
 	exit(1);
 }
 
+void	ft_no_exit_perror(int err)
+{
+	if (err == INFILE_OPEN_ERR)
+		perror("Infile open error!");
+	else if (err == OUTFILE_OPEN_ERR)
+		perror("Outfile open error!");
+	else if (err == EXE_ERR)
+		perror("Execve error!");
+	else if (err == PATH_ERR)
+		perror("command not found");
+	else if (err == DUP_ERR)
+		perror("Dupplitcate error");
+}
 // int	ft_check_status(t_info *info)
 // {
 // 	const int	w_status = info->status & 0177;

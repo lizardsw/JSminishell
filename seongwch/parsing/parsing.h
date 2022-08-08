@@ -135,9 +135,9 @@ void signal_handler();
 void setting_terminal();
 
 // setting_fd.c
-void	redir_fd(t_info *info, t_list *redir);
-int		open_infile(char *file, int flag);
-int		open_outfile(char *file, int flag);
+int		redir_fd(t_info *info, t_list *redir);
+int		open_infile(char *file, int flag, int pid);
+int		open_outfile(char *file, int flag, int pid);
 
 // pipe_main.c
 int	ft_dup2(int fd1, int fd2);
@@ -152,8 +152,9 @@ void pipe_main(t_process **storage, t_state *state);
 void	execute_cmd(t_list *redir, t_state *state);
 
 // ft_perror.c
-int	ft_perror(int err);
+void	ft_perror(int err);
 void	ft_error(int err);
+void	ft_no_exit_perror(int err);
 
 // builtin_package.c
 void	multi_total_cmd(t_list *cmd, t_state *state);

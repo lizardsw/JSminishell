@@ -6,28 +6,30 @@ int	parsing(t_process ***storage, t_state *state, char *line)
 
 	*storage = NULL;
 	list = shell_split(line);
-	// show_list(list);
-	// printf("%d\n", list->state);
 	if (list->start == NULL)
+	{
+		free_list(list);
 		return (-1);
+	}
 	if (list->state == GOOD)
 	{
 		*storage = make_ast(list);
-		// show_process(*storage);
 		expand_ast(*storage, state);
-		// show_process(*storage);
 		if (syntax_error(*storage) == -1)
 		{
+			free_list(list);
+			free_process(*storage);
 			printf("syntax_error!\n");
 			return (-1);
 		}
 	}
 	else if (list->state == ERROR)
 	{
+		free_list(list);
 		printf("QUOTE error!\n");
 		return (-1);
 	}
-	free(list);
+	free_list(list);
 	return (1);
 }
 
@@ -56,7 +58,7 @@ int	main(int argc, char **argv, char **env)
 			free_process(storage);
 		}
 		free(line);
-		// system("leaks a.out > leaks_result_temp; cat leaks_result_temp | grep leaked && rm -rf leaks_result_temp");
+		system("leaks a.out > leaks_result_temp; cat leaks_result_temp | grep leaked && rm -rf leaks_result_temp");
 	}
 	return 0;
 }

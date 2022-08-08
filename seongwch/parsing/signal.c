@@ -2,44 +2,29 @@
 
 void handler(int signum)
 {
-	if (signum != SIGINT)
-		return ;
-	write(STDOUT_FILENO, "\n", 1);
-	if (rl_on_new_line() == -1)
-	{
-		printf("r1_error!\n");
-		exit(1);
-	} 
-	rl_replace_line("", 1);
-	rl_redisplay();
-}
+	pid_t	pid;
 
-void child_handler(int signum)
-{
 	if (signum != SIGINT)
 		return ;
-	write(2, "child!\n", 7);
-// 	write(STDOUT_FILENO, "\n", 1);
-// 	printf("handler!\n");
-// 	if (rl_on_new_line() == -1)
-// 	{
-// 		printf("r1_error!\n");
-// 		exit(1);
-// 	} 
-// 	rl_replace_line("", 1);
-// 	rl_redisplay();
-// }
+	pid = waitpid(-1, NULL, WNOHANG);
+	if (pid == -1)
+	{
+		write(STDOUT_FILENO, "\n", 1);
+		if (rl_on_new_line() == -1)
+		{
+			printf("r1_error!\n");
+			exit(1);
+		} 
+		rl_replace_line("", 1);
+		rl_redisplay();
+	}
+	else
+		write(STDOUT_FILENO, "^C\n", 3);
 }
 
 void signal_handler()
 {
 	signal(SIGINT, handler);
-	signal(SIGQUIT, SIG_IGN);
-}
-
-void child_signal_handler()
-{
-	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
 }
 

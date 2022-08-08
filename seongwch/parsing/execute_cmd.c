@@ -1,10 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execute_cmd.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/08 19:54:04 by seongwch          #+#    #+#             */
+/*   Updated: 2022/08/08 19:59:59 by seongwch         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parsing.h"
+
+static int	ft_access(char *path)
+{
+	int	fd;
+
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (fd);
+	close(fd);
+	return (1);
+}
 
 static char	*get_path(char **envp, char *cmd)
 {
 	char	*path;
 	char	**real_path;
 	int		i;
+	int		fd;
 
 	i = 0;
 	while (envp[i] != NULL && (ft_strncmp(envp[i], "PATH=", 5)))
@@ -17,7 +41,8 @@ static char	*get_path(char **envp, char *cmd)
 	while (real_path[i] != NULL)
 	{
 		path = ft_path_join(real_path[i++], cmd);
-		if (access(path, X_OK) == 0)
+		fd = ft_access(path);
+		if (fd > 0)
 		{
 			path_frees(real_path, NULL);
 			return (path);

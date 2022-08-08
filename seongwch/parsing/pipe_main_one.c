@@ -23,8 +23,6 @@ void	ft_make_pipe(t_info *info, int index)
 
 void child_process(t_process *process, t_state *state, t_info *info, int i)
 {
-	// setting_terminal();
-	child_signal_handler();
 	if (process->index == START)
 	{
 		close(info->pipe_alpha[0]);
@@ -69,6 +67,7 @@ void	init_info(t_process **storage, t_info *info)
 	info->pid = (pid_t *)malloc(sizeof(pid_t) * i);
 	if (info->pid == NULL)
 		exit(1);
+	info->pid[0] = 1;
 	info->number = i;
 	info->pre_pipe = -1;
 	info->fd_in = -2;
@@ -96,7 +95,7 @@ void multi_process(t_process **storage, t_state *state)
 	i = 0;
 	while(i < info.number)
 	{
-		wait(NULL);
+		waitpid(info.pid[i], NULL, WUNTRACED);
 		i++;
 	}
 	free(info.pid);
