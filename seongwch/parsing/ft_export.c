@@ -3,107 +3,126 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:10:39 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/08 16:22:30 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/09 05:59:01 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-t_node     *is_key_exist_without_value(t_state *state, char *key, int flag)
+static int export_check_str(char *str)
 {
-	t_node  *lst;
-	char    *cmp_buf;
-	char    **split;
-	
-	lst = state->env_lst->start;
-	cmp_buf = get_strdup(key, (int)ft_strlen(key) - flag);
-	while (lst->next != NULL)
-	{
-		split = split_key_value(lst->data);
-		if ((!ft_strncmp(cmp_buf, split[0], ft_strlen(key) - flag) && \
-		((int)ft_strlen(split[0]) == (int)ft_strlen(key) - flag)))
-		{
-			free_str(split);
-			return (new_node(ft_strdup(lst->data)));
-		}
-		lst = lst->next;
-	}        
-	free_str(split);
-	return (NULL);
+    int i;
+
+    i = 0;
+    while (str[i] != '\0')
+    {
+        if ((str[i] >= 48 && str[i] <= 57) || str[i] == '=' || str[i] == '_' ||  
+            ft_isalpha(str[i]))
+            i++;
+        else
+            return (0);
+    }
+    return (1);
 }
 
-static  void    change_and_add_env_lst(t_state *state, char **split, t_node *cmd_node)
+void    replace_node(t_node *new_node, t_list *env_lst)
 {
-	t_node *node;
-	   
-	node = is_key_exist_without_value(state, split[0], 1); // 환경변수 a=3 이나 a=가 아닌 a 일떼
-	if (node)
-	{
-		node->data = ft_strjoin(node->data, "=");
-		node->data = ft_strjoin(node->data, split[1]);
-	}
-	else
-	{
-		node = is_key_exist_without_value(state, split[0], 0); //  a 조차 없다면 a= 을 만듬
-		if (node)
-			node->data = ft_strjoin(node->data, split[1]);
-		else
-			push_node_back(state->env_lst, new_node(cmd_node->data));
-	}
-	free_str(split);
-	return ;
+    t_node *ptr;
+    char    **origin;
+    char    **args;
+    char    *tmp;
+    
+    args = split_key_value(new_node->data);
+    ptr = env_lst->start;
+    while (ptr != NULL)
+    {
+        origin = split_key_value(ptr->data);
+        if (compare_str(origin[0], args[0]))
+        {
+            tmp = ptr->data;
+            ptr->data = ft_strdup(new_node->data);
+            free(tmp);
+            free_str(args);
+            free_str(origin);
+            return ;
+        }
+        free_str(origin);
+        ptr = ptr->next;
+    }
+    free_str(args);
 }
 
-static  void    exchange_env_lst(t_node *node, t_state *state)
+void     check_key(t_node *node, t_list *env_lst)
 {
-	char    **morpheme; 
-	t_node  *n_node;
-		
-	morpheme = split_key_value(node->data);
-	n_node = NULL;
-	morpheme[0] = ft_strjoin(morpheme[0], "="); // ft_strjoin 수정함
-	if (morpheme[1] == NULL) // export a=
-	{ 
-		n_node = is_key_exist_without_value(state, morpheme[0], 1);
-		if (n_node)
-			n_node->data = ft_strjoin(n_node->data, "=");
-		else
-			push_node_back(state->env_lst, new_node(morpheme[0]));
-		free_str(morpheme);
-	}
-	else
-		change_and_add_env_lst(state, morpheme, node);
+    char    **origin;
+    char    **args;
+    t_node  *ptr;
+
+    ptr = env_lst->start;
+    args = split_key_value(node->data);
+    while (ptr != NULL)
+    {
+        origin = split_key_value(ptr->data);
+        if (compare_str(args[0], origin[0]))
+        {
+            classify_export(args, origin, node, 1, env_lst);
+            free_str(args);
+            free_str(origin);
+            return ;            
+        }
+        free_str(origin);
+        ptr = ptr->next;
+    }
+    classify_export(args, NULL, node, 0, env_lst);
+    free_str(args);
+    return ;
 }
 
-void    exec_export(t_node *cmd_node, t_state *state)
+void    classify_export(char **args, char **origin, t_node *arg_node, \
+int flag, t_list *env) // flag = 0 는 arg_node 의 키값이 없는 경우
 {
-	t_node *ptr;
-	
-	ptr = cmd_node;
-	if (ptr->next == NULL)
-	{
-		export_print(state);
-		return ;
-	}
-	ptr = ptr->next;
-	while (ptr != NULL)
-	{
-		if (ft_strlen(ptr->data) == 1 && ptr->data[0] == '_')
-			;
-		else if (!ft_strchr(ptr->data, '='))
-			exchange_env_lst(ptr, state);
-		else
-			push_node_back(state->env_lst, new_node(ptr->data));
-		ptr = ptr->next;
-	}
-	return ;
+    if (flag == 0 || !compare_str(origin[0], args[0]))
+        push_node_back(env, new_node(arg_node->data));
+    else if (origin[0] && origin[1] == NULL)
+    {
+        if (compare_str(origin[0], args[0]) && 
+        !ft_strncmp(arg_node->data, origin[0], ft_strlen(origin[0]) &&
+        ft_strlen(arg_node->data) - 1 == ft_strlen(origin[0])))
+            replace_node(arg_node, env);
+    }
+    else if (origin[0] && origin[1])
+    {
+        if (compare_str(origin[0], args[0]) && 
+        !compare_str(origin[1], args[1]) &&
+		ft_strlen(origin[0]) != 0)
+            replace_node(arg_node, env);
+    }
 }
 
 void    ft_export(t_list *cmd_list, t_state *state)
 {
-	exec_export(cmd_list->start, state);
-	return ;
+    t_node *cmd_ptr;
+    
+    cmd_ptr = cmd_list->start;
+    if (cmd_ptr->next == NULL)
+    {
+        export_print(state);
+        return ;
+    }
+    cmd_ptr = cmd_ptr->next;
+    while (cmd_ptr != NULL)
+    {   
+        if (ft_strlen(cmd_ptr->data) == 1 && cmd_ptr->data[0] == '_')
+            ;
+        else if (!ft_isalpha(cmd_ptr->data[0]))
+           printf("bash: export: `%c\': not a valid identifier\n", cmd_ptr->data[0]);
+        else if (!export_check_str(cmd_ptr->data))
+           printf("bash: export: `%s\': not a valid identifier\n", cmd_ptr->data); 
+        else
+            check_key(cmd_ptr, state->env_lst);
+        cmd_ptr = cmd_ptr->next;
+    }
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:42:25 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/05 20:32:05 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/09 03:58:48 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int ft_env(t_state *state, t_node *cmd_node)
 	else
 	{
 		node = state->env_lst->start;
-		while (node->next != NULL)
+		while (node != NULL)
 		{
 			if (ft_strchr(node->data, '='))
 				printf("%s\n", node->data);

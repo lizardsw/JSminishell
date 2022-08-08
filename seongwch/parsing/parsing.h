@@ -168,11 +168,16 @@ void    change_env_path(t_state *state, char *key, int flag);
 void    change_dir(char *path, t_state *state);
 void    ft_cd(t_list *cmd_list, t_state *state);
 int ft_env(t_state *state, t_node *cmd_node);
+
 void    export_print_with_value(t_state *state, t_node *node);
 void    export_print(t_state *state);
-t_node     *is_key_exist_without_value(t_state *state, char *key, int flag);
-void    exec_export(t_node *cmd_node, t_state *state);
 void    ft_export(t_list *cmd_list, t_state *state);
+int 	compare_str(char *s1, char *s2);
+void    classify_export(char **args, char **origin, t_node *arg_node, \
+int flag, t_list *env);
+void     check_key(t_node *node, t_list *env_lst);
+void    replace_node(t_node *new_node, t_list *env_lst);
+
 int ft_pwd(t_list *cmd_list, t_state *state);
 int     check_str(char *str);
 void    del_env_one(t_node *cmd_node, t_state *state, t_node *ptr);

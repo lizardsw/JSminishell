@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:26:06 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/05 20:32:30 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/09 05:54:30 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int     check_str(char *str)
 	i = 0;
 	while(str[i] != '\0')
 	{
-		if (ft_isalpha(str[i]) || str[i] == '_')
+		if (ft_isalpha(str[i]) || str[i] == '_' || (str[i] >= 48 && str[i] <= 57))
 			i++;
 		else
 			return (0);
@@ -36,18 +36,26 @@ void    del_env_one(t_node *cmd_node, t_state *state, t_node *ptr)
 	while (node != NULL)
 	{
 		split = split_key_value(node->data);
-		if (split == NULL)
-		{
-			if (!ft_strncmp(ptr->data, node->data, ft_strlen(ptr->data)))
-				remove_node(state->env_lst, node);
-			return;
-		}
-		else if (!ft_strncmp(ptr->data, split[0], ft_strlen(ptr->data)))
+		// if (split[1] == NULL)
+		// {
+		// 	if (!ft_strncmp(ptr->data, node->data, ft_strlen(ptr->data)))
+		// 		remove_node(state->env_lst, node);
+		// 	free_str(split);
+		// 	return;
+		// }
+		// else if (!ft_strncmp(ptr->data, split[0], ft_strlen(ptr->data)))
+		// {
+		// 	remove_node(state->env_lst, node);
+		// 	free_str(split);
+		// 	return ;
+		// }
+		if (!ft_strncmp(ptr->data, split[0], ft_strlen(ptr->data)))
 		{
 			remove_node(state->env_lst, node);
+			free_str(split);
 			return ;
 		}
-		free(split);
+		free_str(split);
 		node = node->next;
 	}   
 }

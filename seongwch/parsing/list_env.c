@@ -3,14 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   list_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 18:33:43 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/03 16:35:07 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/09 03:57:17 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+// char	**split_key_value(char *str)
+// {
+// 	char	**new;
+// 	int		i;
+
+// 	i = 0;
+// 	new = (char **)malloc(sizeof(char *) * 3);
+// 	if (new == NULL)
+// 		exit(1);
+// 	while (str[i] != '=')
+// 		i++;
+// 	new[0] = get_strdup(str, i + 1);
+// 	new[1] = ft_strdup(&str[i + 1]);
+// 	new[2] = NULL;
+// 	return (new);
+// }
 
 char	**split_key_value(char *str)
 {
@@ -19,12 +36,23 @@ char	**split_key_value(char *str)
 
 	i = 0;
 	new = (char **)malloc(sizeof(char *) * 3);
-	if (new == NULL)
-		exit(1);
-	while (str[i] != '=')
+ 	if (new == NULL)
+ 		exit(1);
+	while (str[i] != '=' && str[i] != '\0')	
 		i++;
-	new[0] = get_strdup(str, i + 1);
-	new[1] = ft_strdup(&str[i + 1]);
+	if (str[i] == '\0')
+	{
+		new[0] = ft_strdup(str);
+		new[1] = NULL;
+	}
+	else
+	{
+		new[0] = get_strdup(str, i);
+		if (str[ft_strlen(str) - 1] == '=')
+			new[1] = ft_strdup("");
+		else
+			new[1] = ft_strdup(&str[i + 1]);
+	}
 	new[2] = NULL;
 	return (new);
 }
