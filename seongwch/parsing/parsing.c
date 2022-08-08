@@ -45,7 +45,7 @@ int	main(int argc, char **argv, char **env)
 		line = readline("JSminishell> ");
 		if (line == NULL)
 		{
-			write(1, "exit111111\n", 6);
+			write(1, "exit\n", 6);
 			exit(1);
 		}
 		add_history(line);

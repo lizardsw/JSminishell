@@ -129,6 +129,8 @@ void	expand_ast(t_process **ast, t_state *state);
 
 // signal.c
 void handler(int signum);
+void child_signal_handler();
+void child_handler(int signum);
 void signal_handler();
 void setting_terminal();
 

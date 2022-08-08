@@ -23,6 +23,8 @@ void	ft_make_pipe(t_info *info, int index)
 
 void child_process(t_process *process, t_state *state, t_info *info, int i)
 {
+	// setting_terminal();
+	child_signal_handler();
 	if (process->index == START)
 	{
 		close(info->pipe_alpha[0]);

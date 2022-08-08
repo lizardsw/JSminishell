@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:10:39 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/08 16:12:48 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/08 16:22:30 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void    exec_export(t_node *cmd_node, t_state *state)
 		if (ft_strlen(ptr->data) == 1 && ptr->data[0] == '_')
 			;
 		else if (!ft_strchr(ptr->data, '='))
-			change_env_lst(ptr, state);
+			exchange_env_lst(ptr, state);
 		else
 			push_node_back(state->env_lst, new_node(ptr->data));
 		ptr = ptr->next;

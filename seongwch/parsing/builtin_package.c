@@ -26,6 +26,8 @@ void	single_built_cmd(t_process *storage, t_state *state, t_info *info)
 {
 	char *str;
 	
+	// setting_terminal();
+	child_signal_handler();
 	redir_fd(info, storage->redir);
 	str = storage->cmd->start->data;
 	if (ft_strncmp(str, "cd", ft_strlen(str)) == 0)
