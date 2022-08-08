@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 13:56:36 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/05 19:37:57 by junoh            ###   ########.fr       */
+/*   Updated: 2022/08/08 16:14:19 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void    put_var_to_process(t_process *process)
     list = new_list();
     push_node_front(list, new_node("export"));
     push_node_back(list, new_node("a=12"));
-    push_node_back(list, new_node("b="));
+    push_node_back(list, new_node("a=123"));
     push_node_back(list, new_node("c"));
     process->cmd = list;
 }
@@ -79,23 +79,23 @@ int main(int argc, char **argv, char **env)
     put_var_to_process(&storage);
     cmd_node = storage.cmd->start;
     env_node = new_node("env");
-//    ft_env(&state, env_node);
-/*    ft_export(storage.cmd, &state);
+    ft_env(&state, env_node);
+    ft_export(storage.cmd, &state);
     ft_env(&state, env_node);
     printf("\n");
     put_var_to_process_two(&storage);
-//    ft_export(storage.cmd, &state);
+    ft_export(storage.cmd, &state);
     ft_unset(storage.cmd, &state);
     ft_env(&state, env_node); 
     put_var_to_process_thrid(&storage);
-    ft_export(storage.cmd, &state); */
-    put_var_to_process_pwd(&storage);
-    ft_pwd(storage.cmd, &state);
-    put_var_to_process_cd(&storage, "/Users/junoh/Desktop/minilibx/test");
-    ft_cd(storage.cmd, &state);
-    ft_pwd(storage.cmd, &state);
-    put_var_to_process_cd(&storage, NULL);
-    ft_cd(storage.cmd, &state);
-    ft_pwd(storage.cmd, &state);
+    ft_export(storage.cmd, &state); 
+    // put_var_to_process_pwd(&storage);
+    // ft_pwd(storage.cmd, &state);
+    // put_var_to_process_cd(&storage, "/Users/junoh/Desktop/minilibx/test");
+    // ft_cd(storage.cmd, &state);
+    // ft_pwd(storage.cmd, &state);
+    // put_var_to_process_cd(&storage, NULL);
+    // ft_cd(storage.cmd, &state);
+    // ft_pwd(storage.cmd, &state);
     return (0);
 }

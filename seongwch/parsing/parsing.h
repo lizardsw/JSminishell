@@ -155,7 +155,9 @@ void	ft_error(int err);
 
 // builtin_package.c
 void	multi_total_cmd(t_list *cmd, t_state *state);
-void	single_total_cmd(t_list *cmd, t_state *state);
+void	single_total_cmd(t_process *storage, t_state *state, t_info *info);
+void	single_built_cmd(t_process *storage, t_state *state, t_info *info);
+
 
 
 // built-in

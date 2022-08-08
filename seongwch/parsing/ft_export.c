@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:10:39 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/05 20:32:17 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/08 16:12:48 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static  void    change_and_add_env_lst(t_state *state, char **split, t_node *cmd
 	return ;
 }
 
-static  void    change_env_lst(t_node *node, t_state *state)
+static  void    exchange_env_lst(t_node *node, t_state *state)
 {
 	char    **morpheme; 
 	t_node  *n_node;

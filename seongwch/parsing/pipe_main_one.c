@@ -5,7 +5,6 @@ int	ft_dup2(int fd1, int fd2)
 	int	ret_value;
 
 	ret_value = dup2(fd1, fd2);
-	// printf("fd1 : %d , fd2 : %d, ret_value : %d\n", fd1, fd2, ret_value);
 	if (ret_value < 0)
 		ft_perror(DUP_ERR);
 	close(fd1);
@@ -24,33 +23,25 @@ void	ft_make_pipe(t_info *info, int index)
 
 void child_process(t_process *process, t_state *state, t_info *info, int i)
 {
-	// printf("child i : %d\n", i);
 	if (process->index == START)
 	{
-		// write(2, "START\n", 6);
 		close(info->pipe_alpha[0]);
 		ft_dup2(info->pipe_alpha[1], STDOUT_FILENO);
 	}
 	else if (process->index == MIDDLE)
 	{
-		// write(2, "MIDDLE\n", 7);
 		close(info->pipe_alpha[0]);
 		ft_dup2(info->pre_pipe, STDIN_FILENO);
 		ft_dup2(info->pipe_alpha[1], STDOUT_FILENO);
-
 	}
 	else
-	{
-		// write(2, "END\n", 4);
 		ft_dup2(info->pre_pipe, STDIN_FILENO);
-	}
 	redir_fd(info, process->redir);
 	multi_total_cmd(process->cmd, state);
 }
 
 void parent_process(t_process *process, t_info *info, int i)
 {
-	// printf("parent i : %d\n", i);
 	if (process->index == START)
 	{
 		close(info->pipe_alpha[1]);
@@ -62,10 +53,6 @@ void parent_process(t_process *process, t_info *info, int i)
 		if (info->pre_pipe != -1)
 			close(info->pre_pipe);
 		info->pre_pipe = info->pipe_alpha[0];
-	}
-	else
-	{
-
 	}
 }
 
@@ -95,13 +82,8 @@ void multi_process(t_process **storage, t_state *state)
 	init_info(storage, &info);
 	while (storage[i] != NULL)
 	{
-		// printf("process : %d i : %d, info.number : %d\n", storage[i]->index,  i, info.number);
 		if (storage[i]->index != END)
-		{
-			// printf("create pipe\n");
 			ft_make_pipe(&info, i);
-		}
-		// printf("pre->pipe %d\n", info.pre_pipe);
 		info.pid[i] = fork();
 		if (info.pid[i])
 			parent_process(storage[i], &info, i);
@@ -121,28 +103,22 @@ void multi_process(t_process **storage, t_state *state)
 void single_process(t_process **storage, t_state *state)
 {
 	t_info info;
+	int	std_fd[2];
+	char *str;
 
+	std_fd[0] = dup(STDIN_FILENO);
+	std_fd[1] = dup(STDOUT_FILENO);
 	init_info(storage, &info);
-	info.pid[0] = fork();
-	if (info.pid[0])
-		wait(NULL);
-	else
-	{
-		redir_fd(&info, storage[0]->redir);
-		single_total_cmd(storage[0]->cmd, state);
-	}
+	single_built_cmd(storage[0], state, &info);
 	free(info.pid);
+	ft_dup2(std_fd[0], STDIN_FILENO);
+	ft_dup2(std_fd[1], STDOUT_FILENO);
 }
 
 void pipe_main(t_process **storage, t_state *state)
 {
 	if (storage[0]->token == PIPE)
-	{
 		multi_process(storage, state);
-	}
 	else
-	{
 		single_process(storage, state);
-		// execute_cmd(storage[0]->cmd, state);
-	}
 }
