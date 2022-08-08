@@ -141,7 +141,7 @@ int		open_outfile(char *file, int flag);
 int	ft_dup2(int fd1, int fd2);
 void	ft_make_pipe(t_info *info, int index);
 void child_process(t_process *process, t_state *state, t_info *info, int i);
-void parent_process(t_info *info, int i);
+void parent_process(t_process *process, t_info *info, int i);
 void	init_info(t_process **storage, t_info *info);
 void multi_process(t_process **storage, t_state *state);
 void pipe_main(t_process **storage, t_state *state);
@@ -155,6 +155,8 @@ void	ft_error(int err);
 
 // builtin_package.c
 void	multi_total_cmd(t_list *cmd, t_state *state);
+void	single_total_cmd(t_list *cmd, t_state *state);
+
 
 // built-in
 void    change_env_path(t_state *state, char *key, int flag);

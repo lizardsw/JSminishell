@@ -5,6 +5,7 @@ int	ft_dup2(int fd1, int fd2)
 	int	ret_value;
 
 	ret_value = dup2(fd1, fd2);
+	// printf("fd1 : %d , fd2 : %d, ret_value : %d\n", fd1, fd2, ret_value);
 	if (ret_value < 0)
 		ft_perror(DUP_ERR);
 	close(fd1);
@@ -24,40 +25,47 @@ void	ft_make_pipe(t_info *info, int index)
 void child_process(t_process *process, t_state *state, t_info *info, int i)
 {
 	// printf("child i : %d\n", i);
-	if (i % 2 == 0)
+	if (process->index == START)
 	{
+		// write(2, "START\n", 6);
 		close(info->pipe_alpha[0]);
-		if (i != 0)
-			ft_dup2(info->pipe_beta[0], STDIN_FILENO);
-		if (i < info->number - 1)
-			ft_dup2(info->pipe_alpha[1], STDOUT_FILENO);
+		ft_dup2(info->pipe_alpha[1], STDOUT_FILENO);
+	}
+	else if (process->index == MIDDLE)
+	{
+		// write(2, "MIDDLE\n", 7);
+		close(info->pipe_alpha[0]);
+		ft_dup2(info->pre_pipe, STDIN_FILENO);
+		ft_dup2(info->pipe_alpha[1], STDOUT_FILENO);
+
 	}
 	else
 	{
-		close(info->pipe_beta[0]);
-		ft_dup2(info->pipe_alpha[0], STDIN_FILENO);
-		if (i < info->number - 1)
-			ft_dup2(info->pipe_beta[1], STDOUT_FILENO);
+		// write(2, "END\n", 4);
+		ft_dup2(info->pre_pipe, STDIN_FILENO);
 	}
-	// write(2, "child!\n", 7);
 	redir_fd(info, process->redir);
 	multi_total_cmd(process->cmd, state);
 }
 
-void parent_process(t_info *info, int i)
+void parent_process(t_process *process, t_info *info, int i)
 {
 	// printf("parent i : %d\n", i);
-	if (i % 2 == 0)
+	if (process->index == START)
 	{
 		close(info->pipe_alpha[1]);
-		if (i != 0 && i < info->number - 1)
-			close(info->pipe_beta[0]);
+		info->pre_pipe = info->pipe_alpha[0];
+	}
+	else if (process->index == MIDDLE)
+	{
+		close(info->pipe_alpha[1]);
+		if (info->pre_pipe != -1)
+			close(info->pre_pipe);
+		info->pre_pipe = info->pipe_alpha[0];
 	}
 	else
 	{
-		close(info->pipe_beta[1]);
-		if (i < info->number - 1)
-			close(info->pipe_alpha[0]);
+
 	}
 }
 
@@ -87,15 +95,16 @@ void multi_process(t_process **storage, t_state *state)
 	init_info(storage, &info);
 	while (storage[i] != NULL)
 	{
-		// printf("i : %d, info.number : %d\n", i, info.number);
-		if (i != info.number - 1)
+		// printf("process : %d i : %d, info.number : %d\n", storage[i]->index,  i, info.number);
+		if (storage[i]->index != END)
 		{
 			// printf("create pipe\n");
 			ft_make_pipe(&info, i);
 		}
+		// printf("pre->pipe %d\n", info.pre_pipe);
 		info.pid[i] = fork();
 		if (info.pid[i])
-			parent_process(&info, i);
+			parent_process(storage[i], &info, i);
 		else
 			child_process(storage[i], state, &info, i);
 		i++;
@@ -111,21 +120,18 @@ void multi_process(t_process **storage, t_state *state)
 
 void single_process(t_process **storage, t_state *state)
 {
-	char *str;
+	t_info info;
 
-	str = storage[0]->cmd->start->data;
-	if (ft_strncmp(str, "cd", ft_strlen(str)) == 0)
-		ft_cd(storage[0]->cmd, state);
-	else if (ft_strncmp(str, "env", ft_strlen(str)) == 0)
-		ft_env(state, storage[0]->cmd->start);
-	else if (ft_strncmp(str, "export", ft_strlen(str)) == 0)
-		ft_export(storage[0]->cmd, state);
-	else if (ft_strncmp(str, "pwd", ft_strlen(str)) == 0)
-		ft_pwd(storage[0]->cmd, state);
-	else if (ft_strncmp(str, "unset", ft_strlen(str)) == 0)
-		ft_unset(storage[0]->cmd, state);
+	init_info(storage, &info);
+	info.pid[0] = fork();
+	if (info.pid[0])
+		wait(NULL);
 	else
-		multi_process(storage, state);
+	{
+		redir_fd(&info, storage[0]->redir);
+		single_total_cmd(storage[0]->cmd, state);
+	}
+	free(info.pid);
 }
 
 void pipe_main(t_process **storage, t_state *state)
