@@ -17,10 +17,12 @@ void	multi_total_cmd(t_list *cmd, t_state *state)
 		ft_pwd(cmd, state);
 	else if (ft_strncmp(str, "unset", ft_strlen("unset")) == 0)
 		ft_unset(cmd, state);
+	else if (ft_strncmp(str, "echo", ft_strlen("echo")) == 0)
+		ft_echo(cmd);
+	else if (ft_strncmp(str, "exit",ft_strlen("exit")) == 0)
+		ft_exit(cmd, state);
 	else
 		execute_cmd(cmd, state);
-	// else if (ft_strncmp(str, "echo", ft_strlen(str)) == 0)
-	// else if (ft_strncmp(str, "exit",ft_strlen(str)) == 0)
 	exit(1);
 }
 
@@ -43,10 +45,12 @@ void	single_built_cmd(t_process *storage, t_state *state, t_info *info)
 		ft_pwd(storage->cmd, state);
 	else if (ft_strncmp(str, "unset", ft_strlen("unset")) == 0)
 		ft_unset(storage->cmd, state);
+	else if (ft_strncmp(str, "echo", ft_strlen("echo")) == 0)
+		ft_echo(storage->cmd);
+	else if (ft_strncmp(str, "exit",ft_strlen("exit")) == 0)
+		ft_exit(storage->cmd, state);
 	else
 		single_total_cmd(storage, state, info);
-	// else if (ft_strncmp(str, "echo", ft_strlen(str)) == 0)
-	// else if (ft_strncmp(str, "exit",ft_strlen(str)) == 0)
 }
 
 

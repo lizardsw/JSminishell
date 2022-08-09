@@ -178,6 +178,10 @@ int flag, t_list *env);
 void     check_key(t_node *node, t_list *env_lst);
 void    replace_node(t_node *new_node, t_list *env_lst);
 
+void	ft_echo(t_list *cmd_list);
+
+void	ft_exit(t_list *cmd_list ,t_state *state);
+
 int ft_pwd(t_list *cmd_list, t_state *state);
 int     check_str(char *str);
 void    del_env_one(t_node *cmd_node, t_state *state, t_node *ptr);
