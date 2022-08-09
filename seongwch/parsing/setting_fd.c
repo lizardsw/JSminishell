@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setting_fd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 20:42:08 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/08 22:07:47 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/09 11:44:03 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	open_outfile(char *file, int flag, int pid)
 	return (open_ret);
 }
 
-int	open_infile(char *file, int flag, int pid)
+int	open_infile(char *file, int flag, int pid, t_list *redir, t_info *info)
 {
 	int	open_ret;
 
@@ -50,6 +50,7 @@ int	open_infile(char *file, int flag, int pid)
 	else if (flag  == RDRDIN)
 	{
 		// you have to make heredoc
+		open_ret = ft_here_doc_redir(redir, info);
 	}
 	return (open_ret);
 }
@@ -85,11 +86,13 @@ int	redir_fd(t_info *info, t_list *redir)
 	{
 		close_file(info, ptr->token);
 		if (ptr->token == RDIN)
-			info->fd_in = open_infile(ptr->next->data, RDIN, info->pid[0]);
+			info->fd_in = open_infile(ptr->next->data, RDIN, \
+			info->pid[0], redir, info);
 		else if (ptr->token == RDOUT)
 			info->fd_out = open_outfile(ptr->next->data, RDOUT, info->pid[0]);
 		else if (ptr->token == RDRDIN)
-			info->fd_in = open_infile(ptr->next->data, RDRDIN, info->pid[0]);
+			info->fd_in = open_infile(ptr->next->data, RDRDIN, \
+			info->pid[0], redir, info);
 		else if (ptr->token == RDRDOUT)
 			info->fd_out = open_outfile(ptr->next->data, RDRDOUT, info->pid[0]);
 		if (info->fd_out == -1 || info->fd_in == -1)

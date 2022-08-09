@@ -136,7 +136,7 @@ void setting_terminal();
 
 // setting_fd.c
 int		redir_fd(t_info *info, t_list *redir);
-int		open_infile(char *file, int flag, int pid);
+int		open_infile(char *file, int flag, int pid, t_list *redir, t_info *info);
 int		open_outfile(char *file, int flag, int pid);
 
 // pipe_main.c
@@ -161,7 +161,8 @@ void	multi_total_cmd(t_list *cmd, t_state *state);
 void	single_total_cmd(t_process *storage, t_state *state, t_info *info);
 void	single_built_cmd(t_process *storage, t_state *state, t_info *info);
 
-
+// here_doc
+int ft_here_doc_redir(t_list *redir, t_info *info);
 
 // built-in
 void    change_env_path(t_state *state, char *key, int flag);

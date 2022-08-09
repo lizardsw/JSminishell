@@ -11,7 +11,7 @@ int	ft_dup2(int fd1, int fd2)
 	return (ret_value);
 }
 
-void	ft_make_pipe(t_info *info, int index)
+void	ft_make_pipe(t_info *info, int index) // index 존재할 필요 없음.
 {
 	int	pipe_ret;
 

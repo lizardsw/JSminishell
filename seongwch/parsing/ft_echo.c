@@ -6,7 +6,7 @@
 /*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 09:35:37 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/09 10:01:15 by junoh            ###   ########.fr       */
+/*   Updated: 2022/08/09 12:53:57 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,19 @@ void    ft_echo(t_list *cmd_list)
 {
     t_node *ptr;
     int     flag;
-        
+    
+    
     ptr = cmd_list->start;
     flag = 0;
+    if (ptr->next == NULL)
+    {
+        write(STDOUT_FILENO, "\n", 1);
+        return ;
+    }
     if (!ft_strncmp(cmd_list->start->next->data, "-n", ft_strlen("-n")))
         flag = 1;
     print_echo(cmd_list, flag);
     if (flag == 0)
         write(STDOUT_FILENO, "\n", 1);
+    return ;
 }

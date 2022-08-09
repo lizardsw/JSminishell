@@ -1,3 +1,1 @@
-/Users/seongwch/Desktop/minishell/seongwch/parsing
-[?2004hJSminishell> [?2004l
-JSminishell> [?2004h[?2004l
+ou.txt 
