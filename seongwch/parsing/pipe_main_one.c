@@ -15,9 +15,18 @@ void	ft_make_pipe(t_info *info, int index) // index 존재할 필요 없음.
 {
 	int	pipe_ret;
 
-	pipe_ret = pipe(info->pipe_alpha);
-	if (pipe_ret < 0)
-		ft_error(PIPE_ERR);
+	if (index == 0)
+	{
+		pipe_ret = pipe(info->pipe_alpha);
+		if (pipe_ret < 0)
+			ft_error(PIPE_ERR);
+	}
+	else
+	{
+		pipe_ret = pipe(info->pipe_beta);
+		if (pipe_ret < 0)
+			ft_error(PIPE_ERR);
+	}
 	return ;
 }
 

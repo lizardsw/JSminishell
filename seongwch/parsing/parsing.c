@@ -58,7 +58,7 @@ int	main(int argc, char **argv, char **env)
 			free_process(storage);
 		}
 		free(line);
-	//	system("leaks a.out > leaks_result_temp; cat leaks_result_temp | grep leaked && rm -rf leaks_result_temp");
+		// system("leaks a.out > leaks_result_temp; cat leaks_result_temp | grep leaked && rm -rf leaks_result_temp");
 	}
 	return 0;
 }

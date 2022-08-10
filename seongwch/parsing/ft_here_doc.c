@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_here_doc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 11:38:31 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/09 13:03:31 by junoh            ###   ########.fr       */
+/*   Updated: 2022/08/09 21:16:05 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void ft_here_doc_readline(t_info *info, char *limiter)
 {
     char    *buf;
-    
+
     while (1)
     {
         // write(STDOUT_FILENO, "> ", 2);
@@ -25,18 +25,21 @@ static void ft_here_doc_readline(t_info *info, char *limiter)
         {
             free(buf);
             free(limiter);
-            return ;
+            // return ;
+            exit(1);
         }
         buf = ft_strjoin(buf, "\n");
-        write(info->pipe_alpha[1], buf, ft_strlen(buf));
+        write(info->pipe_beta[1], buf, ft_strlen(buf));
         free(buf);
     }
-    close(info->pipe_alpha[1]);
-    free(limiter);    
+    free(limiter);
+    exit(1);
+    // return ;
 }
 
 int ft_here_doc_redir(t_list *redir, t_info *info)
 {
+    pid_t   pid;
     t_node  *ptr;
     char    *limiter;
     
@@ -51,7 +54,14 @@ int ft_here_doc_redir(t_list *redir, t_info *info)
         }
         ptr = ptr->next;
     }
-    ft_make_pipe(info, 0);
-    ft_here_doc_readline(info, limiter);
-    return (info->pipe_alpha[0]);
+    ft_make_pipe(info, 1);
+    pid = fork();
+    if (pid)
+    {
+        close(info->pipe_beta[1]);
+    }
+    else
+        ft_here_doc_readline(info, limiter);
+    waitpid(pid, NULL, WUNTRACED);
+    return (info->pipe_beta[0]);
 }

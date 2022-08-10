@@ -1,1 +1,0 @@
-/Users/seongwch/Desktop/minishell/seongwch/parsing

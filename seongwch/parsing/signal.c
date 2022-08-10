@@ -10,16 +10,29 @@ void handler(int signum)
 	if (pid == -1)
 	{
 		write(STDOUT_FILENO, "\n", 1);
-		if (rl_on_new_line() == -1)
-		{
-			printf("r1_error!\n");
-			exit(1);
-		} 
+		rl_on_new_line();
 		rl_replace_line("", 1);
 		rl_redisplay();
 	}
 	else
-		write(STDOUT_FILENO, "^C\n", 3);
+	{
+		write(STDOUT_FILENO, "\n", 1);
+	}
+}
+
+void herehandler(int signum)
+{
+    if (signum == -1)
+        return ;
+	write(STDOUT_FILENO, "\n", 1);
+    exit(1);
+}
+
+void pipehandler(int signum)
+{
+	if (signum == -1)
+		return;
+	write(STDOUT_FILENO, "^C\n", 3);
 }
 
 void signal_handler()
