@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 11:38:31 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/16 20:00:07 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/16 22:09:09 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int here_doc_redir(t_node *node, t_info *info)
     
     limiter = NULL;
     limiter = ft_strdup(node->data);
-    ft_make_pipe(info, 1);
+    ft_make_pipe(info);
     pid = fork();
     if (pid == -1)
     {

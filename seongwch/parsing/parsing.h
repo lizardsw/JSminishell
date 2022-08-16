@@ -80,6 +80,7 @@ typedef struct s_info
 	int	fd_in;
 	int	fd_out;
 	int	number;
+	int	prc_flag;
 	int pre_pipe;
 	int	pipe_alpha[2];
 	int	pipe_beta[2];
@@ -134,12 +135,10 @@ void here_signal_handler();
 
 // setting_fd.c
 int		redir_fd(t_info *info, t_list *redir);
-int		open_infile(t_node *node, int flag, int pid);
-int		open_outfile(char *file, int flag, int pid);
 
 // pipe_main.c
-int	ft_dup2(int fd1, int fd2);
-void	ft_make_pipe(t_info *info, int index);
+int		ft_dup2(int fd1, int fd2, int flag);
+void	ft_make_pipe(t_info *info);
 void child_process(t_process *process, t_state *state, t_info *info, int i);
 void parent_process(t_process *process, t_info *info, int i);
 void	init_info(t_process **storage, t_info *info);
@@ -157,7 +156,6 @@ void	ft_no_exit_error(int err);
 
 // builtin_package.c
 void	multi_total_cmd(t_list *cmd, t_state *state);
-void	single_total_cmd(t_process *storage, t_state *state, t_info *info);
 void	single_built_cmd(t_process *storage, t_state *state, t_info *info);
 
 // here_doc

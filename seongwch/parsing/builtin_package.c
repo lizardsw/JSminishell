@@ -26,6 +26,20 @@ void	multi_total_cmd(t_list *cmd, t_state *state)
 	exit(1);
 }
 
+static void	single_total_cmd(t_process *storage, t_state *state, t_info *info)
+{
+	info->pid[0] = fork();
+	if (info->pid[0] == -1)
+	{
+		ft_no_exit_error(PID_ERR);
+		return ;
+	}
+	if (info->pid[0])
+		waitpid(info->pid[0], NULL, WUNTRACED);
+	else
+		execute_cmd(storage->cmd, state);
+}
+
 void	single_built_cmd(t_process *storage, t_state *state, t_info *info)
 {
 	char *str;
@@ -51,13 +65,4 @@ void	single_built_cmd(t_process *storage, t_state *state, t_info *info)
 		ft_exit(storage->cmd, state);
 	else
 		single_total_cmd(storage, state, info);
-}
-
-void	single_total_cmd(t_process *storage, t_state *state, t_info *info)
-{
-	info->pid[0] = fork();
-	if (info->pid[0])
-		waitpid(info->pid[0], NULL, WUNTRACED);
-	else
-		execute_cmd(storage->cmd, state);
 }

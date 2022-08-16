@@ -6,28 +6,35 @@ int	ft_dup(int fd)
 
 	ret_value = dup(fd);
 	if (ret_value < 0)
-		ft_exit_perror(DUP_ERR);
+		ft_no_exit_perror(DUP_ERR);
 	return (ret_value);
 }
 
-int	ft_dup2(int fd1, int fd2)
+int	ft_dup2(int fd1, int fd2, int flag)
 {
 	int	ret_value;
 
 	ret_value = dup2(fd1, fd2);
-	if (ret_value < 0)
+	if (ret_value < 0 && flag ==1)
 		ft_perror(DUP_ERR);
+	else if (ret_value < 0 && flag == 0)
+	{
+		ft_no_exit_perror(DUP_ERR);
+		return (ret_value);
+	}
 	close(fd1);
 	return (ret_value);
 }
 
-void	ft_make_pipe(t_info *info, int index) // index 존재할 필요 없음.
+void	ft_make_pipe(t_info *info) // index 존재할 필요 없음.
 {
 	int	pipe_ret;
 
 	pipe_ret = pipe(info->pipe_alpha);
-	if (pipe_ret < 0)
+	if (pipe_ret < 0 && info->prc_flag == 1)
 		ft_error(PIPE_ERR);
+	if (pipe_ret < 0 && info->prc_flag == 0)
+		ft_no_exit_error(PIPE_ERR);
 	return ;
 }
 
@@ -36,16 +43,16 @@ void child_process(t_process *process, t_state *state, t_info *info, int i)
 	if (process->index == START)
 	{
 		close(info->pipe_alpha[0]);
-		ft_dup2(info->pipe_alpha[1], STDOUT_FILENO);
+		ft_dup2(info->pipe_alpha[1], STDOUT_FILENO, info->prc_flag);
 	}
 	else if (process->index == MIDDLE)
 	{
 		close(info->pipe_alpha[0]);
-		ft_dup2(info->pre_pipe, STDIN_FILENO);
-		ft_dup2(info->pipe_alpha[1], STDOUT_FILENO);
+		ft_dup2(info->pre_pipe, STDIN_FILENO, info->prc_flag);
+		ft_dup2(info->pipe_alpha[1], STDOUT_FILENO, info->prc_flag);
 	}
 	else
-		ft_dup2(info->pre_pipe, STDIN_FILENO);
+		ft_dup2(info->pre_pipe, STDIN_FILENO, info->prc_flag);
 	redir_fd(info, process->redir);
 	multi_total_cmd(process->cmd, state);
 }
@@ -91,12 +98,15 @@ void multi_process(t_process **storage, t_state *state)
 
 	i = 0;
 	init_info(storage, &info);
+	info.prc_flag = 1;
 	setting_herdoce(storage, &info);
 	while (storage[i] != NULL)
 	{
 		if (storage[i]->index != END)
-			ft_make_pipe(&info, i);
+			ft_make_pipe(&info);
 		info.pid[i] = fork();
+		if (info.pid[i] < 0)
+			ft_error(PID_ERR);
 		if (info.pid[i])
 			parent_process(storage[i], &info, i);
 		else
@@ -122,10 +132,11 @@ void single_process(t_process **storage, t_state *state)
 	std_fd[0] = ft_dup(STDIN_FILENO);
 	std_fd[1] = ft_dup(STDOUT_FILENO);
 	init_info(storage, &info);
+	info.prc_flag = 0;
 	single_built_cmd(storage[0], state, &info);
 	free(info.pid);
-	ft_dup2(std_fd[0], STDIN_FILENO);
-	ft_dup2(std_fd[1], STDOUT_FILENO);
+	ft_dup2(std_fd[0], STDIN_FILENO, info.prc_flag);
+	ft_dup2(std_fd[1], STDOUT_FILENO, info.prc_flag);
 }
 
 void pipe_main(t_process **storage, t_state *state)
