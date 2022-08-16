@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 13:46:51 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/05 20:26:21 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/16 22:45:39 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ char	**ft_split(char const *s, char c);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strchr(const char *str, int c);
 int		ft_isalpha(int c);
+char	*ft_itoa(int n);
 
 // list 관련된
 void	show_list(t_list *list);

@@ -12,6 +12,8 @@
 #include <termios.h>
 
 #include <fcntl.h>
+#include <string.h>
+#include <errno.h>
 
 enum group
 {
@@ -86,6 +88,8 @@ typedef struct s_info
 	int	pipe_beta[2];
 	pid_t	*pid;
 }	t_info;
+
+int	g_exit_status;
 
 // shell_split.c
 t_list *shell_split(char *str);

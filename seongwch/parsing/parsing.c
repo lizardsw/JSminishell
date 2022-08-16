@@ -1,7 +1,5 @@
 #include "parsing.h"
 
-int	g_exit_status = 0;
-
 int	parsing(t_process ***storage, t_state *state, char *line)
 {
 	t_list	*list;

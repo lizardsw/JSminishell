@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 14:32:49 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/16 20:07:35 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/16 22:39:27 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,12 @@ void	ft_no_exit_error(int err)
 
 void	ft_perror(int err)
 {
+
 	if (err == INFILE_OPEN_ERR)
-		perror("Infile open error!");
+	{	
+		printf("Infile open error! : %s\n",strerror(errno));
+		g_exit_status = 1;
+	}
 	else if (err == OUTFILE_OPEN_ERR)
 		perror("Outfile open error!");
 	else if (err == EXE_ERR)
