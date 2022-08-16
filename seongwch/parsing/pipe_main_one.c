@@ -15,18 +15,9 @@ void	ft_make_pipe(t_info *info, int index) // index 존재할 필요 없음.
 {
 	int	pipe_ret;
 
-	if (index == 0)
-	{
-		pipe_ret = pipe(info->pipe_alpha);
-		if (pipe_ret < 0)
-			ft_error(PIPE_ERR);
-	}
-	else
-	{
-		pipe_ret = pipe(info->pipe_beta);
-		if (pipe_ret < 0)
-			ft_error(PIPE_ERR);
-	}
+	pipe_ret = pipe(info->pipe_alpha);
+	if (pipe_ret < 0)
+		ft_error(PIPE_ERR);
 	return ;
 }
 
@@ -90,6 +81,7 @@ void multi_process(t_process **storage, t_state *state)
 
 	i = 0;
 	init_info(storage, &info);
+	setting_herdoce(storage, &info);
 	while (storage[i] != NULL)
 	{
 		if (storage[i]->index != END)
@@ -98,7 +90,9 @@ void multi_process(t_process **storage, t_state *state)
 		if (info.pid[i])
 			parent_process(storage[i], &info, i);
 		else
+		{
 			child_process(storage[i], state, &info, i);
+		}
 		i++;
 	}
 	i = 0;
@@ -108,6 +102,7 @@ void multi_process(t_process **storage, t_state *state)
 		i++;
 	}
 	free(info.pid);
+	signal_handler();
 }
 
 void single_process(t_process **storage, t_state *state)
@@ -116,6 +111,7 @@ void single_process(t_process **storage, t_state *state)
 	int	std_fd[2];
 	char *str;
 
+	setting_herdoce(storage, &info);
 	std_fd[0] = dup(STDIN_FILENO);
 	std_fd[1] = dup(STDOUT_FILENO);
 	init_info(storage, &info);
@@ -127,6 +123,7 @@ void single_process(t_process **storage, t_state *state)
 
 void pipe_main(t_process **storage, t_state *state)
 {
+
 	if (storage[0]->token == PIPE)
 		multi_process(storage, state);
 	else

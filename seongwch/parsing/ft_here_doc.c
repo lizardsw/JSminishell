@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 11:38:31 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/09 21:16:05 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/16 18:24:33 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,50 +18,60 @@ static void ft_here_doc_readline(t_info *info, char *limiter)
 
     while (1)
     {
-        // write(STDOUT_FILENO, "> ", 2);
         buf = readline("> ");
         if (buf == NULL || (ft_strlen(buf) == ft_strlen(limiter) &&\
         !ft_strncmp(buf, limiter, ft_strlen(buf))))
         {
             free(buf);
             free(limiter);
-            // return ;
             exit(1);
         }
         buf = ft_strjoin(buf, "\n");
-        write(info->pipe_beta[1], buf, ft_strlen(buf));
+        write(info->pipe_alpha[1], buf, ft_strlen(buf));
         free(buf);
     }
     free(limiter);
     exit(1);
-    // return ;
 }
 
-int ft_here_doc_redir(t_list *redir, t_info *info)
+static int here_doc_redir(t_node *node, t_info *info)
 {
     pid_t   pid;
     t_node  *ptr;
     char    *limiter;
     
     limiter = NULL;
-    ptr = redir->start;
-    while (ptr != NULL)
-    {
-        if (!ft_strncmp(ptr->data, "<<", 2) && ft_strlen(ptr->data) == 2)
-        {
-            limiter = ft_strdup(ptr->next->data);
-            break ;
-        }
-        ptr = ptr->next;
-    }
+    limiter = ft_strdup(node->data);
     ft_make_pipe(info, 1);
     pid = fork();
     if (pid)
-    {
-        close(info->pipe_beta[1]);
-    }
+        close(info->pipe_alpha[1]);
     else
         ft_here_doc_readline(info, limiter);
     waitpid(pid, NULL, WUNTRACED);
-    return (info->pipe_beta[0]);
+    return (info->pipe_alpha[0]);
+}
+
+void    setting_herdoce(t_process **storage, t_info *info)
+{
+    t_node  *ptr;
+    int      i;
+
+    i = 0;
+    here_signal_handler();
+    while (storage[i] != NULL)
+    {
+        ptr = storage[i]->redir->start;
+        while (ptr != NULL)
+        {
+            if (ptr->token == RDRDIN)
+            {
+                ptr = ptr->next;
+                ptr->group = here_doc_redir(ptr, info);
+            }
+            ptr = ptr->next;
+        }
+        i++;
+    }
+    signal_handler();
 }

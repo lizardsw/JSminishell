@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setting_fd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 20:42:08 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/09 11:44:03 by junoh            ###   ########.fr       */
+/*   Updated: 2022/08/16 15:33:01 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ int	open_outfile(char *file, int flag, int pid)
 	return (open_ret);
 }
 
-int	open_infile(char *file, int flag, int pid, t_list *redir, t_info *info)
+int	open_infile(t_node *node, int flag, int pid)
 {
 	int	open_ret;
 
 	if (flag == RDIN)
 	{
-		open_ret = open(file, O_RDONLY);
+		open_ret = open(node->data, O_RDONLY);
 		if (open_ret < 0 && pid != 1)
 			ft_perror(INFILE_OPEN_ERR);
 		else if (open_ret < 0 && pid == 1)
@@ -49,8 +49,11 @@ int	open_infile(char *file, int flag, int pid, t_list *redir, t_info *info)
 	}
 	else if (flag  == RDRDIN)
 	{
-		// you have to make heredoc
-		open_ret = ft_here_doc_redir(redir, info);
+		open_ret = node->group;
+		if (open_ret < 0 && pid != 1)
+			ft_perror(INFILE_OPEN_ERR);
+		else if (open_ret < 0 && pid == 1)
+			ft_no_exit_perror(INFILE_OPEN_ERR);
 	}
 	return (open_ret);
 }
@@ -86,13 +89,13 @@ int	redir_fd(t_info *info, t_list *redir)
 	{
 		close_file(info, ptr->token);
 		if (ptr->token == RDIN)
-			info->fd_in = open_infile(ptr->next->data, RDIN, \
-			info->pid[0], redir, info);
+			info->fd_in = open_infile(ptr->next, RDIN, \
+			info->pid[0]);
 		else if (ptr->token == RDOUT)
 			info->fd_out = open_outfile(ptr->next->data, RDOUT, info->pid[0]);
 		else if (ptr->token == RDRDIN)
-			info->fd_in = open_infile(ptr->next->data, RDRDIN, \
-			info->pid[0], redir, info);
+			info->fd_in = open_infile(ptr->next, RDRDIN, \
+			info->pid[0]);
 		else if (ptr->token == RDRDOUT)
 			info->fd_out = open_outfile(ptr->next->data, RDRDOUT, info->pid[0]);
 		if (info->fd_out == -1 || info->fd_in == -1)

@@ -128,15 +128,13 @@ int	dquote_expand(char **str_storage, char *str, t_state *state);
 void	expand_ast(t_process **ast, t_state *state);
 
 // signal.c
-void handler(int signum);
-void pipehandler(int signum);
-void herehandler(int signum);
 void signal_handler();
 void setting_terminal();
+void here_signal_handler();
 
 // setting_fd.c
 int		redir_fd(t_info *info, t_list *redir);
-int		open_infile(char *file, int flag, int pid, t_list *redir, t_info *info);
+int		open_infile(t_node *node, int flag, int pid);
 int		open_outfile(char *file, int flag, int pid);
 
 // pipe_main.c
@@ -162,7 +160,7 @@ void	single_total_cmd(t_process *storage, t_state *state, t_info *info);
 void	single_built_cmd(t_process *storage, t_state *state, t_info *info);
 
 // here_doc
-int ft_here_doc_redir(t_list *redir, t_info *info);
+void    setting_herdoce(t_process **storage, t_info *info);
 
 // built-in
 void    change_env_path(t_state *state, char *key, int flag);
