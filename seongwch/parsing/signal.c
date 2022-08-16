@@ -16,7 +16,6 @@ static void handler(int signum)
 	if (signum != SIGINT)
 		return ;
 	pid = waitpid(-1, NULL, WNOHANG);
-	printf("pid : %d\n", pid);
 	if (pid != 0)
 	{
 		write(2, "\n", 1);
@@ -45,10 +44,6 @@ static void here_handler(int signum)
 	{
 		write(STDOUT_FILENO, "\n", 1);
 		exit(1);
-	}
-	else
-	{
-		// exit(1);
 	}
 }
 

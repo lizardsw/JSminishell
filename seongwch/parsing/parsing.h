@@ -153,6 +153,7 @@ void	execute_cmd(t_list *redir, t_state *state);
 void	ft_perror(int err);
 void	ft_error(int err);
 void	ft_no_exit_perror(int err);
+void	ft_no_exit_error(int err);
 
 // builtin_package.c
 void	multi_total_cmd(t_list *cmd, t_state *state);

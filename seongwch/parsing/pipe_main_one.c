@@ -1,5 +1,15 @@
 #include "parsing.h"
 
+int	ft_dup(int fd)
+{
+	int	ret_value;
+
+	ret_value = dup(fd);
+	if (ret_value < 0)
+		ft_exit_perror(DUP_ERR);
+	return (ret_value);
+}
+
 int	ft_dup2(int fd1, int fd2)
 {
 	int	ret_value;
@@ -90,9 +100,7 @@ void multi_process(t_process **storage, t_state *state)
 		if (info.pid[i])
 			parent_process(storage[i], &info, i);
 		else
-		{
 			child_process(storage[i], state, &info, i);
-		}
 		i++;
 	}
 	i = 0;
@@ -102,7 +110,6 @@ void multi_process(t_process **storage, t_state *state)
 		i++;
 	}
 	free(info.pid);
-	signal_handler();
 }
 
 void single_process(t_process **storage, t_state *state)
@@ -112,8 +119,8 @@ void single_process(t_process **storage, t_state *state)
 	char *str;
 
 	setting_herdoce(storage, &info);
-	std_fd[0] = dup(STDIN_FILENO);
-	std_fd[1] = dup(STDOUT_FILENO);
+	std_fd[0] = ft_dup(STDIN_FILENO);
+	std_fd[1] = ft_dup(STDOUT_FILENO);
 	init_info(storage, &info);
 	single_built_cmd(storage[0], state, &info);
 	free(info.pid);

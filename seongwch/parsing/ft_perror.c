@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 14:32:49 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/08 20:55:38 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/16 20:07:35 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,16 @@ void	ft_error(int err)
 	else if (err == PIPE_ERR)
 		ft_putstr_fd("Pipe failed", 2);
 	exit(1);
+}
+
+void	ft_no_exit_error(int err)
+{
+	if (err == ARGS_NUM_ERR)
+		ft_putstr_fd("Invalid number of arguments!", 2);
+	else if (err == PID_ERR)
+		ft_putstr_fd("Invalid pid", 2);
+	else if (err == PIPE_ERR)
+		ft_putstr_fd("Pipe failed", 2);
 }
 
 void	ft_perror(int err)

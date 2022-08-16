@@ -53,7 +53,6 @@ void	single_built_cmd(t_process *storage, t_state *state, t_info *info)
 		single_total_cmd(storage, state, info);
 }
 
-
 void	single_total_cmd(t_process *storage, t_state *state, t_info *info)
 {
 	info->pid[0] = fork();
