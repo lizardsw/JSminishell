@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:22:40 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/03 13:44:04 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:20:47 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,14 @@ int	squote_expand(char **str_storage, char *str)
 
 static int	position_except(char **storage, char *front_str, char *str, int i)
 {
+	char	*temp;
 	if (str[i] == '?') // $? 처리해주는 부분!
 	{
-		*storage = null_strjoin(front_str, "$?");
+		temp = ft_itoa(g_exit_status);
+		// printf("%d %s\n",g_exit_status, temp);
+		*storage = null_strjoin(front_str, temp);
 		free(front_str);
+		free(temp);
 		return (i + 1);
 	}
 	if (str[i] == '$')

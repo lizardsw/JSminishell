@@ -8,7 +8,7 @@
 #include <unistd.h>
 #include "parsing.h"
 
-// gcc -g -lreadline -L ~/goinfre/.brew/opt/readline/lib -I ~/goinfre/.brew/opt/readline/include *.c libft.a 
+// gcc -g -lreadline -L ~/goinfre/.brew/opt/readline/lib -I ~/goinfre/.brew/opt/readline/include *.c shell_libft.a 
 // 위에 명령어를 통해 함수를 사용할 수 있다!!
 
 void	handler(int signum)
