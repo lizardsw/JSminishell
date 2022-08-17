@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 10:52:46 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/17 16:05:28 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 17:04:26 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,20 +72,19 @@ static	void	exit_not_num(char *str)
 
 void	ft_exit(t_list *cmd_list ,t_state *state)
 {
-	int	ret;
-
 	if (cmd_list->number == 1)
 	{
 		printf("exit\n");
-		exit(state->status);
+		g_exit_status = 0;
+		exit(g_exit_status);
 	}
 	else if (cmd_list->number == 2)
 	{
 		if (is_num_str(cmd_list->start->next->data))
 		{
-			ret = ft_atoi(cmd_list->start->next->data);
+			g_exit_status = ft_atoi(cmd_list->start->next->data);
 			printf("exit\n");
-			exit(ret);
+			exit(g_exit_status);
 		}
 		else
 			exit_not_num(cmd_list->start->next->data);
@@ -93,6 +92,6 @@ void	ft_exit(t_list *cmd_list ,t_state *state)
 	else
 	{
 		printf("bash: exit: too many arguments\n");
-		state->status = 1;
+		g_exit_status = 1;
 	}
 }

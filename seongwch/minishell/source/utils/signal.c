@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 14:31:56 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 16:10:18 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 17:49:09 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static	void	handler(int signum)
 	pid = waitpid(-1, NULL, WNOHANG);
 	if (pid != 0)
 	{
+		g_exit_status = 1;
 		write(2, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 1);
@@ -56,6 +57,10 @@ static	void	here_handler(int signum)
 	{
 		write(STDOUT_FILENO, "\n", 1);
 		exit(1);
+	}
+	else
+	{
+		g_exit_status = 1;
 	}
 }
 

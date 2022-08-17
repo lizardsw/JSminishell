@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:52:56 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 16:23:23 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 18:22:03 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static	void	multi_total_cmd(t_list *cmd, t_state *state)
 		ft_exit(cmd, state);
 	else
 		execute_cmd(cmd, state);
-	exit(1);
+	exit(0);
 }
 
 static	void	child_prc(t_process *prc, t_state *state, t_info *info, int i)
@@ -97,15 +97,27 @@ void	multi_process(t_process **storage, t_state *state)
 {
 	int		i;
 	t_info	info;
+	int		temp;
 
+	temp = 0;
 	i = 0;
 	init_info(storage, &info);
 	info.prc_flag = 1;
-	setting_herdoce(storage, &info);
+	if (setting_herdoce(storage, &info) == -1)
+	{
+		free(info.pid);
+		return ; 
+	}
 	prc_while(storage, state, &info);
 	while (i < info.number)
 	{
-		waitpid(info.pid[i], NULL, WUNTRACED);
+		if (info.pid[info.number - 1] == wait(&temp))
+		{	
+			printf("exit_Status : %d", g_exit_status);
+			g_exit_status = ft_check_status(temp);
+			printf("asdf_exit_Status : %d", g_exit_status);
+		}
+		// printf("check_status : %d\n", g_exit_status);
 		i++;
 	}
 	free(info.pid);

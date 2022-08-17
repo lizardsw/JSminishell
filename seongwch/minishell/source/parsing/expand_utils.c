@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:22:40 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 16:06:38 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 17:18:09 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ static int	position_except(char **storage, char *front_str, char *str, int i)
 	char	*temp;
 	if (str[i] == '?') // $? 처리해주는 부분!
 	{
-		temp = ft_itoa(errno);
-		printf("%d %s\n", errno, temp);
+		temp = ft_itoa(g_exit_status);
 		*storage = null_strjoin(front_str, temp);
 		free(front_str);
 		free(temp);

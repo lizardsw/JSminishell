@@ -87,6 +87,8 @@ typedef struct s_info
 	pid_t	*pid;
 }	t_info;
 
+int	g_exit_status;
+
 //	builtin
 void	ft_cd(t_list *cmd_list, t_state *state);
 void	ft_echo(t_list *cmd_list);
@@ -125,7 +127,7 @@ void	show_process(t_process **ptr);
 
 // pipe
 void	execute_cmd(t_list *cmd, t_state *state);
-void	setting_herdoce(t_process **storage, t_info *info);
+int		setting_herdoce(t_process **storage, t_info *info);
 void	multi_process(t_process **storage, t_state *state);
 void	init_info(t_process **storage, t_info *info);
 void	pipe_main(t_process **storage, t_state *state);
@@ -146,6 +148,7 @@ void	ft_error(int err);
 void	ft_perror(int err);
 void	ft_no_exit_error(int err);
 void	ft_no_exit_perror(int err);
+int		ft_check_status(int temp);
 char	**split_key_value(char *str);
 char	*get_value(t_list *env, char *key);
 char	**make_char_env(t_list *list);

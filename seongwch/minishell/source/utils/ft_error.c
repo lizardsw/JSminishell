@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 14:32:49 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 16:10:06 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 17:31:06 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,18 @@ void	ft_perror(int err)
 	exit(4);
 }
 
-// int	ft_check_status(t_info *info)
-// {
-// 	const int	w_status = info->status & 0177;
-
-// 	if (w_status == 0)
-// 		return ((info->status >> 8) & 0x000000ff);
-// 	if (w_status != 0177 && w_status != 0)
-// 		return (w_status);
-// 	return (0);
-// }
+int	ft_check_status(int temp)
+{
+	const int	w_status = temp & 0177; // WSTATUS(X) 0177 is octal number. it means 127 by decimal number
+												// WSTATUS(X) = (status & 127)
+	if (w_status == 0) // WIFEXITED(X) == (WSTATUS(X) == 0) -> if no signal end.
+	{ 	printf("exit_code = %d\n", ((temp >> 8) & 0x000000ff));
+		return ((temp >> 8) & 0x000000ff); // WEXITSTATUS(X) -> check exitcode and return its code
+	}
+	if (w_status != 0177 && w_status != 0) // WIFSIGNALED(X) -> if siganl end but not SIGSTOP and SIGCONT(these codes fill 3rd index with 127)
+	{
+		printf("status = %d\n", w_status);
+		return (w_status); //WSTATUS(X) -> return its status code.
+	}
+	return (0);
+}

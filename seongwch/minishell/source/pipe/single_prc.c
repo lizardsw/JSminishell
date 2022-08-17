@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:54:05 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 16:09:59 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 17:52:58 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,16 @@ void	single_process(t_process **storage, t_state *state)
 	t_info	info;
 	int		std_fd[2];
 	char	*str;
-
-	setting_herdoce(storage, &info);
-	std_fd[0] = ft_dup(STDIN_FILENO);
-	std_fd[1] = ft_dup(STDOUT_FILENO);
+	
 	init_info(storage, &info);
 	info.prc_flag = 0;
+	if (setting_herdoce(storage, &info) == -1)
+	{
+		free(info.pid);
+		return ;
+	}
+	std_fd[0] = ft_dup(STDIN_FILENO);
+	std_fd[1] = ft_dup(STDOUT_FILENO);
 	single_built_cmd(storage[0], state, &info);
 	free(info.pid);
 	ft_dup2(std_fd[0], STDIN_FILENO, info.prc_flag);

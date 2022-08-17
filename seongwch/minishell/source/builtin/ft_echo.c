@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 09:35:37 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/17 16:05:12 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 17:03:16 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@ static	void	ft_putstr(char *str)
 	return ;
 }
 
-static	void	print_echo(t_list *cmd_list, int flag)
+static  void    print_echo(t_list *cmd_list, int flag)
 {
-	t_node	*ptr;
+	t_node *ptr;
+	int     arg;
 
+	arg = 0;
 	ptr = cmd_list->start->next;
 	if (flag == 1)
 	{
@@ -41,8 +43,14 @@ static	void	print_echo(t_list *cmd_list, int flag)
 	}
 	while (ptr != NULL)
 	{
-		ft_putstr(ptr->data);
-		ft_putchar(' ');    
+		if (ft_strncmp(ptr->data, "-n", ft_strlen("-n")) || arg)
+		{
+			arg = 1;
+			ft_putstr(ptr->data);
+		}
+		if (ft_strncmp(ptr->data, "-n", ft_strlen("-n")) && \
+		ptr->next != NULL)
+			ft_putchar(' ');    
 		ptr = ptr->next;
 	}
 	return ;

@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 11:38:31 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/17 16:09:33 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 17:56:04 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,14 @@ static int	here_doc_redir(t_node *node, t_info *info)
 	return (info->pipe_alpha[0]);
 }
 
-void	setting_herdoce(t_process **storage, t_info *info)
+int	setting_herdoce(t_process **storage, t_info *info)
 {
 	t_node	*ptr;
 	int		i;
+	int		here_num;
 
 	i = 0;
+	here_num = 0;
 	here_signal_handler();
 	while (storage[i] != NULL)
 	{
@@ -73,10 +75,24 @@ void	setting_herdoce(t_process **storage, t_info *info)
 			{
 				ptr = ptr->next;
 				ptr->group = here_doc_redir(ptr, info);
+				here_num++;
+				// printf("flag : %d stats : %d\n", info->prc_flag, g_exit_status);
+				if (info->prc_flag == 0 && g_exit_status == 1)
+				{
+					// printf("hello!\n");
+					signal_handler();
+					return (-1);
+				}
+				else if (info->prc_flag == 1 && here_num > 0 && g_exit_status == 1)
+				{
+					signal_handler();
+					return (-1);
+				}
 			}
 			ptr = ptr->next;
 		}
 		i++;
 	}
 	signal_handler();
+	return (0);
 }
