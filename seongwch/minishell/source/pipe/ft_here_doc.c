@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 11:38:31 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/17 17:56:04 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 19:53:03 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static	void	ft_here_doc_readline(t_info *info, char *limiter)
 		{
 			free(buf);
 			free(limiter);
-			exit(1);
+			exit(0);
 		}
 		buf = ft_strjoin(buf, "\n");
 		write(info->pipe_alpha[1], buf, ft_strlen(buf));
@@ -39,8 +39,10 @@ static int	here_doc_redir(t_node *node, t_info *info)
 	pid_t	pid;
 	t_node	*ptr;
 	char	*limiter;
+	int		temp;
 
 	limiter = NULL;
+	temp = 0;
 	limiter = ft_strdup(node->data);
 	ft_make_pipe(info);
 	pid = fork();
@@ -53,8 +55,24 @@ static int	here_doc_redir(t_node *node, t_info *info)
 		close(info->pipe_alpha[1]);
 	else
 		ft_here_doc_readline(info, limiter);
-	waitpid(pid, NULL, WUNTRACED);
+	if (pid == wait(&temp))
+		g_exit_status = ft_check_status(temp);
 	return (info->pipe_alpha[0]);
+}
+
+static	int	multi_heredoc(t_node *ptr, t_info *info, int *here_num)
+{
+	if (ptr->token == RDRDIN)
+	{
+		ptr = ptr->next;
+		ptr->group = here_doc_redir(ptr, info);
+		(*here_num)++;
+		if (info->prc_flag == 0 && g_exit_status == 1)
+			return (-1);
+		else if (info->prc_flag == 1 && *here_num > 0 && g_exit_status == 1)
+			return (-1);
+	}
+	return (1);
 }
 
 int	setting_herdoce(t_process **storage, t_info *info)
@@ -71,23 +89,10 @@ int	setting_herdoce(t_process **storage, t_info *info)
 		ptr = storage[i]->redir->start;
 		while (ptr != NULL)
 		{
-			if (ptr->token == RDRDIN)
+			if (multi_heredoc(ptr, info, &here_num) == -1)
 			{
-				ptr = ptr->next;
-				ptr->group = here_doc_redir(ptr, info);
-				here_num++;
-				// printf("flag : %d stats : %d\n", info->prc_flag, g_exit_status);
-				if (info->prc_flag == 0 && g_exit_status == 1)
-				{
-					// printf("hello!\n");
-					signal_handler();
-					return (-1);
-				}
-				else if (info->prc_flag == 1 && here_num > 0 && g_exit_status == 1)
-				{
-					signal_handler();
-					return (-1);
-				}
+				signal_handler();
+				return (-1);
 			}
 			ptr = ptr->next;
 		}

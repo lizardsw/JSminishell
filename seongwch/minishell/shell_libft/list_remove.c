@@ -6,15 +6,15 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 15:06:33 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/05 20:20:29 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 19:17:55 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell_libft.h"
 
-static  void    remove_start(t_list *list, t_node *node)
+static	void	remove_start(t_list *list, t_node *node)
 {
-	t_node  *node_next;
+	t_node	*node_next;
 
 	node_next = list->start->next;
 	list->start = node_next;
@@ -24,9 +24,9 @@ static  void    remove_start(t_list *list, t_node *node)
 	return ;
 }
 
-static  void    remove_last(t_list *list, t_node *node)
+static	void	remove_last(t_list *list, t_node *node)
 {
-	t_node *node_prev;
+	t_node	*node_prev;
 
 	node_prev = list->end->prev;
 	list->end = node_prev;
@@ -36,10 +36,10 @@ static  void    remove_last(t_list *list, t_node *node)
 	return ;
 }
 
-static  void    remove_middle(t_node *node)
+static	void	remove_middle(t_node *node)
 {
-	t_node *node_next;
-	t_node *node_prev;
+	t_node	*node_next;
+	t_node	*node_prev;
 
 	node_next = node->next;
 	node_prev = node->prev;
@@ -50,10 +50,9 @@ static  void    remove_middle(t_node *node)
 	return ;
 }
 
-void    remove_node(t_list *list, t_node *node)
+void	remove_node(t_list *list, t_node *node)
 {
-	t_node  *ptr;
-
+	t_node	*ptr;
 
 	if (list->end == node)
 	{

@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:52:56 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 18:22:03 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 20:16:10 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@ static	void	multi_total_cmd(t_list *cmd, t_state *state)
 	if (cmd->start == NULL)
 		exit(1);
 	str = cmd->start->data;
-	if (ft_strncmp(str, "cd", ft_strlen("cd")) == 0)
+	if (cmd_compare(str, "cd") == 0)
 		ft_cd(cmd, state);
-	else if (ft_strncmp(str, "env", ft_strlen("env")) == 0)
+	else if (cmd_compare(str, "env") == 0)
 		ft_env(state, cmd->start);
-	else if (ft_strncmp(str, "export", ft_strlen("export")) == 0)
+	else if (cmd_compare(str, "export") == 0)
 		ft_export(cmd, state);
-	else if (ft_strncmp(str, "pwd", ft_strlen("pwd")) == 0)
+	else if (cmd_compare(str, "pwd") == 0)
 		ft_pwd(cmd, state);
-	else if (ft_strncmp(str, "unset", ft_strlen("unset")) == 0)
+	else if (cmd_compare(str, "unset") == 0)
 		ft_unset(cmd, state);
-	else if (ft_strncmp(str, "echo", ft_strlen("echo")) == 0)
+	else if (cmd_compare(str, "echo") == 0)
 		ft_echo(cmd);
-	else if (ft_strncmp(str, "exit", ft_strlen("exit")) == 0)
+	else if (cmd_compare(str, "exit") == 0)
 		ft_exit(cmd, state);
 	else
 		execute_cmd(cmd, state);
@@ -71,6 +71,12 @@ static	void	parent_prc(t_process *process, t_info *info, int i)
 			close(info->pre_pipe);
 		info->pre_pipe = info->pipe_alpha[0];
 	}
+	else
+	{
+		close(info->pipe_alpha[1]);
+		if (info->pre_pipe != -1)
+			close(info->pre_pipe);
+	}
 }
 
 static	void	prc_while(t_process **storage, t_state *state, t_info *info)
@@ -106,18 +112,13 @@ void	multi_process(t_process **storage, t_state *state)
 	if (setting_herdoce(storage, &info) == -1)
 	{
 		free(info.pid);
-		return ; 
+		return ;
 	}
 	prc_while(storage, state, &info);
 	while (i < info.number)
 	{
 		if (info.pid[info.number - 1] == wait(&temp))
-		{	
-			printf("exit_Status : %d", g_exit_status);
 			g_exit_status = ft_check_status(temp);
-			printf("asdf_exit_Status : %d", g_exit_status);
-		}
-		// printf("check_status : %d\n", g_exit_status);
 		i++;
 	}
 	free(info.pid);

@@ -136,6 +136,7 @@ int		ft_dup2(int fd1, int fd2, int flag);
 void	ft_make_pipe(t_info *info);
 int		redir_fd(t_info *info, t_list *redir);
 void	single_process(t_process **storage, t_state *state);
+int		cmd_compare(char *str1, char *str2);
 
 // utils
 void	free_str(char **str);

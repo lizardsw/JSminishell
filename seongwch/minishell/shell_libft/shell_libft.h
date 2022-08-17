@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 13:46:51 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/16 22:45:39 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 19:18:26 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,6 @@ void	push_node_back(t_list *list, t_node *node);
 void	push_node_front(t_list *list, t_node *node);
 t_node	*pop_node_back(t_list *list);
 t_node	*pop_node_front(t_list *list);
-void    remove_node(t_list *list, t_node *node);
+void	remove_node(t_list *list, t_node *node);
 
 #endif

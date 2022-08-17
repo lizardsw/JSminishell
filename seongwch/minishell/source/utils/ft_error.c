@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 14:32:49 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 17:31:06 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 20:30:30 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_perror(int err)
 {
 	if (err == INFILE_OPEN_ERR)
 	{
-		printf("Infile open error! : %s\n", strerror(errno));
+		perror("Infile open error!");
 	}
 	else if (err == OUTFILE_OPEN_ERR)
 		perror("Outfile open error!");

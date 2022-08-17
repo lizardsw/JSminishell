@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:50:56 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 16:09:52 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 20:13:03 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,14 @@ void	ft_make_pipe(t_info *info)
 	if (pipe_ret < 0 && info->prc_flag == 0)
 		ft_no_exit_error(PIPE_ERR);
 	return ;
+}
+
+int	cmd_compare(char *str1, char *str2)
+{
+	int	temp;
+
+	if (ft_strlen(str1) != ft_strlen(str2))
+		return (-1);
+	temp = ft_strncmp(str1, str2, ft_strlen(str2));
+	return (temp);
 }

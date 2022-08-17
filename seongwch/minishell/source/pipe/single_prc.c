@@ -6,27 +6,30 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:54:05 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 17:52:58 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 20:16:09 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static	void	single_total_cmd(t_process *storage, t_state *state, t_info *info)
+static	void	single_cmd(t_process *storage, t_state *state, t_info *info)
 {
+	int	temp;
+
+	temp = 0;
 	info->pid[0] = fork();
 	if (info->pid[0] == -1)
 	{
 		ft_no_exit_error(PID_ERR);
 		return ;
 	}
-	if (info->pid[0])
-		waitpid(info->pid[0], NULL, WUNTRACED);
-	else
+	if (!info->pid[0])
 		execute_cmd(storage->cmd, state);
+	if (info->pid[0] == wait(&temp))
+		g_exit_status = ft_check_status(temp);
 }
 
-static	void	single_built_cmd(t_process *storage, t_state *state, t_info *info)
+static	void	single_built(t_process *storage, t_state *state, t_info *info)
 {
 	char	*str;
 
@@ -35,22 +38,22 @@ static	void	single_built_cmd(t_process *storage, t_state *state, t_info *info)
 	if (storage->cmd->start == NULL)
 		return ;
 	str = storage->cmd->start->data;
-	if (ft_strncmp(str, "cd", ft_strlen("cd")) == 0)
+	if (cmd_compare(str, "cd") == 0)
 		ft_cd(storage->cmd, state);
-	else if (ft_strncmp(str, "env", ft_strlen("env")) == 0)
+	else if (cmd_compare(str, "env") == 0)
 		ft_env(state, storage->cmd->start);
-	else if (ft_strncmp(str, "export", ft_strlen("export")) == 0)
+	else if (cmd_compare(str, "export") == 0)
 		ft_export(storage->cmd, state);
-	else if (ft_strncmp(str, "pwd", ft_strlen("pwd")) == 0)
+	else if (cmd_compare(str, "pwd") == 0)
 		ft_pwd(storage->cmd, state);
-	else if (ft_strncmp(str, "unset", ft_strlen("unset")) == 0)
+	else if (cmd_compare(str, "unset") == 0)
 		ft_unset(storage->cmd, state);
-	else if (ft_strncmp(str, "echo", ft_strlen("echo")) == 0)
+	else if (cmd_compare(str, "echo") == 0)
 		ft_echo(storage->cmd);
-	else if (ft_strncmp(str, "exit", ft_strlen("exit")) == 0)
+	else if (cmd_compare(str, "exit") == 0)
 		ft_exit(storage->cmd, state);
 	else
-		single_total_cmd(storage, state, info);
+		single_cmd(storage, state, info);
 }
 
 void	single_process(t_process **storage, t_state *state)
@@ -58,7 +61,7 @@ void	single_process(t_process **storage, t_state *state)
 	t_info	info;
 	int		std_fd[2];
 	char	*str;
-	
+
 	init_info(storage, &info);
 	info.prc_flag = 0;
 	if (setting_herdoce(storage, &info) == -1)
@@ -68,7 +71,7 @@ void	single_process(t_process **storage, t_state *state)
 	}
 	std_fd[0] = ft_dup(STDIN_FILENO);
 	std_fd[1] = ft_dup(STDOUT_FILENO);
-	single_built_cmd(storage[0], state, &info);
+	single_built(storage[0], state, &info);
 	free(info.pid);
 	ft_dup2(std_fd[0], STDIN_FILENO, info.prc_flag);
 	ft_dup2(std_fd[1], STDOUT_FILENO, info.prc_flag);
