@@ -6,11 +6,11 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 10:52:46 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/17 14:35:37 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:05:28 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
 #include <limits.h> //  넣어도 되는 것일까?
 
 static	long	ft_strtol(const char *str)

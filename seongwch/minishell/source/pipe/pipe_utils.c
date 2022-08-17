@@ -6,11 +6,11 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:50:56 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 14:26:42 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:09:52 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
 
 int	ft_dup(int fd)
 {

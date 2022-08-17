@@ -6,11 +6,11 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 21:02:13 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/17 14:47:52 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:04:52 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
 
 static	void	change_env_path(t_state *state, char *key, int flag)
 {

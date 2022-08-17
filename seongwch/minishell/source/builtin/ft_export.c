@@ -6,11 +6,11 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:10:39 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/17 14:37:23 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:06:26 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
 
 static	int	export_check_str(char *str)
 {

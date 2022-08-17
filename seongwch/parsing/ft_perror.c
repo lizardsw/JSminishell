@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 14:32:49 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/16 22:39:27 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/16 22:56:45 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	ft_perror(int err)
 	}
 	else if (err == DUP_ERR)
 		perror("Dupplitcate error");
-	exit(1);
+	exit(4);
 }
 
 void	ft_no_exit_perror(int err)

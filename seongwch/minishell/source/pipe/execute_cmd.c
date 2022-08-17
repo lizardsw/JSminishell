@@ -6,11 +6,11 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 19:54:04 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/09 20:16:34 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:09:29 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
 
 static int	ft_access(char *path)
 {

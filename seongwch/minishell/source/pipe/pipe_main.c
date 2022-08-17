@@ -6,11 +6,11 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 14:25:45 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 14:26:11 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:09:49 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
 
 void	init_info(t_process **storage, t_info *info)
 {

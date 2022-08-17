@@ -6,11 +6,11 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 09:35:37 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/17 14:34:57 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:05:12 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
 
 static	void	ft_putchar(char c)
 {

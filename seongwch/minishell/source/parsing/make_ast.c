@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   make_ast.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:06:04 by seongwch          #+#    #+#             */
-/*   Updated: 2022/07/26 13:47:52 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:09:15 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
 
 // redir group node를 ast에 넣어줌.
 static void	mv_redir_syn(t_process *prc, t_list *split)

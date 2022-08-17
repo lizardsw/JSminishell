@@ -6,11 +6,11 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:29:41 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/05 14:33:06 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:09:25 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
 
 // redir error 확인해줌. ex) < <
 static int	check_redir(t_process *process)

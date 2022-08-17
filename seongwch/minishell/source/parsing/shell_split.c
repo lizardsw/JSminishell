@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   shell_split.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 16:41:07 by seongwch          #+#    #+#             */
-/*   Updated: 2022/07/26 13:45:48 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:09:21 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
 
 // syntax를 node화 시켜서 list로 push_back 해준다.
 static int	push_syntax(t_list *list, char *str, int index, int len)

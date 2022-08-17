@@ -6,11 +6,11 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 14:31:56 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 15:00:39 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:10:18 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
 
 void	setting_terminal(void)
 {

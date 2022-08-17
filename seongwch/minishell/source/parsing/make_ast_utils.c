@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   make_ast_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:06:06 by seongwch          #+#    #+#             */
-/*   Updated: 2022/07/21 17:27:49 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:06:49 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
 
 void	show_process(t_process **ptr)
 {

@@ -6,11 +6,11 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 20:42:08 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 14:28:12 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:09:56 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
 
 static int	open_outfile(char *file, int flag, int pid)
 {

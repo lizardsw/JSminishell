@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   shell_split_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 16:55:16 by seongwch          #+#    #+#             */
-/*   Updated: 2022/07/28 12:28:26 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:09:18 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
 
 // 문자가 어떤 group인지 확인해준다.
 int	check_group(char c)

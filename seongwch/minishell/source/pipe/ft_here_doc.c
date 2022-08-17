@@ -6,11 +6,11 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 11:38:31 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/17 14:10:28 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:09:33 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
 
 static	void	ft_here_doc_readline(t_info *info, char *limiter)
 {

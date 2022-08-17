@@ -6,11 +6,11 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:52:56 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 14:56:06 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:23:23 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
 
 static	void	multi_total_cmd(t_list *cmd, t_state *state)
 {
@@ -86,9 +86,9 @@ static	void	prc_while(t_process **storage, t_state *state, t_info *info)
 		if (info->pid[i] < 0)
 			ft_error(PID_ERR);
 		if (info->pid[i])
-			parent_prc(storage[i], &info, i);
+			parent_prc(storage[i], info, i);
 		else
-			child_prc(storage[i], state, &info, i);
+			child_prc(storage[i], state, info, i);
 		i++;
 	}
 }

@@ -6,11 +6,11 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:54:05 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 14:56:52 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:09:59 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
 
 static	void	single_total_cmd(t_process *storage, t_state *state, t_info *info)
 {

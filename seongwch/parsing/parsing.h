@@ -143,8 +143,8 @@ int		redir_fd(t_info *info, t_list *redir);
 // pipe_main.c
 int		ft_dup2(int fd1, int fd2, int flag);
 void	ft_make_pipe(t_info *info);
-void child_process(t_process *process, t_state *state, t_info *info, int i);
-void parent_process(t_process *process, t_info *info, int i);
+void child_prc(t_process *process, t_state *state, t_info *info, int i);
+void parent_prc(t_process *process, t_info *info, int i);
 void	init_info(t_process **storage, t_info *info);
 void multi_process(t_process **storage, t_state *state);
 void pipe_main(t_process **storage, t_state *state);

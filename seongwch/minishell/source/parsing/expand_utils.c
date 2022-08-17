@@ -6,11 +6,11 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:22:40 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 14:38:45 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:06:38 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
 
 static int	position_except(char **storage, char *front_str, char *str, int i)
 {

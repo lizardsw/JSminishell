@@ -6,11 +6,11 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 20:59:43 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/17 14:50:03 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:06:23 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
 
 int	compare_str(char *s1, char *s2)
 {

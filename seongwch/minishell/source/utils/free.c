@@ -6,11 +6,11 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:30:23 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 13:58:46 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:10:03 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
 
 void	free_str(char **str)
 {

@@ -6,11 +6,11 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:59:44 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 14:31:00 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:10:10 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
 
 void	ft_no_exit_error(int err)
 {

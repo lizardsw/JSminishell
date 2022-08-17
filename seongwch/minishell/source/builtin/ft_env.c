@@ -6,11 +6,11 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 14:42:25 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/17 14:35:04 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:05:30 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
 
 int	ft_env(t_state *state, t_node *cmd_node)
 {

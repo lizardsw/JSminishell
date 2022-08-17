@@ -6,11 +6,11 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 18:33:43 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/17 14:32:44 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:10:14 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
 
 char	**split_key_value(char *str)
 {
