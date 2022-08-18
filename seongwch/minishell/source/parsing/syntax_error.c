@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:29:41 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/18 15:13:35 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:19:34 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,18 @@ static int	check_redir(t_process *process)
 }
 
 // pipe error 확인해줌. ex)  | echo
-static int	check_pipe(t_process *process)
+static int	check_pipe(t_process *process, int i)
 {
-	int	i;
 	int	redir_num;
 	int	cmd_num;
 
-	i = 0;
+	if (i != 0)
+	{
+		redir_num = process->redir->number;
+		cmd_num = process->cmd->number;
+		if (redir_num == 0 && cmd_num == 0)
+			return (-1);
+	}
 	if (process->token == PIPE)
 	{
 		redir_num = process->redir->number;
@@ -61,7 +66,7 @@ int	syntax_error(t_process **parsing)
 	{
 		if (check_redir(parsing[i]) == -1)
 			return (-1);
-		if (check_pipe(parsing[i]) == -1)
+		if (check_pipe(parsing[i], i) == -1)
 			return (-1);
 		i++;
 	}
