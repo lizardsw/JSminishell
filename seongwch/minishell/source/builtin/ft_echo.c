@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 09:35:37 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/17 17:03:16 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:04:41 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static	void	ft_putchar(char c)
 
 static	void	ft_putstr(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -28,18 +28,18 @@ static	void	ft_putstr(char *str)
 	return ;
 }
 
-static  void    print_echo(t_list *cmd_list, int flag)
+static	void	print_echo(t_list *cmd_list, int flag)
 {
-	t_node *ptr;
-	int     arg;
+	t_node	*ptr;
+	int		arg;
 
 	arg = 0;
 	ptr = cmd_list->start->next;
 	if (flag == 1)
 	{
-		if (ptr->next == NULL) // echo -n 인 경우
+		if (ptr->next == NULL)
 			return ;
-		ptr = ptr->next; // echo -n a b c ...
+		ptr = ptr->next;
 	}
 	while (ptr != NULL)
 	{
@@ -50,7 +50,7 @@ static  void    print_echo(t_list *cmd_list, int flag)
 		}
 		if (ft_strncmp(ptr->data, "-n", ft_strlen("-n")) && \
 		ptr->next != NULL)
-			ft_putchar(' ');    
+			ft_putchar(' ');
 		ptr = ptr->next;
 	}
 	return ;

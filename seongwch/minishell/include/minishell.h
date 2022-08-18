@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 15:03:18 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/18 15:10:14 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:15:32 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	export_print_with_value(t_state *state, t_node *node);
 void	export_print(t_state *state);
 void	replace_node(t_node *new_node, t_list *env_lst);
 void	check_key(t_node *node, t_list *env_lst);
-void	classify_export(char **args, char **origin, t_node *arg_node, int flag, t_list *env);
+void	classify_export(char **origin, t_node *arg_node, int flag, t_list *env);
 void	ft_export(t_list *cmd_list, t_state *state);
 
 // parsing

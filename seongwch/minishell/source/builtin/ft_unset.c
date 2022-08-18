@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:26:06 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/17 16:06:33 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:21:38 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 static	int	check_str(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(str[i] != '\0')
+	while (str[i] != '\0')
 	{
-		if (ft_isalpha(str[i]) || str[i] == '_' || (str[i] >= 48 && str[i] <= 57))
+		if (ft_isalpha(str[i]) || str[i] == '_' || \
+				(str[i] >= 48 && str[i] <= 57))
 			i++;
 		else
 			return (0);
@@ -36,19 +37,6 @@ static	void	del_env_one(t_node *cmd_node, t_state *state, t_node *ptr)
 	while (node != NULL)
 	{
 		split = split_key_value(node->data);
-		// if (split[1] == NULL)
-		// {
-		// 	if (!ft_strncmp(ptr->data, node->data, ft_strlen(ptr->data)))
-		// 		remove_node(state->env_lst, node);
-		// 	free_str(split);
-		// 	return;
-		// }
-		// else if (!ft_strncmp(ptr->data, split[0], ft_strlen(ptr->data)))
-		// {
-		// 	remove_node(state->env_lst, node);
-		// 	free_str(split);
-		// 	return ;
-		// }
 		if (!ft_strncmp(ptr->data, split[0], ft_strlen(ptr->data)))
 		{
 			remove_node(state->env_lst, node);
@@ -75,7 +63,7 @@ static	void	exec_unset(t_node *cmd_node, t_state *state)
 		else if (ft_strlen(ptr->data) == 1 && ptr->data[0] == '_')
 			;
 		else if (!check_str(ptr->data))
-		   printf("bash: unset: `%s\': not a valid identifier\n", ptr->data); 
+			printf("bash: unset: `%s\': not a valid identifier\n", ptr->data);
 		else
 			del_env_one(cmd_node, state, ptr);
 		ptr = ptr->next;
@@ -87,4 +75,3 @@ void	ft_unset(t_list *cmd_list, t_state *state)
 	exec_unset(cmd_list->start, state);
 	return ;
 }
-

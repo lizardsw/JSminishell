@@ -6,7 +6,7 @@
 /*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 10:52:46 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/18 13:29:30 by junoh            ###   ########.fr       */
+/*   Updated: 2022/08/18 15:06:59 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ static	void	exit_not_num(char *str)
 	exit(255);
 }
 
-static void		exit_less_arg(t_node *node, int number, pid_t pid)
+static	void	exit_less_arg(t_node *node, int number, pid_t pid)
 {
 	int	temp;
-	
+
 	temp = 0;
 	if (number == 1)
 	{
@@ -55,7 +55,8 @@ static void		exit_less_arg(t_node *node, int number, pid_t pid)
 		g_exit_status = temp;
 		if ((temp < 10 && temp > -10) && ft_strlen(node->next->data) > 17)
 		{
-			printf("bash: exit: %s: numeric argument required\n", node->next->data);
+			printf("bash: exit: %s: numeric argument required\n", \
+					node->next->data);
 			g_exit_status = 255;
 		}
 		if (pid != 0)
@@ -64,7 +65,7 @@ static void		exit_less_arg(t_node *node, int number, pid_t pid)
 	}
 }
 
-void	ft_exit(t_list *cmd_list ,t_state *state, pid_t pid)
+void	ft_exit(t_list *cmd_list, t_state *state, pid_t pid)
 {
 	if (cmd_list->number != 1 && !is_num_str(cmd_list->start->next->data))
 	{

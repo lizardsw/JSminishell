@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export_print.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 20:59:43 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/17 16:06:23 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:20:12 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	compare_str(char *s1, char *s2)
 {
 	if (s2 == NULL)
 		return (1);
-	if (!ft_strncmp(s1 , s2, ft_strlen(s1)) && 
+	if (!ft_strncmp(s1, s2, ft_strlen(s1)) && \
 			ft_strlen(s1) == ft_strlen(s2))
 		return (1);
 	else
@@ -27,7 +27,7 @@ void	export_print_with_value(t_state *state, t_node *node)
 {
 	char	**split;
 	char	*buf;
-	
+
 	buf = NULL;
 	split = split_key_value(node->data);
 	if (split[1] == NULL)
@@ -50,7 +50,7 @@ void	export_print_with_value(t_state *state, t_node *node)
 void	export_print(t_state *state)
 {
 	t_node	*node;
-	
+
 	node = state->env_lst->start;
 	while (node != NULL)
 	{

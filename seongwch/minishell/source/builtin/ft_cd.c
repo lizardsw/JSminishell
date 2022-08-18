@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 21:02:13 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/18 14:05:33 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:03:02 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static	void	change_dir(char *path, t_state *state)
 {
 	int		ret;
 	char	*buf;
-	
+
 	ret = chdir(path);
 	if (ret == 0)
 	{
