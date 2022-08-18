@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 09:35:37 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/18 15:04:41 by junoh            ###   ########.fr       */
+/*   Updated: 2022/08/18 16:38:22 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,23 @@ static	void	ft_putstr(char *str)
 	return ;
 }
 
+static	int	check_flag(char *arg)
+{
+	int	i;
+
+	i = 0;
+	if (arg[0] != '-')
+		return (0);
+	i = 1;
+	while (arg[i] != '\0')
+	{
+		if (arg[i] != 'n')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 static	void	print_echo(t_list *cmd_list, int flag)
 {
 	t_node	*ptr;
@@ -42,14 +59,13 @@ static	void	print_echo(t_list *cmd_list, int flag)
 		ptr = ptr->next;
 	}
 	while (ptr != NULL)
-	{
-		if (ft_strncmp(ptr->data, "-n", ft_strlen("-n")) || arg)
+	{		
+		if (!check_flag(ptr->data) || arg)
 		{
 			arg = 1;
 			ft_putstr(ptr->data);
 		}
-		if (ft_strncmp(ptr->data, "-n", ft_strlen("-n")) && \
-		ptr->next != NULL)
+		if (!check_flag(ptr->data) && ptr->next != NULL)
 			ft_putchar(' ');
 		ptr = ptr->next;
 	}
@@ -68,7 +84,7 @@ void	ft_echo(t_list *cmd_list)
 		write(STDOUT_FILENO, "\n", 1);
 		return ;
 	}
-	if (!ft_strncmp(cmd_list->start->next->data, "-n", ft_strlen("-n")))
+	if (check_flag(cmd_list->start->next->data) == 1)
 		flag = 1;
 	print_echo(cmd_list, flag);
 	if (flag == 0)

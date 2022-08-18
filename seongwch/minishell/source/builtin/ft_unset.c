@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:26:06 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/18 15:21:38 by junoh            ###   ########.fr       */
+/*   Updated: 2022/08/18 15:39:28 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static	int	check_str(char *str)
 	return (1);
 }
 
-static	void	del_env_one(t_node *cmd_node, t_state *state, t_node *ptr)
+static	void	del_env_one(t_state *state, t_node *ptr)
 {
 	t_node	*node;
 	char	**split;
@@ -65,7 +65,7 @@ static	void	exec_unset(t_node *cmd_node, t_state *state)
 		else if (!check_str(ptr->data))
 			printf("bash: unset: `%s\': not a valid identifier\n", ptr->data);
 		else
-			del_env_one(cmd_node, state, ptr);
+			del_env_one(state, ptr);
 		ptr = ptr->next;
 	}
 }

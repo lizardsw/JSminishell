@@ -6,38 +6,11 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:06:06 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 16:06:49 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:27:50 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	show_process(t_process **ptr)
-{
-	t_list	*redir;
-	t_list	*cmd;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	printf("~~~~~~~~~~~~~~~~~~~\n");
-	printf("-------------------\n");
-	while (ptr[i] != NULL)
-	{
-		j = 0;
-		redir = ptr[i]->redir;
-		cmd = ptr[i]->cmd;
-		printf("process : token(%d) index(%d)\n", ptr[i]->token, ptr[i]->index);
-		printf("*redir : %d\n", redir->number);
-		show_list(redir);
-		printf("*cmd : %d\n", cmd->number);
-		show_list(cmd);
-		printf("-------------------\n");
-		i++;
-	}
-	printf("~~~~~~~~~~~~~~~~~~~\n");
-}
 
 t_process	*new_process(void)
 {

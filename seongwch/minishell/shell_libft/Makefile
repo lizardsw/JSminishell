@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+         #
+#    By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 21:31:47 by seongwch          #+#    #+#              #
-#    Updated: 2022/08/18 12:25:46 by junoh            ###   ########.fr        #
+#    Updated: 2022/08/18 15:34:41 by seongwch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror -c
 AR = ar
 ARFLAGS = rs

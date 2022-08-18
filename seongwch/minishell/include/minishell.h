@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 15:03:18 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/18 15:15:32 by junoh            ###   ########.fr       */
+/*   Updated: 2022/08/18 15:38:23 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,80 +97,79 @@ typedef struct s_info
 	int		prc_flag;
 	int		pre_pipe;
 	int		pipe_alpha[2];
-	int		pipe_beta[2];
 	pid_t	*pid;
 }	t_info;
 
 int	g_exit_status;
 
 //	builtin
-void	ft_cd(t_list *cmd_list, t_state *state);
-void	ft_echo(t_list *cmd_list);
-int		ft_env(t_state *state, t_node *cmd_node);
-void	ft_exit(t_list *cmd_list, t_state *state, pid_t pid);
-int		ft_pwd(t_list *cmd_list, t_state *state);
-void	ft_unset(t_list *cmd_list, t_state *state);
+void		ft_cd(t_list *cmd_list, t_state *state);
+void		ft_echo(t_list *cmd_list);
+int			ft_env(t_state *state, t_node *cmd_node);
+void		ft_exit(t_list *cmd_list, pid_t pid);
+int			ft_pwd(t_list *cmd_list, t_state *state);
+void		ft_unset(t_list *cmd_list, t_state *state);
 
 // builtin - export
-int		compare_str(char *s1, char *s2);
-void	export_print_with_value(t_state *state, t_node *node);
-void	export_print(t_state *state);
-void	replace_node(t_node *new_node, t_list *env_lst);
-void	check_key(t_node *node, t_list *env_lst);
-void	classify_export(char **origin, t_node *arg_node, int flag, t_list *env);
-void	ft_export(t_list *cmd_list, t_state *state);
+int			compare_str(char *s1, char *s2);
+void		export_print_with_value(t_node *node);
+void		export_print(t_state *state);
+void		replace_node(t_node *new_node, t_list *env_lst);
+void		check_key(t_node *node, t_list *env_lst);
+void		classify_export(char **origin, t_node *arg_node, \
+					int flag, t_list *env);
+void		ft_export(t_list *cmd_list, t_state *state);
 
 // parsing
-int			cmd_expand(char **str_storage, char *str);
-int			squote_expand(char **str_storage, char *str);
-int			position_expand(char **storage, char *str, t_state *state, int is_dquote);
-int			dquote_expand(char **str_storage, char *str, t_state *state);
-void		expand_syntax(t_node *node, t_state *state);
-void		expand_ast(t_process **ast, t_state *state);
 t_process	*new_process(void);
 t_process	**new_storage(int pipe_num);
 t_process	**make_ast(t_list *list);
+
+int			cmd_expand(char **str_storage, char *str);
+int			squote_expand(char **str_storage, char *str);
+int			position_expand(char **storage, char *str, t_state *state, \
+					int is_dquote);
+int			dquote_expand(char **str_storage, char *str, t_state *state);
+void		expand_syntax(t_node *node, t_state *state);
+void		expand_ast(t_process **ast, t_state *state);
 int			check_group(char c);
 void		label_token(t_node *ptr);
 int			dq_strlen(t_list *list, char *str);
 t_list		*shell_split(char *str);
 int			syntax_error(t_process **parsing);
 
-// have to erase
-void	show_process(t_process **ptr);
-
 // pipe
-void	execute_cmd(t_list *cmd, t_state *state);
-int		setting_herdoce(t_process **storage, t_info *info);
-void	multi_process(t_process **storage, t_state *state);
-void	init_info(t_process **storage, t_info *info);
-void	pipe_main(t_process **storage, t_state *state);
-int		ft_dup(int fd);
-int		ft_dup2(int fd1, int fd2, int flag);
-void	ft_make_pipe(t_info *info);
-int		redir_fd(t_info *info, t_list *redir);
-void	single_process(t_process **storage, t_state *state);
-int		cmd_compare(char *str1, char *str2);
+void		execute_cmd(t_list *cmd, t_state *state);
+int			setting_herdoce(t_process **storage, t_info *info);
+void		multi_process(t_process **storage, t_state *state);
+void		init_info(t_process **storage, t_info *info);
+void		pipe_main(t_process **storage, t_state *state);
+int			ft_dup(int fd);
+int			ft_dup2(int fd1, int fd2, int flag);
+void		ft_make_pipe(t_info *info);
+int			redir_fd(t_info *info, t_list *redir);
+void		single_process(t_process **storage, t_state *state);
+int			cmd_compare(char *str1, char *str2);
 
 // utils
-void	free_str(char **str);
-void	free_node(t_node *ptr);
-void	free_list(t_list *list);
-void	free_process(t_process **prc);
-void	path_frees(char **strs, char *str);
-void	ft_putstr_fd(char *str, int fd);
-void	ft_error(int err);
-void	ft_perror(int err);
-void	ft_no_exit_error(int err);
-void	ft_no_exit_perror(int err);
-int		ft_check_status(int temp);
-char	**split_key_value(char *str);
-char	*get_value(t_list *env, char *key);
-char	**make_char_env(t_list *list);
-t_list	*make_list_env(char **env);
-void	setting_terminal(void);
-void	signal_handler(void);
-void	here_signal_handler(void);
-void	ft_str_error(char *str1);
+void		free_str(char **str);
+void		free_node(t_node *ptr);
+void		free_list(t_list *list);
+void		free_process(t_process **prc);
+void		path_frees(char **strs, char *str);
+void		ft_putstr_fd(char *str, int fd);
+void		ft_error(int err);
+void		ft_perror(int err);
+void		ft_no_exit_error(int err);
+void		ft_no_exit_perror(int err);
+int			ft_check_status(int temp);
+char		**split_key_value(char *str);
+char		*get_value(t_list *env, char *key);
+char		**make_char_env(t_list *list);
+t_list		*make_list_env(char **env);
+void		setting_terminal(void);
+void		signal_handler(void);
+void		here_signal_handler(void);
+void		ft_str_error(char *str1);
 
 #endif

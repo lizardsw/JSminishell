@@ -6,13 +6,12 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:06:04 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 16:09:15 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:26:39 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// redir group node를 ast에 넣어줌.
 static void	mv_redir_syn(t_process *prc, t_list *split)
 {
 	t_node	*ptr;
@@ -29,7 +28,6 @@ static void	mv_redir_syn(t_process *prc, t_list *split)
 	}
 }
 
-//	cmd group node를 ast에 넣어줌.
 static void	mv_cmd_syn(t_process *prc, t_list *split)
 {
 	t_node	*ptr;
@@ -39,7 +37,6 @@ static void	mv_cmd_syn(t_process *prc, t_list *split)
 	push_node_back(prc->cmd, ptr);
 }
 
-// pip group node 확인 후, process toeken 바꿔주고 node free 해줌.
 static void	mv_pip_syn(t_process *prc, t_list *split)
 {
 	t_node	*ptr;
@@ -50,7 +47,6 @@ static void	mv_pip_syn(t_process *prc, t_list *split)
 	free_node(ptr);
 }
 
-// ast 만드는 함수
 t_process	**make_ast(t_list *list)
 {
 	t_process	**storage;

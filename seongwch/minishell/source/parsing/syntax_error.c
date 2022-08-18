@@ -6,13 +6,12 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:29:41 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/18 15:19:34 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:42:28 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// redir error 확인해줌. ex) < <
 static int	check_redir(t_process *process)
 {
 	t_node	*ptr;
@@ -32,7 +31,6 @@ static int	check_redir(t_process *process)
 	return (1);
 }
 
-// pipe error 확인해줌. ex)  | echo
 static int	check_pipe(t_process *process, int i)
 {
 	int	redir_num;
@@ -55,11 +53,9 @@ static int	check_pipe(t_process *process, int i)
 	return (1);
 }
 
-// syntax_error 확인해줌.
 int	syntax_error(t_process **parsing)
 {
 	int	i;
-	int	check;
 
 	i = 0;
 	while (parsing[i] != NULL)

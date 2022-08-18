@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 14:25:45 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 16:09:49 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:43:42 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	init_info(t_process **storage, t_info *info)
 {
-	t_process	*ptr;
 	int			i;
 
 	i = 0;

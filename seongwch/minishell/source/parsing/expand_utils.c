@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:22:40 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 19:57:15 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/18 16:20:09 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ static void	position_back_str(char *str, char **back_str, int i, int is_dquote)
 {
 	if ((str[i] == '\'' || str[i] == '\"') && is_dquote != 1)
 		*back_str = NULL;
-	else if ((str[i] == ' ' || str[i] == '\0') \
-					|| (str[i] == '\'' || str[i] == '\"') && is_dquote == 1)
+	else if (((str[i] == ' ' || str[i] == '\0') \
+					|| (str[i] == '\'' || str[i] == '\"')) && is_dquote == 1)
+		*back_str = ft_strdup("$");
+	else if (str[i] == '\0' && is_dquote != 1)
 		*back_str = ft_strdup("$");
 }
 
@@ -54,7 +56,7 @@ int	position_expand(char **storage, char *str, t_state *state, int is_dquote)
 	while (str[i] != ' ' && str[i] != '\'' && str[i] != '\"' \
 				&& str[i] != '\0' && str[i] != '$' && str[i] != '?')
 		i++;
-	if (str[i] == '?' || str[i] == '$')
+	if (str[i] == '?' || (str[i] == '$' && i == 1))
 		return (position_except(storage, front_str, str, i));
 	key = get_strdup(&str[1], i - 1);
 	if (key[0] == '\0')

@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 20:42:08 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 20:32:51 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:46:15 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static int	open_outfile(char *file, int flag, int pid)
 {
 	int	open_ret;
 
+	open_ret = 0;
 	if (flag == RDOUT)
 	{
 		open_ret = open(file, O_WRONLY | O_TRUNC | O_CREAT, 0000644);
@@ -39,6 +40,7 @@ static int	open_infile(t_node *node, int flag, int pid)
 {
 	int	open_ret;
 
+	open_ret = 0;
 	if (flag == RDIN)
 	{
 		open_ret = open(node->data, O_RDONLY);
@@ -77,6 +79,8 @@ static int	dup2_redir(t_info *info)
 	int	in_dup;
 	int	out_dup;
 
+	in_dup = 0;
+	out_dup = 0;
 	if (info->fd_in > 0)
 		in_dup = ft_dup2(info->fd_in, STDIN_FILENO, info->prc_flag);
 	if (info->fd_out > 0)

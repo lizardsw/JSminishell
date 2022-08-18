@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multi_prc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:52:56 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/18 12:16:53 by junoh            ###   ########.fr       */
+/*   Updated: 2022/08/18 15:43:30 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ static	void	multi_total_cmd(t_list *cmd, t_state *state, t_info *info)
 	else if (cmd_compare(str, "echo") == 0)
 		ft_echo(cmd);
 	else if (cmd_compare(str, "exit") == 0)
-		ft_exit(cmd, state, info->pid[info->number - 1]);
+		ft_exit(cmd, info->pid[info->number - 1]);
 	else
 		execute_cmd(cmd, state);
 	exit(0);
 }
 
-static	void	child_prc(t_process *prc, t_state *state, t_info *info, int i)
+static	void	child_prc(t_process *prc, t_state *state, t_info *info)
 {
 	if (prc->index == START)
 	{
@@ -57,7 +57,7 @@ static	void	child_prc(t_process *prc, t_state *state, t_info *info, int i)
 	multi_total_cmd(prc->cmd, state, info);
 }
 
-static	void	parent_prc(t_process *process, t_info *info, int i)
+static	void	parent_prc(t_process *process, t_info *info)
 {
 	if (process->index == START)
 	{
@@ -92,9 +92,9 @@ static	void	prc_while(t_process **storage, t_state *state, t_info *info)
 		if (info->pid[i] < 0)
 			ft_error(PID_ERR);
 		if (info->pid[i])
-			parent_prc(storage[i], info, i);
+			parent_prc(storage[i], info);
 		else
-			child_prc(storage[i], state, info, i);
+			child_prc(storage[i], state, info);
 		i++;
 	}
 }

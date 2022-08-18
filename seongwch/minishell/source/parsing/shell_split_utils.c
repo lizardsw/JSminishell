@@ -6,13 +6,12 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 16:55:16 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 16:09:18 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:26:55 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// 문자가 어떤 group인지 확인해준다.
 int	check_group(char c)
 {
 	if (c == ' ' || c == '	')
@@ -28,7 +27,6 @@ int	check_group(char c)
 	return (WORD);
 }
 
-// syntax_node에 token을 라벨링 시켜줌
 void	label_token(t_node *ptr)
 {
 	char	*temp;
@@ -57,7 +55,6 @@ void	label_token(t_node *ptr)
 		ptr->token = CMD;
 }
 
-// QUOTE문자를 포함해서 SPACE, NULL, REDIR 을 기준으로 str길이를 세준다.
 int	dq_strlen(t_list *list, char *str)
 {
 	int	i;

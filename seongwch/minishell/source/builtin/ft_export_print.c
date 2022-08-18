@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export_print.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 20:59:43 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/18 15:20:12 by junoh            ###   ########.fr       */
+/*   Updated: 2022/08/18 15:38:54 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	compare_str(char *s1, char *s2)
 		return (0);
 }
 
-void	export_print_with_value(t_state *state, t_node *node)
+void	export_print_with_value(t_node *node)
 {
 	char	**split;
 	char	*buf;
@@ -57,7 +57,7 @@ void	export_print(t_state *state)
 		if (!ft_strchr(node->data, '='))
 			printf("declare -x %s\n", node->data);
 		else
-			export_print_with_value(state, node);
+			export_print_with_value(node);
 		node = node->next;
 	}
 	return ;

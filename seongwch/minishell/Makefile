@@ -3,21 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+         #
+#    By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 15:02:38 by seongwch          #+#    #+#              #
-#    Updated: 2022/08/18 13:30:17 by junoh            ###   ########.fr        #
+#    Updated: 2022/08/18 16:16:26 by seongwch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# gcc -g -lreadline -L ~/goinfre/.brew/opt/readline/lib  -I ~/goinfre/.brew/opt/readline/include *.c shell_libft.a
-#libft.a
-#-lft
 NAME = minishell
-CC = gcc
+CC = cc
 RM = rm -f
 make = make
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
 SHELL_LIBFT_DIR = ./shell_libft/
 SHELL_LIBFT = ./shell_libft/shell_libft.a
 READLINE_INCLUDE = -I ~/goinfre/.brew/opt/readline/include
@@ -73,7 +70,7 @@ PIPE_OBJ = $(PIPE_SRC:.c=.o)
 UTILS_OBJ = $(UTILS_SRC:.c=.o)
 
 %.o : %.c
-	$(CC) $(READLINE_INCLUDE) -I $(INCLUDE_DIR) -o $@ -c $^ 
+	$(CC) $(READLINE_INCLUDE) -I $(INCLUDE_DIR) $(CFLAGS) -o $@ -c $^ 
 
 all : $(NAME)
 

@@ -6,13 +6,12 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 16:41:07 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 16:09:21 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:42:20 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// syntax를 node화 시켜서 list로 push_back 해준다.
 static int	push_syntax(t_list *list, char *str, int index, int len)
 {
 	t_node	*new;
@@ -29,7 +28,7 @@ static int	push_syntax(t_list *list, char *str, int index, int len)
 	return (len);
 }
 
-static int	label_group_util(t_list *split_list, char *str)
+static int	label_group_util(char *str)
 {
 	int	add_index;
 	int	i;
@@ -45,7 +44,6 @@ static int	label_group_util(t_list *split_list, char *str)
 	return (add_index);
 }
 
-// syntax를 group에 따라 다르게 처리해준다.
 static int	label_group(t_list *split_list, char *str)
 {
 	int		add_index;
@@ -64,15 +62,13 @@ static int	label_group(t_list *split_list, char *str)
 			add_index = push_syntax(split_list, str, 0, 1);
 	}
 	else
-		add_index = label_group_util(split_list, str);
+		add_index = label_group_util(str);
 	return (add_index);
 }
 
-// 문자열을 syntax단위로 나누어서 list로 만들어준다.
 t_list	*shell_split(char *str)
 {
 	t_list	*split_list;
-	int		dq_switch;
 	int		i;
 	int		j;
 

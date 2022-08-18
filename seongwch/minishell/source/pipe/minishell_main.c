@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:09:40 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/18 15:01:49 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:47:32 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int	main(int argc, char **argv, char **env)
 	t_process	**storage;
 	char		*line;
 
+	(void)argc;
+	(void)argv;
 	setting_terminal();
 	signal_handler();
 	state.env_lst = make_list_env(env);

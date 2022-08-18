@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 10:52:46 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/18 15:06:59 by junoh            ###   ########.fr       */
+/*   Updated: 2022/08/18 15:37:43 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,14 @@ static	void	exit_less_arg(t_node *node, int number, pid_t pid)
 	}
 }
 
-void	ft_exit(t_list *cmd_list, t_state *state, pid_t pid)
+void	ft_exit(t_list *cmd_list, pid_t pid)
 {
 	if (cmd_list->number != 1 && !is_num_str(cmd_list->start->next->data))
-	{
-		printf("debug2\n");
 		exit_not_num(cmd_list->start->next->data);
-		printf("debug3\n");
-	}
 	else
 	{
 		if (cmd_list->number <= 2)
-		{
 			exit_less_arg(cmd_list->start, cmd_list->number, pid);
-		}
 		else
 		{
 			printf("bash: exit: too many arguments\n");

@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 11:38:31 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/18 14:28:24 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:42:43 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static	void	ft_here_doc_readline(t_info *info, char *limiter)
 static int	here_doc_redir(t_node *node, t_info *info)
 {
 	pid_t	pid;
-	t_node	*ptr;
 	char	*limiter;
 	int		temp;
 

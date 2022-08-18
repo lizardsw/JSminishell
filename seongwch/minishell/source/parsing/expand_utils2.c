@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:45:47 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 16:06:42 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:41:05 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	cmd_expand(char **str_storage, char *str)
 {
 	char	*front_str;
 	char	*back_str;
-	char	*temp;
 	int		i;
 
 	i = 0;

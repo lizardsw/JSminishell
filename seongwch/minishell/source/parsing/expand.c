@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:26:12 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 16:06:46 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:41:33 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	expand_syntax(t_node *node, t_state *state)
 		else if (node->data[i + j] == '\0')
 			j++;
 		i += j;
-		if (i > strlen(node->data))
+		if (i > ft_strlen(node->data))
 			break ;
 	}
 	free(node->data);
