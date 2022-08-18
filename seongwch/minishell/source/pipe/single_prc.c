@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_prc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:54:05 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 20:16:09 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/18 12:49:57 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static	void	single_built(t_process *storage, t_state *state, t_info *info)
 	else if (cmd_compare(str, "echo") == 0)
 		ft_echo(storage->cmd);
 	else if (cmd_compare(str, "exit") == 0)
-		ft_exit(storage->cmd, state);
+		ft_exit(storage->cmd, state, info->pid[info->number - 1]);
 	else
 		single_cmd(storage, state, info);
 }

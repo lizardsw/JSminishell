@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   multi_prc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:52:56 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 20:16:10 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/18 12:16:53 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static	void	multi_total_cmd(t_list *cmd, t_state *state)
+static	void	multi_total_cmd(t_list *cmd, t_state *state, t_info *info)
 {
 	char	*str;
 
@@ -32,7 +32,7 @@ static	void	multi_total_cmd(t_list *cmd, t_state *state)
 	else if (cmd_compare(str, "echo") == 0)
 		ft_echo(cmd);
 	else if (cmd_compare(str, "exit") == 0)
-		ft_exit(cmd, state);
+		ft_exit(cmd, state, info->pid[info->number - 1]);
 	else
 		execute_cmd(cmd, state);
 	exit(0);
@@ -54,7 +54,7 @@ static	void	child_prc(t_process *prc, t_state *state, t_info *info, int i)
 	else
 		ft_dup2(info->pre_pipe, STDIN_FILENO, info->prc_flag);
 	redir_fd(info, prc->redir);
-	multi_total_cmd(prc->cmd, state);
+	multi_total_cmd(prc->cmd, state, info);
 }
 
 static	void	parent_prc(t_process *process, t_info *info, int i)

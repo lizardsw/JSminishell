@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_libft.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 13:46:51 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 19:18:26 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/18 12:25:37 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strchr(const char *str, int c);
 int		ft_isalpha(int c);
 char	*ft_itoa(int n);
+int		ft_atoi(const char *str);
 
 // list 관련된
 void	show_list(t_list *list);

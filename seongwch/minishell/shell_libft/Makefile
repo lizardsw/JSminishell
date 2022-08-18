@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+         #
+#    By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 21:31:47 by seongwch          #+#    #+#              #
-#    Updated: 2022/08/16 22:45:25 by seongwch         ###   ########.fr        #
+#    Updated: 2022/08/18 12:25:46 by junoh            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ PART1 = ft_path_join\
 	ft_strchr\
 	ft_isalpha\
 	ft_itoa\
+	ft_atoi\
 
 
 all : $(NAME)

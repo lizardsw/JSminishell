@@ -93,7 +93,7 @@ int	g_exit_status;
 void	ft_cd(t_list *cmd_list, t_state *state);
 void	ft_echo(t_list *cmd_list);
 int		ft_env(t_state *state, t_node *cmd_node);
-void	ft_exit(t_list *cmd_list ,t_state *state);
+void	ft_exit(t_list *cmd_list ,t_state *state, pid_t pid);
 int		ft_pwd(t_list *cmd_list, t_state *state);
 void	ft_unset(t_list *cmd_list, t_state *state);
 
