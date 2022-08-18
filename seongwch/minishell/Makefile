@@ -6,7 +6,7 @@
 #    By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 15:02:38 by seongwch          #+#    #+#              #
-#    Updated: 2022/08/18 16:16:26 by seongwch         ###   ########.fr        #
+#    Updated: 2022/08/18 16:44:24 by seongwch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = minishell
 CC = cc
 RM = rm -f
 make = make
-CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 SHELL_LIBFT_DIR = ./shell_libft/
 SHELL_LIBFT = ./shell_libft/shell_libft.a
 READLINE_INCLUDE = -I ~/goinfre/.brew/opt/readline/include

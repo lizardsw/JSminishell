@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:10:39 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/18 15:16:31 by junoh            ###   ########.fr       */
+/*   Updated: 2022/08/18 17:22:03 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static	int	export_check_str(char *str)
 	while (str[i] != '\0')
 	{
 		if ((str[i] >= 48 && str[i] <= 57) || str[i] == '=' || \
-				str[i] == '_' || ft_isalpha(str[i]))
+				str[i] == '_' || ft_isalpha(str[i]) || str[i] == '/')
 			i++;
 		else
 			return (0);

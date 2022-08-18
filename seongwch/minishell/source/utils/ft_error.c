@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 14:32:49 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/18 15:02:27 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/18 16:52:43 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,15 @@ void	ft_error(int err)
 void	ft_perror(int err)
 {
 	if (err == INFILE_OPEN_ERR)
+	{
 		ft_str_error("Infile open error!");
+		exit(1);
+	}
 	else if (err == OUTFILE_OPEN_ERR)
+	{
 		ft_str_error("Outfile open error!");
+		exit(1);
+	}
 	else if (err == EXE_ERR)
 		ft_str_error("Execve error!");
 	else if (err == PATH_ERR)
