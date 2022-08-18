@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 19:54:04 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/18 17:13:05 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/18 19:57:56 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	*get_path(char **envp, char *cmd)
 	while (envp[i] != NULL && (ft_strncmp(envp[i], "PATH=", 5)))
 		i++;
 	if (envp[i] == NULL)
-		return (NULL);
+		return ("");
 	path = ft_strndup(envp[i] + 5, ft_strlen(envp[i]) - 5);
 	real_path = ft_split(path, ':');
 	i = 0;
