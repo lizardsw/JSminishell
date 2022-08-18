@@ -1,19 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/18 15:03:18 by seongwch          #+#    #+#             */
+/*   Updated: 2022/08/18 15:10:14 by seongwch         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <signal.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <termios.h>
-#include <fcntl.h>
-#include <string.h>
-#include <errno.h>
-#include "../shell_libft/shell_libft.h"
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <signal.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <termios.h>
+# include <fcntl.h>
+# include <string.h>
+# include <errno.h>
+# include "../shell_libft/shell_libft.h"
 
-enum group
+enum e_group
 {
 	WORD = 0,
 	SPACES = 1,
@@ -23,7 +35,7 @@ enum group
 	ZERO = 5
 };
 
-enum token
+enum e_token
 {
 	CMD = 0,
 	RDIN = 1,
@@ -33,14 +45,14 @@ enum token
 	PIPE = 5
 };
 
-enum list_state
+enum e_list_state
 {
 	ERROR = -1,
 	BLANK = 0,
 	GOOD = 1
 };
 
-enum prcindex
+enum e_prcindex
 {
 	START = 0,
 	MIDDLE = 1,
@@ -67,25 +79,25 @@ typedef struct s_process
 	t_list	*cmd;
 	int		token;
 	int		index;
-} t_process;
+}	t_process;
 
 typedef struct s_state
 {
-	t_list *env_lst;
+	t_list	*env_lst;
 	char	*old_pwd;
 	char	*pwd;
 	int		status;
-} t_state;
+}	t_state;
 
 typedef struct s_info
 {
-	int	fd_in;
-	int	fd_out;
-	int	number;
-	int	prc_flag;
-	int pre_pipe;
-	int	pipe_alpha[2];
-	int	pipe_beta[2];
+	int		fd_in;
+	int		fd_out;
+	int		number;
+	int		prc_flag;
+	int		pre_pipe;
+	int		pipe_alpha[2];
+	int		pipe_beta[2];
 	pid_t	*pid;
 }	t_info;
 
@@ -95,7 +107,7 @@ int	g_exit_status;
 void	ft_cd(t_list *cmd_list, t_state *state);
 void	ft_echo(t_list *cmd_list);
 int		ft_env(t_state *state, t_node *cmd_node);
-void	ft_exit(t_list *cmd_list ,t_state *state, pid_t pid);
+void	ft_exit(t_list *cmd_list, t_state *state, pid_t pid);
 int		ft_pwd(t_list *cmd_list, t_state *state);
 void	ft_unset(t_list *cmd_list, t_state *state);
 

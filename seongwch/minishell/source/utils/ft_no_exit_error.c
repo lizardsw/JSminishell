@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:59:44 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/18 13:58:20 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:02:19 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_str_error(char *str1)
 {
 	char	*temp;
-	
+
 	temp = strerror(errno);
 	ft_putstr_fd(str1, 2);
 	ft_putstr_fd(" : ", 2);

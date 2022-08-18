@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:09:40 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/18 13:53:15 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:01:49 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	main(int argc, char **argv, char **env)
 		if (line == NULL)
 		{
 			write(1, "exit\n", 6);
-			exit(1);
+			exit(0);
 		}
 		if (parsing(&storage, &state, line) == 1)
 		{
@@ -74,7 +74,6 @@ int	main(int argc, char **argv, char **env)
 			free_process(storage);
 		}
 		free(line);
-		// system("leaks minishell > leaks_result_temp; cat leaks_result_temp | grep leaked && rm -rf leaks_result_temp");
 	}
 	return (0);
 }
