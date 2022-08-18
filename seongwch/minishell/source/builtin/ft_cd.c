@@ -6,11 +6,17 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 21:02:13 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/17 16:04:52 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/18 14:05:33 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static	void	print_err(char *path)
+{
+	printf("minishell: cd: {%s}: No such file or directory\n", path);
+	g_exit_status = 1;
+}
 
 static	void	change_env_path(t_state *state, char *key, int flag)
 {
@@ -59,7 +65,7 @@ static	void	change_dir(char *path, t_state *state)
 		change_env_path(state, "PWD=", 1);
 	}
 	else
-		printf("minishell: cd: {%s}: No such file or directory\n", path);
+		print_err(path);
 	return ;
 }
 
@@ -72,7 +78,8 @@ void	ft_cd(t_list *cmd_list, t_state *state)
 	node = cmd_list->start;
 	if (state->pwd == NULL)
 		state->pwd = getcwd(NULL, 0);
-	if (node->next == NULL || node->next->data[0] == '~')
+	if (node->next == NULL || (node->next->data[0] == '~' && \
+	ft_strlen(node->next->data) == 1))
 	{
 		home = get_value(state->env_lst, "HOME");
 		change_dir(home, state);

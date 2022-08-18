@@ -56,7 +56,9 @@ enum e_error
 	PATH_ERR,
 	EXE_ERR,
 	PIPE_ERR,
-	DUP_ERR
+	DUP_ERR,
+	SYN_ERR,
+	QUOTE_ERR
 };
 
 typedef struct s_process
@@ -157,5 +159,6 @@ t_list	*make_list_env(char **env);
 void	setting_terminal(void);
 void	signal_handler(void);
 void	here_signal_handler(void);
+void	ft_str_error(char *str1);
 
 #endif

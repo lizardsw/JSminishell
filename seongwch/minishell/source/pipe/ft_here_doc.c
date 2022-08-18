@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 11:38:31 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/17 19:53:03 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/18 14:28:24 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ static	void	ft_here_doc_readline(t_info *info, char *limiter)
 		write(info->pipe_alpha[1], buf, ft_strlen(buf));
 		free(buf);
 	}
-	free(limiter);
-	exit(1);
 }
 
 static int	here_doc_redir(t_node *node, t_info *info)
@@ -55,6 +53,7 @@ static int	here_doc_redir(t_node *node, t_info *info)
 		close(info->pipe_alpha[1]);
 	else
 		ft_here_doc_readline(info, limiter);
+	free(limiter);
 	if (pid == wait(&temp))
 		g_exit_status = ft_check_status(temp);
 	return (info->pipe_alpha[0]);

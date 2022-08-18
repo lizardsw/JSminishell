@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:09:40 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 20:16:17 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/18 13:53:15 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ static	int	parsing_util(t_process ***storage, t_state *state, t_list *list)
 		if (syntax_error(*storage) == -1)
 		{
 			free_process(*storage);
-			printf("syntax_error!\n");
+			ft_no_exit_error(SYN_ERR);
 			return (-1);
 		}
 	}
 	else if (list->state == ERROR)
 	{
-		printf("QUOTE error!\n");
+		ft_no_exit_error(QUOTE_ERR);
 		return (-1);
 	}
 	return (1);
