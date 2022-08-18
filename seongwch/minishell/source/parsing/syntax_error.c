@@ -6,7 +6,7 @@
 /*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 17:29:41 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/17 16:09:25 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:13:35 by seongwch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,11 @@ static int	check_redir(t_process *process)
 // pipe error 확인해줌. ex)  | echo
 static int	check_pipe(t_process *process)
 {
+	int	i;
 	int	redir_num;
 	int	cmd_num;
 
+	i = 0;
 	if (process->token == PIPE)
 	{
 		redir_num = process->redir->number;
