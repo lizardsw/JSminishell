@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 18:33:43 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/17 16:10:14 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/21 16:03:34 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ char	*get_value(t_list *env, char *key)
 	while (ptr != NULL)
 	{
 		split = split_key_value(ptr->data);
-		if (!ft_strncmp(key, split[0], (int)ft_strlen(key)))
+		// if (!ft_strncmp(key, split[0], (int)ft_strlen(key)))
+		if (cmd_compare(key, split[0]) == 0)
 		{
 			value = ft_strdup(split[1]);
 			free_str(split);
@@ -85,7 +86,7 @@ char	**make_char_env(t_list *list)
 	return (new);
 }
 
-t_list	*make_list_env(char **env)
+t_list	*make_list_env(char **env, t_state *state)
 {
 	t_list	*new;
 	int		i;
@@ -97,6 +98,8 @@ t_list	*make_list_env(char **env)
 		push_node_back(new, new_node(env[i]));
 		i++;
 	}
+	state->old_pwd = NULL;
+	state->pwd = NULL;
 	env[i] = NULL;
 	return (new);
 }

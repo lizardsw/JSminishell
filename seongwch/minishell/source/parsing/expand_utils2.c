@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:45:47 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/18 15:41:05 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/21 15:16:40 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	cmd_expand(char **str_storage, char *str)
 
 	i = 0;
 	while (str[i] != '\"' && str[i] != '\'' && str[i] != '\0' && str[i] != '$')
-			i++;
+		i++;
 	front_str = *str_storage;
 	back_str = get_strdup(str, i);
 	*str_storage = null_strjoin(front_str, back_str);

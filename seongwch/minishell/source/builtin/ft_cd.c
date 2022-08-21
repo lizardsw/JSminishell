@@ -6,7 +6,7 @@
 /*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 21:02:13 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/18 15:03:02 by junoh            ###   ########.fr       */
+/*   Updated: 2022/08/21 16:46:17 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,31 @@ static	void	print_err(char *path)
 	g_exit_status = 1;
 }
 
+// static void		replace_data(char *pwd, char *state_pwd, t_node *node)
+
 static	void	change_env_path(t_state *state, char *key, int flag)
 {
 	t_node	*node;
 	char	*buf;
-
+	
 	buf = NULL;
 	node = state->env_lst->start;
 	while (node != NULL)
 	{
-		if (!ft_strncmp(key, node->data, (int)ft_strlen(key)))
+		if (!ft_strncmp(key, node->data, \
+		(int)ft_strlen(key)) && (ft_strlen(key) == flag))
 		{
-			buf = node->data;
-			if (flag == 0)
-				node->data = ft_strdup(state->old_pwd);
-			else
-				node->data = ft_strdup(state->pwd);
+			if (flag == 7)
+			{	
+				free(node->data);
+				node->data = ft_strjoin(ft_strdup("OLDPWD="), \
+				ft_strdup(state->old_pwd));
+			}
+			else if (flag == 4)
+			{
+				free(node->data);
+				node->data = ft_strjoin(ft_strdup("PWD="), ft_strdup(state->pwd));
+			}
 			free(buf);
 		}
 		node = node->next;
@@ -45,7 +54,7 @@ static	void	change_dir(char *path, t_state *state)
 {
 	int		ret;
 	char	*buf;
-
+	
 	ret = chdir(path);
 	if (ret == 0)
 	{
@@ -61,8 +70,8 @@ static	void	change_dir(char *path, t_state *state)
 		buf = state->pwd;
 		state->pwd = getcwd(NULL, 0);
 		free(buf);
-		change_env_path(state, "OLDPWD=", 0);
-		change_env_path(state, "PWD=", 1);
+		change_env_path(state, "OLDPWD=", 7);
+		change_env_path(state, "PWD=", 4);
 	}
 	else
 		print_err(path);
@@ -82,6 +91,7 @@ void	ft_cd(t_list *cmd_list, t_state *state)
 	ft_strlen(node->next->data) == 1))
 	{
 		home = get_value(state->env_lst, "HOME");
+		printf("Home = %s\n", home);
 		change_dir(home, state);
 		free(home);
 	}

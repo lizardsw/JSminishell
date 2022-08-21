@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:26:06 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/18 15:39:28 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/21 15:24:19 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ static	void	del_env_one(t_state *state, t_node *ptr)
 	while (node != NULL)
 	{
 		split = split_key_value(node->data);
-		if (!ft_strncmp(ptr->data, split[0], ft_strlen(ptr->data)))
+		// if (!ft_strncmp(ptr->data, split[0], ft_strlen(ptr->data)))
+		if (cmd_compare(ptr->data, split[0]) == 0)
 		{
 			remove_node(state->env_lst, node);
 			free_str(split);

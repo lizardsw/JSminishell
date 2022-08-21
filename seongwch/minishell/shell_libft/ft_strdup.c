@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 15:05:27 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/05 14:17:33 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/21 15:17:37 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell_libft.h"
 
+// ft_strdup 24~28 add;
 char	*ft_strdup(char *str)
 {
 	int		i;
@@ -21,6 +22,11 @@ char	*ft_strdup(char *str)
 	new = (char *)malloc(sizeof(char) * (ft_strlen(str) + 1));
 	if (new == NULL)
 		return (NULL);
+	if (str == NULL)
+	{
+		new[i] = '\0';
+		return (new);
+	}
 	while (str[i] != '\0')
 	{
 		new[i] = str[i];

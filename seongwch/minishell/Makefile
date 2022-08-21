@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+         #
+#    By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 15:02:38 by seongwch          #+#    #+#              #
-#    Updated: 2022/08/18 16:44:24 by seongwch         ###   ########.fr        #
+#    Updated: 2022/08/21 16:44:45 by junoh            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = minishell
 CC = cc
 RM = rm -f
 make = make
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
 SHELL_LIBFT_DIR = ./shell_libft/
 SHELL_LIBFT = ./shell_libft/shell_libft.a
 READLINE_INCLUDE = -I ~/goinfre/.brew/opt/readline/include

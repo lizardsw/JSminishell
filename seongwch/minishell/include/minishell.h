@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 15:03:18 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/18 15:38:23 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/21 16:03:53 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ int			ft_check_status(int temp);
 char		**split_key_value(char *str);
 char		*get_value(t_list *env, char *key);
 char		**make_char_env(t_list *list);
-t_list		*make_list_env(char **env);
+t_list		*make_list_env(char **env, t_state *state);
 void		setting_terminal(void);
 void		signal_handler(void);
 void		here_signal_handler(void);

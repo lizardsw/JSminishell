@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_main.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:09:40 by seongwch          #+#    #+#             */
-/*   Updated: 2022/08/18 15:47:32 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/21 16:02:26 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	setting_terminal();
 	signal_handler();
-	state.env_lst = make_list_env(env);
+	state.env_lst = make_list_env(env, &state); // &state 추가
 	while (1)
 	{
 		line = readline("JSminishell> ");

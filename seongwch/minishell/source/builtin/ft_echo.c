@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 09:35:37 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/18 16:38:22 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/21 15:16:01 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ static	void	print_echo(t_list *cmd_list, int flag)
 			arg = 1;
 			ft_putstr(ptr->data);
 		}
-		if (!check_flag(ptr->data) && ptr->next != NULL)
+		if ((!check_flag(ptr->data) && ptr->next != NULL) || \
+		(arg == 1 && check_flag(ptr->data)))
 			ft_putchar(' ');
 		ptr = ptr->next;
 	}

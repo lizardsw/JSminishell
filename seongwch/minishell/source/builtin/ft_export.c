@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongwch <seongwch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: junoh <junoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:10:39 by junoh             #+#    #+#             */
-/*   Updated: 2022/08/18 17:22:03 by seongwch         ###   ########.fr       */
+/*   Updated: 2022/08/21 14:37:47 by junoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,12 @@ static	int	export_check_str(char *str)
 	while (str[i] != '\0')
 	{
 		if ((str[i] >= 48 && str[i] <= 57) || str[i] == '=' || \
-				str[i] == '_' || ft_isalpha(str[i]) || str[i] == '/')
+			str[i] == '_' || ft_isalpha(str[i]) || str[i] == '/' || \
+			str[i] == ':' || str[i] == '.' || str[i] == '-' || \
+			str[i] == ';' || str[i] == ' ' || str[i] == '@' || \
+			str[i] == '#' || str[i] == '$' || str[i] == '%' || \
+			str[i] == '^' || str[i] == '+' || str[i] == '[' || \
+			str[i] == ']' || str[i] == '?' || str[i] == '\t')
 			i++;
 		else
 			return (0);
