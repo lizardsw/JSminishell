@@ -58,12 +58,6 @@ static	void	change_dir(char *path, t_state *state)
 	ret = chdir(path);
 	if (ret == 0)
 	{
-		if (state->old_pwd == NULL)
-		{
-			buf = ft_strjoin(ft_strdup("OLDPWD="), state->pwd);
-			push_node_back(state->env_lst, new_node(buf));
-			free(buf);
-		}
 		buf = state->old_pwd;
 		state->old_pwd = ft_strdup(state->pwd);
 		free(buf);
@@ -91,7 +85,6 @@ void	ft_cd(t_list *cmd_list, t_state *state)
 	ft_strlen(node->next->data) == 1))
 	{
 		home = get_value(state->env_lst, "HOME");
-		printf("Home = %s\n", home);
 		change_dir(home, state);
 		free(home);
 	}

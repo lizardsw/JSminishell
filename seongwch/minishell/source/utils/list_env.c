@@ -98,7 +98,7 @@ t_list	*make_list_env(char **env, t_state *state)
 		push_node_back(new, new_node(env[i]));
 		i++;
 	}
-	state->old_pwd = NULL;
+	state->old_pwd = get_value(new, "OLDPWD");
 	state->pwd = NULL;
 	env[i] = NULL;
 	return (new);
